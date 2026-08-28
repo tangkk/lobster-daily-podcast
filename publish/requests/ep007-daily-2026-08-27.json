@@ -1,0 +1,11 @@
+{
+  "run_id": "historical",
+  "artifact_name": "historical-existing-r2-audio",
+  "audio_filename": "2026-08-27-daily-brief.mp3",
+  "audio_sha256": "764e6393cba6e78967d9d8bb823ec779ca7671e9be378e73d23112a6ce90feed",
+  "slug": "ep007-daily-2026-08-27",
+  "title": "龙虾日报｜2026年08月27日",
+  "description": "人工智能的基本面仍然非常强，但高通胀和高利率又把市场拉回现实。",
+  "article_url": "https://tangkk.github.io/daily_brief/spoken/2026-08-27/",
+  "prefix": "daily"
+}

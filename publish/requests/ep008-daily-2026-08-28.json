@@ -1,0 +1,11 @@
+{
+  "run_id": "historical",
+  "artifact_name": "historical-existing-r2-audio",
+  "audio_filename": "2026-08-28-daily-brief.mp3",
+  "audio_sha256": "d00c0c0aecd4c7966e4d20e228f5606634725a911815614067ba64da0a712fcc",
+  "slug": "ep008-daily-2026-08-28",
+  "title": "龙虾日报｜2026年08月28日",
+  "description": "人工智能基本面继续非常强，但美国资金成本并没有因为企业盈利很好就下降。",
+  "article_url": "https://tangkk.github.io/daily_brief/spoken/2026-08-28/",
+  "prefix": "daily"
+}

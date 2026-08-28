@@ -1,0 +1,9 @@
+{
+  "provider": "xfyun-super",
+  "ws_url": "wss://cbm01.cn-huabei-1.xf-yun.com/v1/private/mcd9m97e6",
+  "voice": "x6_lingyuyan_pro",
+  "speed": 50,
+  "volume": 52,
+  "pitch": 50,
+  "note": "龙虾日报默认音色"
+}
