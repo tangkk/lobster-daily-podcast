@@ -12,133 +12,58 @@ permissions:
 jobs:
   bootstrap:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
-      - name: Install tools
+      - name: Install artwork dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y ffmpeg fonts-noto-cjk
+          sudo apt-get install -y fonts-noto-cjk
           python -m pip install --upgrade pip pillow
-      - name: Build validated cover, episode texts and feed
-        shell: bash
+      - name: Generate valid cover and copy exact spoken texts
         run: |
           python - <<'PY'
           from pathlib import Path
           from PIL import Image, ImageDraw, ImageFont
-          import subprocess, urllib.request, re, html
-          from email.utils import format_datetime
-          from datetime import datetime, timezone, timedelta
-          import xml.etree.ElementTree as ET
+          import urllib.request, re
 
-          ROOT = Path('.')
-          episodes = ROOT / 'episodes'
-          episodes.mkdir(exist_ok=True)
-
-          # 1400x1400 podcast artwork; valid square JPEG for podcast directories.
-          size = 1400
-          im = Image.new('RGB', (size, size), (250, 246, 236))
-          d = ImageDraw.Draw(im)
+          size=1400
+          im=Image.new('RGB',(size,size),(250,246,236))
+          d=ImageDraw.Draw(im)
           navy=(18,42,62); red=(226,68,42); muted=(98,109,116); white=(255,253,247)
-          try:
-              zh = ImageFont.truetype('/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc', 165)
-              sub = ImageFont.truetype('/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc', 48)
-          except Exception:
-              zh = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', 120)
-              sub = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 42)
-          d.ellipse((430,180,970,720), fill=red)
-          d.ellipse((520,600,880,1050), fill=red)
+          zh=ImageFont.truetype('/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc',165)
+          sub=ImageFont.truetype('/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc',48)
+          d.ellipse((430,180,970,720),fill=red)
+          d.ellipse((520,600,880,1050),fill=red)
           d.arc((385,130,1015,760),180,360,fill=navy,width=38)
           d.rounded_rectangle((390,350,470,650),radius=28,fill=navy)
           d.rounded_rectangle((930,350,1010,650),radius=28,fill=navy)
           d.ellipse((535,360,625,450),fill=white); d.ellipse((775,360,865,450),fill=white)
           d.ellipse((570,395,600,425),fill=navy); d.ellipse((800,395,830,425),fill=navy)
-          title='龙虾日报'
-          box=d.textbbox((0,0),title,font=zh); d.text(((size-(box[2]-box[0]))/2,1060),title,font=zh,fill=navy)
-          tagline='AI、市场、中国与世界，每日重要信息简报'
-          box=d.textbbox((0,0),tagline,font=sub); d.text(((size-(box[2]-box[0]))/2,1260),tagline,font=sub,fill=muted)
+          title='龙虾日报'; box=d.textbbox((0,0),title,font=zh); d.text(((size-(box[2]-box[0]))/2,1060),title,font=zh,fill=navy)
+          tagline='AI、市场、中国与世界，每日重要信息简报'; box=d.textbbox((0,0),tagline,font=sub); d.text(((size-(box[2]-box[0]))/2,1260),tagline,font=sub,fill=muted)
           im.save('cover.jpg','JPEG',quality=92,optimize=True,progressive=True)
+          assert Path('cover.jpg').stat().st_size > 20000
 
           def spoken_body(date):
               url=f'https://raw.githubusercontent.com/tangkk/daily_brief/main/spoken/{date}.md'
-              text=urllib.request.urlopen(url, timeout=30).read().decode('utf-8')
-              text=re.sub(r'^---\n.*?\n---\n','',text,flags=re.S).strip()
-              return text
-
-          # Headlines repo keeps three recent canonical episode texts; mirror that convention.
+              text=urllib.request.urlopen(url,timeout=30).read().decode('utf-8')
+              return re.sub(r'^---\n.*?\n---\n','',text,flags=re.S).strip()
+          Path('episodes').mkdir(exist_ok=True)
           for n,date in [(6,'2026-08-26'),(7,'2026-08-27'),(8,'2026-08-28')]:
-              (episodes/f'ep{n:03d}-daily-{date}.txt').write_text(spoken_body(date)+'\n',encoding='utf-8')
-
-          audio_base='https://pub-bce89faf93be49c0b8db7550b53ffbbc.r2.dev/audio/2026/08'
-          rows=[]
-          for n,day in enumerate(range(21,29),1):
-              date=f'2026-08-{day:02d}'
-              url=f'{audio_base}/{date}-daily-brief.mp3'
-              tmp=Path('/tmp')/f'{date}.mp3'
-              urllib.request.urlretrieve(url,tmp)
-              length=tmp.stat().st_size
-              seconds=float(subprocess.check_output(['ffprobe','-v','error','-show_entries','format=duration','-of','default=nw=1:nk=1',str(tmp)],text=True).strip())
-              sec=round(seconds); duration=f'{sec//3600:02d}:{(sec%3600)//60:02d}:{sec%60:02d}'
               body=spoken_body(date)
-              desc=re.sub(r'\s+',' ',body).strip()[:180]
-              rows.append((n,date,url,length,duration,desc))
-
-          ET.register_namespace('atom','http://www.w3.org/2005/Atom')
-          ET.register_namespace('itunes','http://www.itunes.com/dtds/podcast-1.0.dtd')
-          it='http://www.itunes.com/dtds/podcast-1.0.dtd'; atom='http://www.w3.org/2005/Atom'
-          rss=ET.Element('rss',{'version':'2.0'})
-          ch=ET.SubElement(rss,'channel')
-          ET.SubElement(ch,'title').text='龙虾日报'
-          ET.SubElement(ch,'link').text='https://tangkk.github.io/lobster-daily-podcast'
-          ET.SubElement(ch,f'{{{atom}}}link',{'href':'https://tangkk.github.io/lobster-daily-podcast/feed.xml','rel':'self','type':'application/rss+xml'})
-          ET.SubElement(ch,'language').text='zh-CN'
-          description='AI、市场、中国与世界，每日重要信息简报。内容由 AI 搜索、整理并生成，仅供信息参考；重要事实与投资决策请以原始来源及官方信息为准。\n\n文字版主页：https://tangkk.github.io/daily_brief/'
-          ET.SubElement(ch,'description').text=description
-          ET.SubElement(ch,'managingEditor').text='dengjunqi06323011@gmail.com (龙虾日报)'
-          ET.SubElement(ch,'webMaster').text='dengjunqi06323011@gmail.com (龙虾日报)'
-          ET.SubElement(ch,'lastBuildDate').text=format_datetime(datetime.now(timezone.utc))
-          ET.SubElement(ch,'ttl').text='60'
-          ET.SubElement(ch,f'{{{it}}}type').text='episodic'
-          ET.SubElement(ch,f'{{{it}}}author').text='龙虾日报'
-          ET.SubElement(ch,f'{{{it}}}summary').text=description
-          ET.SubElement(ch,f'{{{it}}}explicit').text='false'
-          owner=ET.SubElement(ch,f'{{{it}}}owner'); ET.SubElement(owner,f'{{{it}}}name').text='龙虾日报'; ET.SubElement(owner,f'{{{it}}}email').text='dengjunqi06323011@gmail.com'
-          ET.SubElement(ch,f'{{{it}}}image',{'href':'https://tangkk.github.io/lobster-daily-podcast/cover.jpg'})
-          image=ET.SubElement(ch,'image'); ET.SubElement(image,'url').text='https://tangkk.github.io/lobster-daily-podcast/cover.jpg'; ET.SubElement(image,'title').text='龙虾日报'; ET.SubElement(image,'link').text='https://tangkk.github.io/lobster-daily-podcast'
-          ET.SubElement(ch,f'{{{it}}}category',{'text':'News'})
-          sh=timezone(timedelta(hours=8))
-          for n,date,url,length,duration,desc in reversed(rows):
-              item=ET.SubElement(ch,'item')
-              ET.SubElement(item,'title').text=f'龙虾日报｜{date[:4]}年{date[5:7]}月{date[8:]}日'
-              ET.SubElement(item,'description').text=f'{desc}\n\n文字版阅读：\nhttps://tangkk.github.io/daily_brief/spoken/{date}/'
-              dt=datetime.fromisoformat(date+'T08:00:00').replace(tzinfo=sh)
-              ET.SubElement(item,'pubDate').text=format_datetime(dt)
-              ET.SubElement(item,'guid',{'isPermaLink':'false'}).text=f'ep{n:03d}-daily-{date}'
-              ET.SubElement(item,'enclosure',{'url':url,'length':str(length),'type':'audio/mpeg'})
-              ET.SubElement(item,f'{{{it}}}duration').text=duration
-              ET.SubElement(item,f'{{{it}}}explicit').text='false'
-          ET.ElementTree(rss).write('feed.xml',encoding='utf-8',xml_declaration=True)
+              assert len(body)>2000
+              Path(f'episodes/ep{n:03d}-daily-{date}.txt').write_text(body+'\n',encoding='utf-8')
+          print('cover bytes',Path('cover.jpg').stat().st_size)
           PY
-          test -s cover.jpg
-          file cover.jpg
-          identify cover.jpg 2>/dev/null || true
-          python - <<'PY'
-          import xml.etree.ElementTree as ET
-          root=ET.parse('feed.xml').getroot(); items=root.find('channel').findall('item'); assert len(items)==8
-          ns={'itunes':'http://www.itunes.com/dtds/podcast-1.0.dtd'}
-          for i in items:
-              assert int(i.find('enclosure').attrib['length']) > 0
-              assert i.findtext('itunes:duration',namespaces=ns)
-          print('validated episodes:',len(items))
-          PY
-      - name: Remove one-time bootstrap workflow and commit
+      - name: Remove one-time workflow and commit
         run: |
           git rm .github/workflows/bootstrap-feed-once.yml
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add cover.jpg feed.xml episodes/
-          git commit -m 'Finalize validated Lobster Daily podcast feed and cover [skip ci]'
+          git add cover.jpg episodes/
+          git commit -m 'Finalize Lobster Daily cover and canonical episode texts [skip ci]'
           git push
