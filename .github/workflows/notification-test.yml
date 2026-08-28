@@ -1,0 +1,29 @@
+name: Notification Test
+
+on:
+  push:
+    paths:
+      - '.github/workflows/notification-test.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test-notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send test notification
+        env:
+          NOTIFY_URL: https://notify.tangkk-x2o.com/github-workflows
+          NTFY_TOKEN: ${{ secrets.NTFY_TOKEN }}
+          REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          test -n "$NTFY_TOKEN" || { echo 'Missing NTFY_TOKEN secret'; exit 1; }
+          curl --fail-with-body --retry 3 --max-time 15 \
+            -H "Authorization: Bearer ${NTFY_TOKEN}" \
+            -H "Title: ${REPO} · Notification Test" \
+            -H "Tags: white_check_mark" \
+            -H "Click: ${RUN_URL}" \
+            -d "TEST SUCCESS · NTFY_TOKEN is working" \
+            "$NOTIFY_URL"
