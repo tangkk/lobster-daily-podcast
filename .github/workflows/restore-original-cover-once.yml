@@ -1,0 +1,47 @@
+name: Restore Original Cover Once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/restore-original-cover-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install Pillow and CJK fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk
+          python -m pip install --upgrade pip pillow
+      - name: Generate exact original Daily Brief cover
+        run: |
+          curl --fail --location --retry 3 \
+            https://raw.githubusercontent.com/tangkk/daily_brief/main/scripts/generate_podcast_cover.py \
+            -o /tmp/generate_podcast_cover.py
+          python /tmp/generate_podcast_cover.py
+          mv podcast-cover.jpg cover.jpg
+          python - <<'PY'
+          from PIL import Image
+          im=Image.open('cover.jpg')
+          assert im.format == 'JPEG'
+          assert im.size == (3000,3000)
+          print('validated original cover:', im.size, im.format)
+          PY
+      - name: Commit cover and remove one-time workflow
+        run: |
+          git rm .github/workflows/restore-original-cover-once.yml
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add cover.jpg
+          git commit -m 'Restore original Lobster Daily cover [skip ci]'
+          git push
