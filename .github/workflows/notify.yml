@@ -6,6 +6,7 @@ on:
       - Publish Approved Artifact
       - Replace Approved Episode Audio
       - TTS Preview
+      - pages build and deployment
     types: [completed]
 
 permissions:
@@ -27,5 +28,17 @@ jobs:
           RUN_URL: ${{ github.event.workflow_run.html_url }}
         run: |
           test -n "$NTFY_TOKEN" || { echo 'Missing NTFY_TOKEN secret'; exit 1; }
-          if [ "$STATUS" = "success" ]; then TAGS="white_check_mark"; LABEL="SUCCESS"; else TAGS="x"; LABEL="${STATUS^^}"; fi
-          curl --fail-with-body --retry 3 --max-time 15 -H "Authorization: Bearer ${NTFY_TOKEN}" -H "Title: ${REPO} · ${WORKFLOW}" -H "Tags: ${TAGS}" -H "Click: ${RUN_URL}" -d "${LABEL} · ${BRANCH} · @${ACTOR}" "$NOTIFY_URL"
+          if [ "$STATUS" = "success" ]; then
+            TAGS="white_check_mark"
+            LABEL="SUCCESS"
+          else
+            TAGS="x"
+            LABEL="${STATUS^^}"
+          fi
+          curl --fail-with-body --retry 3 --max-time 15 \
+            -H "Authorization: Bearer ${NTFY_TOKEN}" \
+            -H "Title: ${REPO} · ${WORKFLOW}" \
+            -H "Tags: ${TAGS}" \
+            -H "Click: ${RUN_URL}" \
+            -d "${LABEL} · ${BRANCH} · @${ACTOR}" \
+            "$NOTIFY_URL"
