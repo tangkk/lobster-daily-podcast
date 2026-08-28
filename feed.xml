@@ -7,16 +7,14 @@
     <language>zh-CN</language>
     <description>AI、市场、中国与世界，每日重要信息简报。内容由 AI 搜索、整理并生成，仅供信息参考；重要事实与投资决策请以原始来源及官方信息为准。
 
-文字版主页：&lt;a href="https://tangkk.github.io/daily_brief/"&gt;https://tangkk.github.io/daily_brief/&lt;/a&gt;</description>
+文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
     <lastBuildDate>Fri, 28 Aug 2026 00:00:00 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
-    <itunes:summary>AI、市场、中国与世界，每日重要信息简报。内容由 AI 搜索、整理并生成，仅供信息参考；重要事实与投资决策请以原始来源及官方信息为准。
-
-文字版主页：&lt;a href="https://tangkk.github.io/daily_brief/"&gt;https://tangkk.github.io/daily_brief/&lt;/a&gt;</itunes:summary>
+    <itunes:summary>AI、市场、中国与世界，每日重要信息简报。内容由 AI 搜索、整理并生成，仅供信息参考；重要事实与投资决策请以原始来源及官方信息为准。</itunes:summary>
     <itunes:explicit>false</itunes:explicit>
     <itunes:owner>
       <itunes:name>龙虾日报</itunes:name>
@@ -29,33 +27,96 @@
       <link>https://tangkk.github.io/lobster-daily-podcast</link>
     </image>
     <itunes:category text="News" />
-    <item><title>龙虾日报｜2026年08月28日</title><description>人工智能基本面继续非常强，但美国资金成本并没有因为企业盈利很好就下降。今天的主线可以概括成一句话：盈利很好，但贴现率也高。
+    <item>
+      <title>龙虾日报｜2026年08月28日</title>
+      <description>人工智能基本面继续非常强，但美国资金成本并没有因为企业盈利很好就下降。今天的主线可以概括成一句话：盈利很好，但贴现率也高。
 
 文字版阅读：
-https://tangkk.github.io/daily_brief/spoken/2026-08-28/</description><pubDate>Fri, 28 Aug 2026 00:00:00 +0000</pubDate><guid isPermaLink="false">ep008-daily-2026-08-28</guid><enclosure url="https://pub-bce89faf93be49c0b8db7550b53ffbbc.r2.dev/audio/2026/08/2026-08-28-daily-brief.mp3" length="3301724" type="audio/mpeg" /><itunes:explicit>false</itunes:explicit></item>
-    <item><title>龙虾日报｜2026年08月27日</title><description>人工智能的基本面仍然非常强，但高通胀和高利率又把市场拉回现实。市场越来越需要靠真实盈利增长来支撑，而不是单纯依靠估值扩张。
+https://tangkk.github.io/daily_brief/2026/08/28/</description>
+      <pubDate>Fri, 28 Aug 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">ep008-daily-2026-08-28</guid>
+      <enclosure url="https://pub-bce89faf93be49c0b8db7550b53ffbbc.r2.dev/audio/2026/08/2026-08-28-daily-brief.mp3" length="3301724" type="audio/mpeg" />
+      <itunes:duration>00:13:45</itunes:duration>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
+    <item>
+      <title>龙虾日报｜2026年08月27日</title>
+      <description>人工智能的基本面仍然非常强，但高通胀和高利率又把市场拉回现实。市场越来越需要靠真实盈利增长来支撑，而不是单纯依靠估值扩张。
 
 文字版阅读：
-https://tangkk.github.io/daily_brief/spoken/2026-08-27/</description><pubDate>Thu, 27 Aug 2026 00:00:00 +0000</pubDate><guid isPermaLink="false">ep007-daily-2026-08-27</guid><enclosure url="https://pub-bce89faf93be49c0b8db7550b53ffbbc.r2.dev/audio/2026/08/2026-08-27-daily-brief.mp3" length="2909756" type="audio/mpeg" /><itunes:explicit>false</itunes:explicit></item>
-    <item><title>龙虾日报｜2026年08月26日</title><description>美国经济数据开始变弱，长期国债收益率明显回落，但黄金和比特币却同时很强。市场同时在交易经济降温与财政、美元购买力风险。
+https://tangkk.github.io/daily_brief/2026/08/27/</description>
+      <pubDate>Thu, 27 Aug 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">ep007-daily-2026-08-27</guid>
+      <enclosure url="https://pub-bce89faf93be49c0b8db7550b53ffbbc.r2.dev/audio/2026/08/2026-08-27-daily-brief.mp3" length="2909756" type="audio/mpeg" />
+      <itunes:duration>00:12:07</itunes:duration>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
+    <item>
+      <title>龙虾日报｜2026年08月26日</title>
+      <description>美国经济数据开始变弱，长期国债收益率明显回落，但黄金和比特币却同时很强。市场同时在交易经济降温与财政、美元购买力风险。
 
 文字版阅读：
-https://tangkk.github.io/daily_brief/spoken/2026-08-26/</description><pubDate>Wed, 26 Aug 2026 00:00:00 +0000</pubDate><guid isPermaLink="false">ep006-daily-2026-08-26</guid><enclosure url="https://pub-bce89faf93be49c0b8db7550b53ffbbc.r2.dev/audio/2026/08/2026-08-26-daily-brief.mp3" length="3099548" type="audio/mpeg" /><itunes:explicit>false</itunes:explicit></item>
-    <item><title>龙虾日报｜2026年08月25日</title><description>龙虾日报 2026 年 8 月 25 日口播版。
+https://tangkk.github.io/daily_brief/2026/08/26/</description>
+      <pubDate>Wed, 26 Aug 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">ep006-daily-2026-08-26</guid>
+      <enclosure url="https://pub-bce89faf93be49c0b8db7550b53ffbbc.r2.dev/audio/2026/08/2026-08-26-daily-brief.mp3" length="3099548" type="audio/mpeg" />
+      <itunes:duration>00:12:55</itunes:duration>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
+    <item>
+      <title>龙虾日报｜2026年08月25日</title>
+      <description>龙虾日报 2026 年 8 月 25 日口播版。
 
 文字版阅读：
-https://tangkk.github.io/daily_brief/spoken/2026-08-25/</description><pubDate>Tue, 25 Aug 2026 00:00:00 +0000</pubDate><guid isPermaLink="false">ep005-daily-2026-08-25</guid><enclosure url="https://pub-bce89faf93be49c0b8db7550b53ffbbc.r2.dev/audio/2026/08/2026-08-25-daily-brief.mp3" length="3156284" type="audio/mpeg" /><itunes:explicit>false</itunes:explicit></item>
-    <item><title>龙虾日报｜2026年08月24日</title><description>龙虾日报 2026 年 8 月 24 日口播版。
+https://tangkk.github.io/daily_brief/2026/08/25/</description>
+      <pubDate>Tue, 25 Aug 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">ep005-daily-2026-08-25</guid>
+      <enclosure url="https://pub-bce89faf93be49c0b8db7550b53ffbbc.r2.dev/audio/2026/08/2026-08-25-daily-brief.mp3" length="3156284" type="audio/mpeg" />
+      <itunes:duration>00:13:09</itunes:duration>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
+    <item>
+      <title>龙虾日报｜2026年08月24日</title>
+      <description>龙虾日报 2026 年 8 月 24 日口播版。
 
 文字版阅读：
-https://tangkk.github.io/daily_brief/spoken/2026-08-24/</description><pubDate>Mon, 24 Aug 2026 00:00:00 +0000</pubDate><guid isPermaLink="false">ep004-daily-2026-08-24</guid><enclosure url="https://pub-bce89faf93be49c0b8db7550b53ffbbc.r2.dev/audio/2026/08/2026-08-24-daily-brief.mp3" length="3412748" type="audio/mpeg" /><itunes:explicit>false</itunes:explicit></item>
-    <item><title>龙虾日报｜2026年08月23日</title><description>龙虾日报 2026 年 8 月 23 日口播版。
+https://tangkk.github.io/daily_brief/2026/08/24/</description>
+      <pubDate>Mon, 24 Aug 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">ep004-daily-2026-08-24</guid>
+      <enclosure url="https://pub-bce89faf93be49c0b8db7550b53ffbbc.r2.dev/audio/2026/08/2026-08-24-daily-brief.mp3" length="3412748" type="audio/mpeg" />
+      <itunes:duration>00:14:13</itunes:duration>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
+    <item>
+      <title>龙虾日报｜2026年08月23日</title>
+      <description>龙虾日报 2026 年 8 月 23 日口播版。
 
 文字版阅读：
-https://tangkk.github.io/daily_brief/spoken/2026-08-23/</description><pubDate>Sun, 23 Aug 2026 00:00:00 +0000</pubDate><guid isPermaLink="false">ep003-daily-2026-08-23</guid><enclosure url="https://pub-bce89faf93be49c0b8db7550b53ffbbc.r2.dev/audio/2026/08/2026-08-23-daily-brief.mp3" length="3037196" type="audio/mpeg" /><itunes:explicit>false</itunes:explicit></item>
-    <item><title>龙虾日报｜2026年08月22日</title><description>龙虾日报 2026 年 8 月 22 日口播版。
+https://tangkk.github.io/daily_brief/2026/08/23/</description>
+      <pubDate>Sun, 23 Aug 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">ep003-daily-2026-08-23</guid>
+      <enclosure url="https://pub-bce89faf93be49c0b8db7550b53ffbbc.r2.dev/audio/2026/08/2026-08-23-daily-brief.mp3" length="3037196" type="audio/mpeg" />
+      <itunes:duration>00:12:39</itunes:duration>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
+    <item>
+      <title>龙虾日报｜2026年08月22日</title>
+      <description>龙虾日报 2026 年 8 月 22 日口播版。
 
 文字版阅读：
-https://tangkk.github.io/daily_brief/spoken/2026-08-22/</description><pubDate>Sat, 22 Aug 2026 00:00:00 +0000</pubDate><guid isPermaLink="false">ep002-daily-2026-08-22</guid><enclosure url="https://pub-bce89faf93be49c0b8db7550b53ffbbc.r2.dev/audio/2026/08/2026-08-22-daily-brief.mp3" length="3017612" type="audio/mpeg" /><itunes:explicit>false</itunes:explicit></item>
+https://tangkk.github.io/daily_brief/2026/08/22/</description>
+      <pubDate>Sat, 22 Aug 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">ep002-daily-2026-08-22</guid>
+      <enclosure url="https://pub-bce89faf93be49c0b8db7550b53ffbbc.r2.dev/audio/2026/08/2026-08-22-daily-brief.mp3" length="3017612" type="audio/mpeg" />
+      <itunes:duration>00:12:34</itunes:duration>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
   </channel>
 </rss>
