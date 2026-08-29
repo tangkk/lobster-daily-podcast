@@ -4,8 +4,7 @@ This repository owns the complete podcast layer for Daily Brief.
 
 ## Source relationship
 
-The canonical written Daily Brief is published separately in `tangkk/daily_brief`.
-The podcast script is a listening-first derivative of that written edition.
+The Daily Brief is researched and composed once as the canonical written edition. Before that written edition is made public, create its listening-first podcast derivative and finish the podcast audio publication. The canonical written post is then published to `tangkk/daily_brief` and references the exact final R2 audio object already published by the podcast layer.
 
 ## Repository responsibilities
 
@@ -17,7 +16,7 @@ The podcast script is a listening-first derivative of that written edition.
 - Podcast notifications
 - R2 audio references / podcast metadata handled by the podcast workflow
 
-The R2 MP3 is the single audio source of truth. The written Daily Brief site may play this same R2 object directly, but it must not generate or upload a separate copy.
+The R2 MP3 is the single audio source of truth. The written Daily Brief site plays this same final R2 object directly; it must not generate, upload, or guess a separate audio URL.
 
 ## RSS requirements
 
@@ -34,19 +33,20 @@ Never publish an episode with a missing or placeholder duration. Audio replaceme
 
 ## Daily order
 
-1. Finish and publish the canonical written Daily Brief to `tangkk/daily_brief`.
+1. Research and compose the canonical Daily Brief text, but do **not** publish the written site yet.
 2. Create a Chinese listening-first spoken derivative, normally 8–15 minutes on an ordinary day.
 3. Store the spoken canonical text in this repository under `episodes/` using the existing `epNNN-daily-YYYY-MM-DD.txt` naming convention.
 4. Generate TTS in this podcast repository.
-5. **Daily Brief does not require a preview/approval gate.** Once TTS succeeds, publish the final MP3 directly to R2 and update `feed.xml` in the same daily run.
-6. Before the RSS update is considered successful, derive and write the real MP3 byte length and actual `itunes:duration`; never use placeholders.
-7. Send the configured workflow notification after publication so success or failure is visible immediately.
-8. The written site plays that same R2 MP3; do not create a second audio object for it.
+5. **龙虾日报 does not require a preview/approval gate.** Once TTS succeeds, publish the final MP3 directly to R2.
+6. Update and verify `feed.xml` using the exact final R2 enclosure URL, real MP3 byte length, and actual `itunes:duration`. Podcast publication is not successful until this step succeeds.
+7. Only after R2 + Podcast RSS are verified, publish the canonical written Daily Brief to `tangkk/daily_brief` and record the exact same final R2 enclosure URL in the written site's audio mapping. The written page must never display a guessed/not-yet-existing audio URL.
+8. Verify that the public written page's audio player loads the final R2 MP3, then send the configured publication notification.
 
 ## Exception handling
 
-- A failed TTS/upload/RSS step is a failed daily publication; fix the cause and resume/re-run the failed publication path rather than creating a duplicate episode.
-- Re-runs must be idempotent for the same date and episode number: replace/update the existing R2 object and RSS item rather than appending duplicates.
+- If TTS, R2 upload, or RSS publication fails, do not publish that day's written site yet. Fix/resume the failed podcast path first.
+- If the written-site publication fails after Podcast publication succeeded, keep the already-published Podcast episode and retry only the written-site step.
+- Re-runs must be idempotent for the same date and episode number and must never append duplicate RSS episodes.
 - Manual preview/approval may still be used for debugging or exceptional editorial review, but it is not part of the normal 龙虾日报 daily SOP.
 - This direct-publish exception applies to 龙虾日报 only. Other 龙虾 podcast programs keep their own preview/approval SOP unless explicitly changed.
 
