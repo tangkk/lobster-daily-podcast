@@ -1,0 +1,48 @@
+name: Validate Daily Pipeline
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/validate-daily-pipeline.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      XFYUN_APPID: ${{ secrets.XFYUN_APPID }}
+      XFYUN_API_KEY: ${{ secrets.XFYUN_API_KEY }}
+      XFYUN_API_SECRET: ${{ secrets.XFYUN_API_SECRET }}
+      R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+      R2_BUCKET: ${{ secrets.R2_BUCKET }}
+      R2_PUBLIC_URL: ${{ secrets.R2_PUBLIC_URL }}
+      DAILY_BRIEF_TOKEN: ${{ secrets.DAILY_BRIEF_TOKEN }}
+    steps:
+      - name: Validate required secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          for v in XFYUN_APPID XFYUN_API_KEY XFYUN_API_SECRET R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_ENDPOINT R2_BUCKET R2_PUBLIC_URL DAILY_BRIEF_TOKEN; do
+            test -n "${!v}" || { echo "Missing $v"; exit 1; }
+          done
+      - name: Checkout podcast repository
+        uses: actions/checkout@v6
+      - name: Compile publisher
+        run: python -m py_compile scripts/publish_episode.py
+      - name: Checkout written repository read-only smoke test
+        uses: actions/checkout@v6
+        with:
+          repository: tangkk/daily_brief
+          token: ${{ secrets.DAILY_BRIEF_TOKEN }}
+          path: written-site
+      - name: Validate written-site structure
+        run: |
+          test -f written-site/_data/audio.json
+          test -f written-site/_layouts/daily_brief.html
+          grep -q 'layout: daily_brief' written-site/_posts/2026-08-30-daily-brief.md
