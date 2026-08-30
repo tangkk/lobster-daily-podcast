@@ -74,13 +74,13 @@ jobs:
           DATE="${BASH_REMATCH[2]}"
           TITLE="龙虾日报｜${DATE:0:4}年${DATE:5:2}月${DATE:8:2}日"
           DESCRIPTION=$(python - "$TEXT_FILE" <<'PY'
-import pathlib, re, sys
-text = pathlib.Path(sys.argv[1]).read_text(encoding='utf-8').strip()
-first = re.split(r'\n\s*\n', text, maxsplit=1)[0].strip()
-first = re.sub(r'^今天最重要的一句话是[：:]\s*', '', first)
-print(first[:220])
-PY
-)
+          import pathlib, re, sys
+          text = pathlib.Path(sys.argv[1]).read_text(encoding='utf-8').strip()
+          first = re.split(r'\n\s*\n', text, maxsplit=1)[0].strip()
+          first = re.sub(r'^今天最重要的一句话是[：:]\s*', '', first)
+          print(first[:220])
+          PY
+          )
           echo "text_file=$TEXT_FILE" >> "$GITHUB_OUTPUT"
           echo "slug=$STEM" >> "$GITHUB_OUTPUT"
           echo "date=$DATE" >> "$GITHUB_OUTPUT"
@@ -142,17 +142,17 @@ PY
           EXPECTED_DURATION: ${{ steps.audio.outputs.duration }}
         run: |
           python - <<'PY'
-import os, xml.etree.ElementTree as ET
-ns={'itunes':'http://www.itunes.com/dtds/podcast-1.0.dtd'}
-channel=ET.parse('feed.xml').getroot().find('channel')
-items=[i for i in channel.findall('item') if i.findtext('guid')==os.environ['SLUG']]
-assert len(items)==1, f"expected one RSS item, got {len(items)}"
-i=items[0]
-assert i.find('enclosure').attrib['url']==os.environ['EXPECTED_URL']
-assert int(i.find('enclosure').attrib['length'])==int(os.environ['EXPECTED_BYTES'])
-assert i.findtext('itunes:duration', namespaces=ns)==os.environ['EXPECTED_DURATION']
-assert i.findtext('itunes:episodeType', namespaces=ns)=='full'
-PY
+          import os, xml.etree.ElementTree as ET
+          ns={'itunes':'http://www.itunes.com/dtds/podcast-1.0.dtd'}
+          channel=ET.parse('feed.xml').getroot().find('channel')
+          items=[i for i in channel.findall('item') if i.findtext('guid')==os.environ['SLUG']]
+          assert len(items)==1, f"expected one RSS item, got {len(items)}"
+          i=items[0]
+          assert i.find('enclosure').attrib['url']==os.environ['EXPECTED_URL']
+          assert int(i.find('enclosure').attrib['length'])==int(os.environ['EXPECTED_BYTES'])
+          assert i.findtext('itunes:duration', namespaces=ns)==os.environ['EXPECTED_DURATION']
+          assert i.findtext('itunes:episodeType', namespaces=ns)=='full'
+          PY
 
       - name: Commit Podcast RSS
         shell: bash
@@ -194,12 +194,12 @@ PY
           fi
           grep -q '^layout: daily_brief$' "$POST"
           python - <<'PY'
-import json, os, pathlib
-p=pathlib.Path('written-site/_data/audio.json')
-data=json.loads(p.read_text(encoding='utf-8'))
-data[os.environ['DATE']]=os.environ['ENCLOSURE_URL']
-p.write_text(json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True)+'\n', encoding='utf-8')
-PY
+          import json, os, pathlib
+          p=pathlib.Path('written-site/_data/audio.json')
+          data=json.loads(p.read_text(encoding='utf-8'))
+          data[os.environ['DATE']]=os.environ['ENCLOSURE_URL']
+          p.write_text(json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True)+'\n', encoding='utf-8')
+          PY
           cd written-site
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
