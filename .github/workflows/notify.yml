@@ -3,6 +3,7 @@ name: Notify Workflow Completion
 on:
   workflow_run:
     workflows:
+      - Auto Publish Daily
       - Publish Approved Artifact
       - Replace Approved Episode Audio
       - TTS Preview
