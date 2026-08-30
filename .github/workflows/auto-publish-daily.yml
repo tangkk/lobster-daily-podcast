@@ -1,0 +1,232 @@
+name: Auto Publish Daily
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'episodes/ep*-daily-*.txt'
+  workflow_dispatch:
+    inputs:
+      text_file:
+        description: Canonical spoken script, e.g. episodes/ep010-daily-2026-08-30.txt
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: auto-publish-daily
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      XFYUN_APPID: ${{ secrets.XFYUN_APPID }}
+      XFYUN_API_KEY: ${{ secrets.XFYUN_API_KEY }}
+      XFYUN_API_SECRET: ${{ secrets.XFYUN_API_SECRET }}
+      R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+      R2_BUCKET: ${{ secrets.R2_BUCKET }}
+      R2_PUBLIC_URL: ${{ secrets.R2_PUBLIC_URL }}
+
+    steps:
+      - name: Checkout podcast repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 2
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install runtime dependencies
+        run: |
+          if ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
+          python -m pip install --upgrade pip
+          python -m pip install websocket-client boto3
+
+      - name: Resolve canonical episode
+        id: episode
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TEXT_FILE="${{ inputs.text_file }}"
+          else
+            mapfile -t FILES < <(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep -E '^episodes/ep[0-9]+-daily-[0-9]{4}-[0-9]{2}-[0-9]{2}\.txt$' || true)
+            test "${#FILES[@]}" -eq 1 || { echo "Expected exactly one changed Daily script, found ${#FILES[@]}"; exit 1; }
+            TEXT_FILE="${FILES[0]}"
+          fi
+          test -f "$TEXT_FILE"
+          STEM=$(basename "$TEXT_FILE" .txt)
+          if [[ ! "$STEM" =~ ^ep([0-9]+)-daily-([0-9]{4}-[0-9]{2}-[0-9]{2})$ ]]; then
+            echo "Unexpected Daily filename: $TEXT_FILE"
+            exit 1
+          fi
+          DATE="${BASH_REMATCH[2]}"
+          TITLE="龙虾日报｜${DATE//-/年}"
+          TITLE="${TITLE:0:10}月${TITLE:10:2}日"
+          DESCRIPTION=$(python - "$TEXT_FILE" <<'PY'
+import pathlib, re, sys
+text = pathlib.Path(sys.argv[1]).read_text(encoding='utf-8').strip()
+first = re.split(r'\n\s*\n', text, maxsplit=1)[0].strip()
+first = re.sub(r'^今天最重要的一句话是[：:]\s*', '', first)
+print(first[:220])
+PY
+)
+          echo "text_file=$TEXT_FILE" >> "$GITHUB_OUTPUT"
+          echo "slug=$STEM" >> "$GITHUB_OUTPUT"
+          echo "date=$DATE" >> "$GITHUB_OUTPUT"
+          echo "title=$TITLE" >> "$GITHUB_OUTPUT"
+          echo "description<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$DESCRIPTION" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Validate secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          for v in XFYUN_APPID XFYUN_API_KEY XFYUN_API_SECRET R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_ENDPOINT R2_BUCKET R2_PUBLIC_URL; do
+            test -n "${!v}" || { echo "Missing $v"; exit 1; }
+          done
+          test -n "${{ secrets.DAILY_BRIEF_TOKEN }}" || { echo 'Missing DAILY_BRIEF_TOKEN'; exit 1; }
+
+      - name: Generate final TTS
+        run: |
+          mkdir -p build
+          python scripts/xfyun-tools/xfyun_segmented_run.py \
+            --text-file "${{ steps.episode.outputs.text_file }}" \
+            --out "build/${{ steps.episode.outputs.slug }}.mp3" \
+            --profile default \
+            --pause-ms 350
+
+      - name: Read final audio metadata
+        id: audio
+        shell: bash
+        run: |
+          set -euo pipefail
+          AUDIO="build/${{ steps.episode.outputs.slug }}.mp3"
+          test -s "$AUDIO"
+          BYTES=$(stat -c %s "$AUDIO")
+          SECONDS=$(ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 "$AUDIO")
+          DURATION=$(python -c 'import sys; s=round(float(sys.argv[1])); print(f"{s//3600:02d}:{(s%3600)//60:02d}:{s%60:02d}")' "$SECONDS")
+          echo "path=$AUDIO" >> "$GITHUB_OUTPUT"
+          echo "bytes=$BYTES" >> "$GITHUB_OUTPUT"
+          echo "duration=$DURATION" >> "$GITHUB_OUTPUT"
+
+      - name: Upload final MP3 and upsert Podcast RSS
+        id: podcast
+        shell: bash
+        run: |
+          set -euo pipefail
+          ENCLOSURE=$(python scripts/publish_episode.py \
+            --audio "${{ steps.audio.outputs.path }}" \
+            --slug "${{ steps.episode.outputs.slug }}" \
+            --title "${{ steps.episode.outputs.title }}" \
+            --description "${{ steps.episode.outputs.description }}" \
+            --duration "${{ steps.audio.outputs.duration }}" \
+            --prefix daily | tail -n 1)
+          echo "enclosure_url=$ENCLOSURE" >> "$GITHUB_OUTPUT"
+
+      - name: Verify Podcast RSS
+        env:
+          SLUG: ${{ steps.episode.outputs.slug }}
+          EXPECTED_URL: ${{ steps.podcast.outputs.enclosure_url }}
+          EXPECTED_BYTES: ${{ steps.audio.outputs.bytes }}
+          EXPECTED_DURATION: ${{ steps.audio.outputs.duration }}
+        run: |
+          python - <<'PY'
+import os, xml.etree.ElementTree as ET
+ns={'itunes':'http://www.itunes.com/dtds/podcast-1.0.dtd'}
+channel=ET.parse('feed.xml').getroot().find('channel')
+items=[i for i in channel.findall('item') if i.findtext('guid')==os.environ['SLUG']]
+assert len(items)==1, f"expected one RSS item, got {len(items)}"
+i=items[0]
+assert i.find('enclosure').attrib['url']==os.environ['EXPECTED_URL']
+assert int(i.find('enclosure').attrib['length'])==int(os.environ['EXPECTED_BYTES'])
+assert i.findtext('itunes:duration', namespaces=ns)==os.environ['EXPECTED_DURATION']
+assert i.findtext('itunes:episodeType', namespaces=ns)=='full'
+PY
+
+      - name: Commit Podcast RSS
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add feed.xml
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish ${{ steps.episode.outputs.slug }} [skip ci]"
+            git pull --rebase origin main
+            git push origin main
+          fi
+
+      - name: Checkout written repository
+        uses: actions/checkout@v6
+        with:
+          repository: tangkk/daily_brief
+          token: ${{ secrets.DAILY_BRIEF_TOKEN }}
+          path: written-site
+          fetch-depth: 1
+
+      - name: Publish staged written Brief and exact audio mapping
+        env:
+          DATE: ${{ steps.episode.outputs.date }}
+          ENCLOSURE_URL: ${{ steps.podcast.outputs.enclosure_url }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          DRAFT="written-site/_drafts/${DATE}-daily-brief.md"
+          POST="written-site/_posts/${DATE}-daily-brief.md"
+          if [ -f "$DRAFT" ]; then
+            grep -q '^layout: daily_brief$' "$DRAFT"
+            mkdir -p "$(dirname "$POST")"
+            mv -f "$DRAFT" "$POST"
+          elif [ ! -f "$POST" ]; then
+            echo "Podcast is published, but written draft is missing: $DRAFT"
+            exit 1
+          fi
+          grep -q '^layout: daily_brief$' "$POST"
+          python - <<'PY'
+import json, os, pathlib
+p=pathlib.Path('written-site/_data/audio.json')
+data=json.loads(p.read_text(encoding='utf-8'))
+data[os.environ['DATE']]=os.environ['ENCLOSURE_URL']
+p.write_text(json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True)+'\n', encoding='utf-8')
+PY
+          cd written-site
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add _posts _drafts _data/audio.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish Daily Brief for ${DATE} after podcast"
+            git pull --rebase origin main
+            git push origin main
+          fi
+
+      - name: Verify live written page and player
+        env:
+          DATE: ${{ steps.episode.outputs.date }}
+          ENCLOSURE_URL: ${{ steps.podcast.outputs.enclosure_url }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          Y=${DATE:0:4}; M=${DATE:5:2}; D=${DATE:8:2}
+          URL="https://tangkk.github.io/daily_brief/${Y}/${M}/${D}/"
+          for n in $(seq 1 36); do
+            HTML=$(curl -fsSL --max-time 15 "${URL}?run=${GITHUB_RUN_ID}" || true)
+            if printf '%s' "$HTML" | grep -Fq "Daily Brief — ${DATE}" && printf '%s' "$HTML" | grep -Fq "$ENCLOSURE_URL"; then
+              echo "Verified $URL"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "Written page did not publish with the exact Podcast audio in time: $URL"
+          exit 1
