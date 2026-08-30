@@ -1,13 +1,6 @@
 name: TTS Preview
 
 on:
-  pull_request:
-    branches:
-      - main
-    paths:
-      - 'episodes/**'
-      - '.github/workflows/tts-preview.yml'
-      - 'scripts/xfyun-tools/**'
   workflow_dispatch:
     inputs:
       text_file:
@@ -18,7 +11,7 @@ on:
         required: false
 
 concurrency:
-  group: tts-preview-${{ github.event.pull_request.number || github.ref }}
+  group: tts-preview-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -36,8 +29,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-        with:
-          fetch-depth: 2
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
@@ -55,16 +46,13 @@ jobs:
         id: inputs
         shell: bash
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            TEXT_FILE="${{ inputs.text_file }}"
-            OUTPUT_NAME="${{ inputs.output_name }}"
-          else
-            mapfile -t EPISODES < <(git diff --name-only HEAD^1 HEAD -- 'episodes/*.txt')
-            test "${#EPISODES[@]}" -eq 1 || { echo "Expected exactly one changed canonical episode, found ${#EPISODES[@]}"; exit 1; }
-            TEXT_FILE="${EPISODES[0]}"
-            OUTPUT_NAME=""
+          TEXT_FILE="${{ inputs.text_file }}"
+          OUTPUT_NAME="${{ inputs.output_name }}"
+          test -f "$TEXT_FILE"
+          if [ -z "$OUTPUT_NAME" ]; then
+            STEM=$(basename "$TEXT_FILE" .txt)
+            OUTPUT_NAME="${STEM}-preview.mp3"
           fi
-          if [ -z "$OUTPUT_NAME" ]; then STEM=$(basename "$TEXT_FILE" .txt); OUTPUT_NAME="${STEM}-preview.mp3"; fi
           echo "text_file=$TEXT_FILE" >> "$GITHUB_OUTPUT"
           echo "output_name=$OUTPUT_NAME" >> "$GITHUB_OUTPUT"
       - name: Validate build-only inputs
@@ -73,7 +61,6 @@ jobs:
           test -n "$XFYUN_APPID"
           test -n "$XFYUN_API_KEY"
           test -n "$XFYUN_API_SECRET"
-          test -f "${{ steps.inputs.outputs.text_file }}"
           mkdir -p build
       - name: Generate segmented TTS preview
         run: |
