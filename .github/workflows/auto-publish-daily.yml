@@ -113,8 +113,11 @@ jobs:
           AUDIO="build/${{ steps.episode.outputs.slug }}.mp3"
           test -s "$AUDIO"
           BYTES=$(stat -c %s "$AUDIO")
-          SECONDS=$(ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 "$AUDIO")
-          DURATION=$(python -c 'import sys; s=round(float(sys.argv[1])); print(f"{s//3600:02d}:{(s%3600)//60:02d}:{s%60:02d}")' "$SECONDS")
+          AUDIO_SECONDS=$(ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 "$AUDIO")
+          python -c 'import sys; s=float(sys.argv[1]); assert s >= 30, f"invalid audio duration: {s}"' "$AUDIO_SECONDS"
+          DURATION=$(python -c 'import sys; s=round(float(sys.argv[1])); print(f"{s//3600:02d}:{(s%3600)//60:02d}:{s%60:02d}")' "$AUDIO_SECONDS")
+          test "$DURATION" != "00:00:00" || { echo 'Refusing zero duration'; exit 1; }
+          echo "Final audio: ${BYTES} bytes, ${AUDIO_SECONDS}s, ${DURATION}"
           echo "path=$AUDIO" >> "$GITHUB_OUTPUT"
           echo "bytes=$BYTES" >> "$GITHUB_OUTPUT"
           echo "duration=$DURATION" >> "$GITHUB_OUTPUT"
@@ -149,7 +152,9 @@ jobs:
           i=items[0]
           assert i.find('enclosure').attrib['url']==os.environ['EXPECTED_URL']
           assert int(i.find('enclosure').attrib['length'])==int(os.environ['EXPECTED_BYTES'])
-          assert i.findtext('itunes:duration', namespaces=ns)==os.environ['EXPECTED_DURATION']
+          duration=i.findtext('itunes:duration', namespaces=ns)
+          assert duration==os.environ['EXPECTED_DURATION']
+          assert duration!='00:00:00'
           assert i.findtext('itunes:episodeType', namespaces=ns)=='full'
           PY
 
