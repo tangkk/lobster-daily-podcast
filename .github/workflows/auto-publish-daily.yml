@@ -122,6 +122,13 @@ jobs:
           echo "bytes=$BYTES" >> "$GITHUB_OUTPUT"
           echo "duration=$DURATION" >> "$GITHUB_OUTPUT"
 
+      - name: Refresh Podcast RSS from latest main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git show origin/main:feed.xml > feed.xml
+
       - name: Upload final MP3 and upsert Podcast RSS
         id: podcast
         shell: bash
