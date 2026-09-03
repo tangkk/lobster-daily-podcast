@@ -8,7 +8,7 @@ concurrency: {group: podcast-feed-write, cancel-in-progress: false}
 jobs:
   replace:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     env:
       R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
       R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
@@ -16,7 +16,7 @@ jobs:
       R2_BUCKET: ${{ secrets.R2_BUCKET }}
     steps:
       - uses: actions/checkout@v6
-        with: {fetch-depth: 2}
+        with: {fetch-depth: 0}
       - uses: actions/setup-python@v6
         with: {python-version: '3.12'}
       - run: |
@@ -27,14 +27,21 @@ jobs:
           REQUEST=$(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep -E '^publish/requests/replace-.+\.json$' | head -n 1); test -n "$REQUEST"
           python -m json.tool "$REQUEST" >/dev/null; test "$(jq -r '.operation' "$REQUEST")" = replace_audio
           for key in run_id artifact_name audio_filename audio_sha256 slug prefix; do value=$(jq -r --arg k "$key" '.[$k] // empty' "$REQUEST"); test -n "$value"; echo "$key=$value" >> "$GITHUB_OUTPUT"; done
+      - name: Refresh feed from latest main
+        run: git fetch origin main && git show origin/main:feed.xml > feed.xml
       - uses: actions/download-artifact@v4
         with: {name: "${{ steps.req.outputs.artifact_name }}", path: approved, repository: "${{ github.repository }}", run-id: "${{ steps.req.outputs.run_id }}", github-token: "${{ secrets.GITHUB_TOKEN }}"}
       - id: meta
         env: {FILE: "${{ steps.req.outputs.audio_filename }}", EXPECTED_SHA: "${{ steps.req.outputs.audio_sha256 }}"}
         run: |
-          AUDIO="approved/$FILE"; test -s "$AUDIO"; test "$(sha256sum "$AUDIO" | awk '{print $1}')" = "$EXPECTED_SHA"; AUDIO_BYTES=$(stat -c %s "$AUDIO"); AUDIO_SECONDS=$(ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 "$AUDIO"); DURATION=$(python -c 'import sys; s=round(float(sys.argv[1])); print(f"{s//3600:02d}:{(s%3600)//60:02d}:{s%60:02d}")' "$AUDIO_SECONDS"); echo "audio=$AUDIO" >> "$GITHUB_OUTPUT"; echo "bytes=$AUDIO_BYTES" >> "$GITHUB_OUTPUT"; echo "duration=$DURATION" >> "$GITHUB_OUTPUT"
+          AUDIO="approved/$FILE"; test -s "$AUDIO"; test "$(sha256sum "$AUDIO" | awk '{print $1}')" = "$EXPECTED_SHA"; B=$(stat -c %s "$AUDIO"); S=$(ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 "$AUDIO"); D=$(python -c 'import sys; s=round(float(sys.argv[1])); print(f"{s//3600:02d}:{(s%3600)//60:02d}:{s%60:02d}")' "$S"); echo "audio=$AUDIO" >> "$GITHUB_OUTPUT"; echo "bytes=$B" >> "$GITHUB_OUTPUT"; echo "duration=$D" >> "$GITHUB_OUTPUT"
       - env: {SLUG: "${{ steps.req.outputs.slug }}", PREFIX: "${{ steps.req.outputs.prefix }}", AUDIO: "${{ steps.meta.outputs.audio }}", AUDIO_BYTES: "${{ steps.meta.outputs.bytes }}", DURATION: "${{ steps.meta.outputs.duration }}"}
         run: mkdir -p build && python scripts/replace_episode_audio.py prepare --audio "$AUDIO" --slug "$SLUG" --prefix "$PREFIX" --bytes "$AUDIO_BYTES" --duration "$DURATION" --state build/replacement-backup.txt
       - env: {SLUG: "${{ steps.req.outputs.slug }}"}
         run: |
-          git config user.name github-actions[bot]; git config user.email 41898282+github-actions[bot]@users.noreply.github.com; git add feed.xml; git commit -m "Replace audio for ${SLUG} from approved artifact [skip ci]"; git push
+          git config user.name github-actions[bot]; git config user.email 41898282+github-actions[bot]@users.noreply.github.com; git add feed.xml; git commit -m "Replace audio for ${SLUG} from approved artifact [skip ci]"; git push origin HEAD:main
+      - name: Verify public replacement and live RSS
+        env: {SLUG: "${{ steps.req.outputs.slug }}", BYTES: "${{ steps.meta.outputs.bytes }}", DURATION: "${{ steps.meta.outputs.duration }}"}
+        run: |
+          URL=$(python -c 'import os,xml.etree.ElementTree as ET; ch=ET.parse("feed.xml").getroot().find("channel"); xs=[i for i in ch.findall("item") if i.findtext("guid")==os.environ["SLUG"]]; assert len(xs)==1; print(xs[0].find("enclosure").attrib["url"])')
+          python scripts/verify_public_release.py --repo "$GITHUB_REPOSITORY" --slug "$SLUG" --url "$URL" --bytes "$BYTES" --duration "$DURATION"
