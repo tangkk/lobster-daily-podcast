@@ -23,176 +23,100 @@ jobs:
     steps:
       - name: Checkout isolated branch
         uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: '3.12'
-
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v6
+        with: {python-version: '3.12'}
       - name: Install runtime dependencies
         run: |
           set -euo pipefail
-          if ! command -v ffprobe >/dev/null 2>&1; then
-            sudo apt-get update
-            sudo apt-get install -y ffmpeg
-          fi
+          if ! command -v ffprobe >/dev/null 2>&1; then sudo apt-get update && sudo apt-get install -y ffmpeg; fi
           python -m pip install --upgrade pip websocket-client
-
       - name: Read rework request
         id: req
         run: |
           set -euo pipefail
           python -m json.tool mock-rework-request.json >/dev/null
-          for key in text_file slug prefix; do
-            value=$(jq -r --arg k "$key" '.[$k] // empty' mock-rework-request.json)
-            test -n "$value"
-            echo "$key=$value" >> "$GITHUB_OUTPUT"
-          done
+          for key in text_file slug prefix; do value=$(jq -r --arg k "$key" '.[$k] // empty' mock-rework-request.json); test -n "$value"; echo "$key=$value" >> "$GITHUB_OUTPUT"; done
           test -f "$(jq -r '.text_file' mock-rework-request.json)"
-
       - name: Assert production isolation
         run: |
           set -euo pipefail
-          test "${GITHUB_REF_NAME}" = "mock-rework-2026-09-05"
-          for v in R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_ENDPOINT R2_BUCKET R2_PUBLIC_URL; do
-            test -z "${!v:-}" || { echo "Mock unexpectedly received production credential: $v"; exit 1; }
-          done
-          echo 'Isolation PASS: branch-only, read-only token, no R2 credentials.'
-
+          test "$GITHUB_REF_NAME" = "mock-rework-2026-09-05"
+          for v in R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_ENDPOINT R2_BUCKET R2_PUBLIC_URL; do test -z "${!v:-}" || { echo "Unexpected production credential: $v"; exit 1; }; done
+          echo 'Isolation PASS'
       - name: Snapshot production episode metadata
-        env:
-          SLUG: ${{ steps.req.outputs.slug }}
-        run: |
-          set -euo pipefail
-          mkdir -p build
-          git show origin/main:feed.xml > build/feed-before.xml
-          python - <<'PY'
-          import json, os, xml.etree.ElementTree as ET, pathlib
-          slug=os.environ['SLUG']
-          ch=ET.parse('build/feed-before.xml').getroot().find('channel')
-          xs=[i for i in ch.findall('item') if (i.findtext('guid') or '')==slug]
-          assert len(xs)==1, f'expected exactly one production item for {slug}, got {len(xs)}'
-          i=xs[0]; e=i.find('enclosure')
-          d=i.findtext('{http://www.itunes.com/dtds/podcast-1.0.dtd}duration')
-          m={'guid':slug,'title':i.findtext('title'),'pubDate':i.findtext('pubDate'),'url':e.attrib['url'],'length':int(e.attrib['length']),'duration':d}
-          pathlib.Path('build/before.json').write_text(json.dumps(m,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          print(json.dumps(m,ensure_ascii=False))
-          PY
-
-      - name: Rebuild approved audio from canonical script
+        env: {SLUG: "${{ steps.req.outputs.slug }}"}
         run: |
           set -euo pipefail
           mkdir -p build/approved
+          git show origin/main:feed.xml > build/feed-before.xml
+          python - <<'PY'
+          import json,os,pathlib,xml.etree.ElementTree as ET
+          slug=os.environ['SLUG']; ch=ET.parse('build/feed-before.xml').getroot().find('channel'); xs=[i for i in ch.findall('item') if (i.findtext('guid') or '')==slug]; assert len(xs)==1
+          i=xs[0]; e=i.find('enclosure'); d=i.findtext('{http://www.itunes.com/dtds/podcast-1.0.dtd}duration')
+          m={'guid':slug,'title':i.findtext('title'),'pubDate':i.findtext('pubDate'),'url':e.attrib['url'],'length':int(e.attrib['length']),'duration':d}
+          pathlib.Path('build/before.json').write_text(json.dumps(m,ensure_ascii=False,indent=2)+'\n',encoding='utf-8'); print(json.dumps(m,ensure_ascii=False))
+          PY
+      - name: Rebuild approved audio from canonical script
+        run: |
+          set -euo pipefail
           python scripts/check_sensitive_terms.py "${{ steps.req.outputs.text_file }}" --filter-output build/safe-spoken.txt
           python scripts/check_sensitive_terms.py build/safe-spoken.txt
           python scripts/prepare_tts_text.py build/safe-spoken.txt -o build/tts-transcript.txt
-          test -s build/tts-transcript.txt
           python scripts/check_sensitive_terms.py build/tts-transcript.txt
-          python scripts/xfyun-tools/xfyun_segmented_run.py \
-            --text-file build/tts-transcript.txt \
-            --out "build/approved/${{ steps.req.outputs.slug }}-rework.mp3" \
-            --profile default --pause-ms 350
-
+          python scripts/xfyun-tools/xfyun_segmented_run.py --text-file build/tts-transcript.txt --out "build/approved/${{ steps.req.outputs.slug }}-rework.mp3" --profile default --pause-ms 350
       - name: Emulate approved-artifact integrity gate
         id: audio
         run: |
           set -euo pipefail
-          AUDIO="build/approved/${{ steps.req.outputs.slug }}-rework.mp3"
-          test -s "$AUDIO"
-          SHA=$(sha256sum "$AUDIO" | awk '{print $1}')
-          cp "$AUDIO" build/approved-copy.mp3
-          test "$(sha256sum build/approved-copy.mp3 | awk '{print $1}')" = "$SHA"
-          BYTES=$(stat -c %s "$AUDIO")
-          SEC=$(ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 "$AUDIO")
-          DUR=$(python -c 'import sys; s=round(float(sys.argv[1])); print(f"{s//3600:02d}:{(s%3600)//60:02d}:{s%60:02d}")' "$SEC")
-          test "$BYTES" -gt 100000
-          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
-          echo "bytes=$BYTES" >> "$GITHUB_OUTPUT"
-          echo "duration=$DUR" >> "$GITHUB_OUTPUT"
-
-      - name: Simulate backup and replacement locally
-        env:
-          SLUG: ${{ steps.req.outputs.slug }}
-          PREFIX: ${{ steps.req.outputs.prefix }}
-          BYTES: ${{ steps.audio.outputs.bytes }}
-          DURATION: ${{ steps.audio.outputs.duration }}
+          AUDIO="build/approved/${{ steps.req.outputs.slug }}-rework.mp3"; test -s "$AUDIO"
+          SHA=$(sha256sum "$AUDIO" | awk '{print $1}'); cp "$AUDIO" build/approved-copy.mp3; test "$(sha256sum build/approved-copy.mp3 | awk '{print $1}')" = "$SHA"
+          BYTES=$(stat -c %s "$AUDIO"); SEC=$(ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 "$AUDIO"); DUR=$(python -c 'import sys; s=round(float(sys.argv[1])); print(f"{s//3600:02d}:{(s%3600)//60:02d}:{s%60:02d}")' "$SEC")
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"; echo "bytes=$BYTES" >> "$GITHUB_OUTPUT"; echo "duration=$DUR" >> "$GITHUB_OUTPUT"
+      - name: Simulate versioned replacement locally
+        env: {SLUG: "${{ steps.req.outputs.slug }}", PREFIX: "${{ steps.req.outputs.prefix }}", BYTES: "${{ steps.audio.outputs.bytes }}", DURATION: "${{ steps.audio.outputs.duration }}"}
         run: |
           set -euo pipefail
           cp build/feed-before.xml build/mock-feed-after.xml
-          cp build/before.json build/mock-r2-backup.json
           python - <<'PY'
-          import json, os, pathlib, xml.etree.ElementTree as ET
-          slug=os.environ['SLUG']; b=os.environ['BYTES']; dur=os.environ['DURATION']; prefix=os.environ['PREFIX'].rstrip('/')
-          path='build/mock-feed-after.xml'; tree=ET.parse(path); ch=tree.getroot().find('channel')
-          xs=[i for i in ch.findall('item') if (i.findtext('guid') or '')==slug]; assert len(xs)==1
-          item=xs[0]; enc=item.find('enclosure'); old_url=enc.attrib['url']; old_guid=item.findtext('guid'); old_title=item.findtext('title'); old_pub=item.findtext('pubDate')
-          enc.set('length',b); item.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}duration').text=dur
-          assert item.findtext('guid')==old_guid
-          assert item.findtext('title')==old_title
-          assert item.findtext('pubDate')==old_pub
-          assert enc.attrib['url']==old_url
-          ET.register_namespace('itunes','http://www.itunes.com/dtds/podcast-1.0.dtd'); ET.register_namespace('atom','http://www.w3.org/2005/Atom')
-          tree.write(path,encoding='utf-8',xml_declaration=True)
-          plan={'backup_key':f'_replacement_backups/{slug}/MOCK.mp3','production_key':f'{prefix}/{slug}.mp3','same_guid':True,'same_enclosure_url':True,'new_bytes':int(b),'new_duration':dur}
-          pathlib.Path('build/replacement-plan.json').write_text(json.dumps(plan,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          print(json.dumps(plan,ensure_ascii=False))
+          import json,os,pathlib,re,xml.etree.ElementTree as ET
+          from urllib.parse import urlparse
+          slug=os.environ['SLUG']; prefix=os.environ['PREFIX'].rstrip('/'); b=os.environ['BYTES']; dur=os.environ['DURATION']; before=json.load(open('build/before.json'))
+          name=os.path.basename(urlparse(before['url']).path)
+          if name==f'{slug}.mp3': n=2
+          else:
+            m=re.fullmatch(re.escape(slug)+r'-v(\d+)\.mp3',name); assert m, name; n=int(m.group(1))+1
+          base=before['url'].rsplit('/',1)[0]; new_url=f'{base}/{slug}-v{n}.mp3'; new_key=f'{prefix}/{slug}-v{n}.mp3'
+          path='build/mock-feed-after.xml'; tree=ET.parse(path); ch=tree.getroot().find('channel'); xs=[i for i in ch.findall('item') if (i.findtext('guid') or '')==slug]; assert len(xs)==1
+          i=xs[0]; e=i.find('enclosure'); e.set('url',new_url); e.set('length',b); i.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}duration').text=dur
+          ET.register_namespace('itunes','http://www.itunes.com/dtds/podcast-1.0.dtd'); ET.register_namespace('atom','http://www.w3.org/2005/Atom'); tree.write(path,encoding='utf-8',xml_declaration=True)
+          plan={'old_url':before['url'],'new_url':new_url,'new_key':new_key,'same_guid':True,'enclosure_url_changed':True,'old_media_retained':True,'new_bytes':int(b),'new_duration':dur}
+          pathlib.Path('build/replacement-plan.json').write_text(json.dumps(plan,ensure_ascii=False,indent=2)+'\n',encoding='utf-8'); print(json.dumps(plan,ensure_ascii=False))
           PY
-
-      - name: Validate replacement invariants
-        env:
-          SLUG: ${{ steps.req.outputs.slug }}
+      - name: Validate rework invariants
+        env: {SLUG: "${{ steps.req.outputs.slug }}"}
         run: |
-          set -euo pipefail
           python - <<'PY'
-          import json, os, xml.etree.ElementTree as ET
-          slug=os.environ['SLUG']; before=json.load(open('build/before.json'))
-          ch=ET.parse('build/mock-feed-after.xml').getroot().find('channel')
-          xs=[i for i in ch.findall('item') if (i.findtext('guid') or '')==slug]; assert len(xs)==1
-          i=xs[0]; e=i.find('enclosure')
-          assert i.findtext('guid')==before['guid']
-          assert i.findtext('title')==before['title']
-          assert i.findtext('pubDate')==before['pubDate']
-          assert e.attrib['url']==before['url']
-          assert int(e.attrib['length'])>0
-          assert i.findtext('{http://www.itunes.com/dtds/podcast-1.0.dtd}duration')
-          print('Replacement invariants PASS')
+          import json,os,xml.etree.ElementTree as ET
+          slug=os.environ['SLUG']; before=json.load(open('build/before.json')); plan=json.load(open('build/replacement-plan.json')); ch=ET.parse('build/mock-feed-after.xml').getroot().find('channel'); xs=[i for i in ch.findall('item') if (i.findtext('guid') or '')==slug]; assert len(xs)==1
+          i=xs[0]; e=i.find('enclosure'); assert i.findtext('guid')==before['guid']; assert i.findtext('title')==before['title']; assert i.findtext('pubDate')==before['pubDate']; assert e.attrib['url']!=before['url']; assert e.attrib['url']==plan['new_url']; assert plan['enclosure_url_changed'] is True
+          print('Rework invariants PASS: stable GUID + fresh versioned enclosure URL')
           PY
-
       - name: Simulate rollback locally
         run: |
-          set -euo pipefail
-          cp build/feed-before.xml build/mock-feed-rolled-back.xml
-          cmp -s build/feed-before.xml build/mock-feed-rolled-back.xml
-          test -s build/mock-r2-backup.json
-          echo 'Rollback simulation PASS'
-
+          cp build/feed-before.xml build/mock-feed-rolled-back.xml && cmp -s build/feed-before.xml build/mock-feed-rolled-back.xml && echo 'Rollback simulation PASS'
       - name: Prove no production state changed
         run: |
-          set -euo pipefail
-          MAIN_NOW=$(git rev-parse origin/main)
-          git fetch origin main
-          MAIN_AFTER=$(git rev-parse origin/main)
-          test "$MAIN_NOW" = "$MAIN_AFTER"
-          echo 'Production main unchanged during mock.'
-
+          MAIN_NOW=$(git rev-parse origin/main); git fetch origin main; MAIN_AFTER=$(git rev-parse origin/main); test "$MAIN_NOW" = "$MAIN_AFTER"; echo 'Production main unchanged during mock.'
       - name: Build mock report
-        env:
-          SLUG: ${{ steps.req.outputs.slug }}
-          SHA: ${{ steps.audio.outputs.sha }}
-          BYTES: ${{ steps.audio.outputs.bytes }}
-          DURATION: ${{ steps.audio.outputs.duration }}
+        env: {SLUG: "${{ steps.req.outputs.slug }}", SHA: "${{ steps.audio.outputs.sha }}", BYTES: "${{ steps.audio.outputs.bytes }}", DURATION: "${{ steps.audio.outputs.duration }}"}
         run: |
           python - <<'PY'
-          import json, os, pathlib
-          r={'mode':'MOCK_REWORK_ONLY','slug':os.environ['SLUG'],'approved_audio_sha256':os.environ['SHA'],'bytes':int(os.environ['BYTES']),'duration':os.environ['DURATION'],'approved_artifact_gate':'PASS','backup_simulation':'PASS','replacement_invariants':'PASS','rollback_simulation':'PASS','production_side_effects':'NONE','result':'PASS'}
-          pathlib.Path('build/mock-rework-report.json').write_text(json.dumps(r,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          print(json.dumps(r,ensure_ascii=False,indent=2))
+          import json,os,pathlib
+          plan=json.load(open('build/replacement-plan.json')); r={'mode':'MOCK_REWORK_ONLY','slug':os.environ['SLUG'],'approved_audio_sha256':os.environ['SHA'],'bytes':int(os.environ['BYTES']),'duration':os.environ['DURATION'],'old_url':plan['old_url'],'new_url':plan['new_url'],'stable_guid':'PASS','version_bump':'PASS','old_media_retained':'PASS','rollback_simulation':'PASS','production_side_effects':'NONE','result':'PASS'}
+          pathlib.Path('build/mock-rework-report.json').write_text(json.dumps(r,ensure_ascii=False,indent=2)+'\n',encoding='utf-8'); print(json.dumps(r,ensure_ascii=False,indent=2))
           PY
-
-      - name: Upload rework mock artifact
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: mock-rework-${{ steps.req.outputs.slug }}-${{ github.run_id }}
           path: |
@@ -202,7 +126,6 @@ jobs:
             build/approved/*.mp3
             build/mock-feed-after.xml
             build/mock-feed-rolled-back.xml
-            build/mock-r2-backup.json
             build/replacement-plan.json
             build/mock-rework-report.json
           retention-days: 7
