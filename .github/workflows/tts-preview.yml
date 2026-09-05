@@ -62,10 +62,17 @@ jobs:
           test -n "$XFYUN_API_KEY"
           test -n "$XFYUN_API_SECRET"
           mkdir -p build
+      - name: Prepare and validate spoken transcript
+        run: |
+          set -euo pipefail
+          python scripts/prepare_tts_text.py "${{ steps.inputs.outputs.text_file }}" -o build/tts-transcript.txt
+          test -s build/tts-transcript.txt
+          echo 'Prepared transcript preview:'
+          sed -n '1,8p' build/tts-transcript.txt
       - name: Generate segmented TTS preview
         run: |
           python scripts/xfyun-tools/xfyun_segmented_run.py \
-            --text-file "${{ steps.inputs.outputs.text_file }}" \
+            --text-file build/tts-transcript.txt \
             --out "build/${{ steps.inputs.outputs.output_name }}" \
             --profile default \
             --pause-ms 350
