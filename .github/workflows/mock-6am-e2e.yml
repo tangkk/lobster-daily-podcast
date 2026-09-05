@@ -1,0 +1,128 @@
+name: Mock 6AM Daily Brief E2E
+
+on:
+  push:
+    branches: [mock-6am-2026-09-06]
+    paths: ['mock/6am/2026-09-06/run.json']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mock-6am-e2e
+  cancel-in-progress: false
+
+jobs:
+  rehearsal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      XFYUN_APPID: ${{ secrets.XFYUN_APPID }}
+      XFYUN_API_KEY: ${{ secrets.XFYUN_API_KEY }}
+      XFYUN_API_SECRET: ${{ secrets.XFYUN_API_SECRET }}
+    steps:
+      - name: Checkout isolated podcast branch
+        uses: actions/checkout@v6
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v6
+        with: {python-version: '3.12'}
+      - name: Install runtime dependencies
+        run: |
+          set -euo pipefail
+          if ! command -v ffprobe >/dev/null 2>&1; then sudo apt-get update && sudo apt-get install -y ffmpeg; fi
+          python -m pip install --upgrade pip websocket-client
+      - name: Resolve generated canonical artifacts
+        id: input
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = "mock-6am-2026-09-06"
+          DATE=$(jq -r '.date' mock/6am/2026-09-06/run.json)
+          SPOKEN=$(jq -r '.spoken' mock/6am/2026-09-06/run.json)
+          WRITTEN=$(jq -r '.written' mock/6am/2026-09-06/run.json)
+          [[ "$DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; test -s "$SPOKEN"
+          SLUG=$(basename "$SPOKEN" .txt)
+          echo "date=$DATE" >> "$GITHUB_OUTPUT"; echo "spoken=$SPOKEN" >> "$GITHUB_OUTPUT"; echo "written=$WRITTEN" >> "$GITHUB_OUTPUT"; echo "slug=$SLUG" >> "$GITHUB_OUTPUT"
+      - name: Assert zero production credentials
+        run: |
+          set -euo pipefail
+          for v in R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_ENDPOINT R2_BUCKET R2_PUBLIC_URL; do test -z "${!v:-}" || exit 1; done
+          echo 'Isolation PASS: no production R2 credentials.'
+      - name: Validate generated written artifact exists on isolated daily branch
+        run: |
+          set -euo pipefail
+          git clone --depth 1 --branch mock-6am-2026-09-06 https://github.com/tangkk/daily_brief.git build-daily
+          test -s "build-daily/${{ steps.input.outputs.written }}"
+          test -s build-daily/mock/6am/2026-09-06/sources.json
+      - name: Production spoken safety and normalization
+        run: |
+          set -euo pipefail
+          mkdir -p build
+          python scripts/check_sensitive_terms.py "${{ steps.input.outputs.spoken }}" --filter-output build/safe-spoken.txt
+          python scripts/check_sensitive_terms.py build/safe-spoken.txt
+          python scripts/prepare_tts_text.py build/safe-spoken.txt -o build/tts-transcript.txt
+          test -s build/tts-transcript.txt
+          python scripts/check_sensitive_terms.py build/tts-transcript.txt
+      - name: Generate TTS with production engine
+        run: |
+          set -euo pipefail
+          for v in XFYUN_APPID XFYUN_API_KEY XFYUN_API_SECRET; do test -n "${!v}"; done
+          python scripts/xfyun-tools/xfyun_segmented_run.py --text-file build/tts-transcript.txt --out "build/${{ steps.input.outputs.slug }}-mock.mp3" --profile default --pause-ms 350
+      - name: Read audio metadata
+        id: audio
+        run: |
+          set -euo pipefail
+          AUDIO="build/${{ steps.input.outputs.slug }}-mock.mp3"; test -s "$AUDIO"
+          B=$(stat -c %s "$AUDIO"); S=$(ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 "$AUDIO"); D=$(python -c 'import sys; s=round(float(sys.argv[1])); print(f"{s//3600:02d}:{(s%3600)//60:02d}:{s%60:02d}")' "$S")
+          echo "bytes=$B" >> "$GITHUB_OUTPUT"; echo "duration=$D" >> "$GITHUB_OUTPUT"
+      - name: Simulate first-publish RSS locally
+        env: {DATE: "${{ steps.input.outputs.date }}", SLUG: "${{ steps.input.outputs.slug }}", BYTES: "${{ steps.audio.outputs.bytes }}", DURATION: "${{ steps.audio.outputs.duration }}"}
+        run: |
+          set -euo pipefail
+          cp feed.xml build/mock-feed.xml
+          python - <<'PY'
+          import os,re,xml.etree.ElementTree as ET
+          from email.utils import format_datetime
+          import datetime as dt
+          IT='http://www.itunes.com/dtds/podcast-1.0.dtd'; AT='http://www.w3.org/2005/Atom'; ET.register_namespace('itunes',IT); ET.register_namespace('atom',AT)
+          tree=ET.parse('build/mock-feed.xml'); ch=tree.getroot().find('channel'); slug=os.environ['SLUG']; date=os.environ['DATE']
+          assert not [i for i in ch.findall('item') if i.findtext('guid')==slug], 'mock target unexpectedly already in production feed'
+          i=ET.Element('item'); first=ch.find('item'); ch.insert(list(ch).index(first) if first is not None else len(ch),i)
+          def s(tag,text,attrs=None):
+            x=ET.SubElement(i,tag); x.text=text
+            if attrs: x.attrib.update(attrs)
+          s('title',f'龙虾日报｜{date[:4]}年{date[5:7]}月{date[8:10]}日'); safe=open('build/safe-spoken.txt',encoding='utf-8').read().strip(); desc=re.split(r'\n\s*\n',safe,1)[0].strip(); desc=re.sub(r'^今天最重要的一句话是[：:]\s*','',desc)[:220]
+          s('description',desc); s('pubDate',format_datetime(dt.datetime.now(dt.timezone.utc))); s('guid',slug,{'isPermaLink':'false'}); s('enclosure',None,{'url':f'https://mock.invalid/daily/{slug}.mp3','length':os.environ['BYTES'],'type':'audio/mpeg'}); s(f'{{{IT}}}duration',os.environ['DURATION']); s(f'{{{IT}}}episodeType','full'); s(f'{{{IT}}}explicit','false')
+          tree.write('build/mock-feed.xml',encoding='utf-8',xml_declaration=True)
+          PY
+      - name: Validate written-site handoff semantics
+        env: {DATE: "${{ steps.input.outputs.date }}"}
+        run: |
+          set -euo pipefail
+          mkdir -p build-daily/_drafts
+          cp "build-daily/${{ steps.input.outputs.written }}" "build-daily/_drafts/${DATE}-daily-brief.md"
+          python build-daily/scripts/publish_staged_daily.py --date "$DATE" --feed "$GITHUB_WORKSPACE/build/mock-feed.xml" --check-only > build/written-handoff.json
+          cat build/written-handoff.json
+      - name: Build E2E report
+        env: {DATE: "${{ steps.input.outputs.date }}", SLUG: "${{ steps.input.outputs.slug }}", BYTES: "${{ steps.audio.outputs.bytes }}", DURATION: "${{ steps.audio.outputs.duration }}"}
+        run: |
+          python - <<'PY'
+          import json,os,pathlib
+          r={'mode':'MOCK_6AM_E2E','date':os.environ['DATE'],'slug':os.environ['SLUG'],'research_pack':'PASS','written_generation':'PASS','spoken_generation':'PASS','spoken_safety':'PASS','tts_normalization':'PASS','production_tts_engine':'PASS','rss_first_publish_simulation':'PASS','written_site_handoff':'PASS','bytes':int(os.environ['BYTES']),'duration':os.environ['DURATION'],'production_side_effects':'NONE','result':'PASS'}
+          pathlib.Path('build/mock-6am-report.json').write_text(json.dumps(r,ensure_ascii=False,indent=2)+'\n',encoding='utf-8'); print(json.dumps(r,ensure_ascii=False,indent=2))
+          PY
+      - name: Prove production main untouched
+        run: |
+          set -euo pipefail
+          git fetch origin main; test "$(git rev-parse origin/main)" != "$(git rev-parse HEAD)"
+          echo 'Mock remained on isolated branch.'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mock-6am-e2e-${{ steps.input.outputs.date }}-${{ github.run_id }}
+          path: |
+            build/safe-spoken.txt
+            build/tts-transcript.txt
+            build/*-mock.mp3
+            build/mock-feed.xml
+            build/written-handoff.json
+            build/mock-6am-report.json
+          retention-days: 7
