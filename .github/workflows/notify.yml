@@ -6,6 +6,7 @@ on:
       - Auto Publish Daily
       - Publish Approved Artifact
       - Replace Approved Episode Audio
+      - Rename Episode Media URL
       - TTS Preview
       - pages build and deployment
     types: [completed]
