@@ -112,23 +112,37 @@ jobs:
           git commit -m "Version media URL for ${SLUG} [skip ci]"
           git push origin HEAD:main
 
-      - name: Verify new public media URL and live RSS
+      - name: Verify renamed R2 object and live RSS
         env:
           SLUG: ${{ steps.req.outputs.slug }}
+          PREFIX: ${{ steps.req.outputs.prefix }}
+          NEW_FILENAME: ${{ steps.req.outputs.new_filename }}
         run: |
           set -euo pipefail
           python - <<'PY'
           import os, time, urllib.request, xml.etree.ElementTree as ET
+          import boto3
+          from botocore.config import Config
+
           slug=os.environ['SLUG']
+          prefix=os.environ['PREFIX'].strip('/')
+          new_filename=os.environ['NEW_FILENAME']
+          new_key=f'{prefix}/{new_filename}'
+
           tree=ET.parse('feed.xml')
           item=[i for i in tree.getroot().find('channel').findall('item') if i.findtext('guid')==slug][0]
-          url=item.find('enclosure').attrib['url']
-          expected=int(item.find('enclosure').attrib['length'])
-          req=urllib.request.Request(url, method='HEAD')
-          with urllib.request.urlopen(req, timeout=20) as r:
-              got=int(r.headers.get('Content-Length') or 0)
-              assert r.status < 400
-              assert got == expected, (got, expected)
+          enclosure=item.find('enclosure')
+          url=enclosure.attrib['url']
+          expected=int(enclosure.attrib['length'])
+
+          c=boto3.client('s3', endpoint_url=os.environ['R2_ENDPOINT'].strip('"'),
+              aws_access_key_id=os.environ['R2_ACCESS_KEY_ID'],
+              aws_secret_access_key=os.environ['R2_SECRET_ACCESS_KEY'], region_name='auto',
+              config=Config(s3={'addressing_style':'path'}))
+          meta=c.head_object(Bucket=os.environ['R2_BUCKET'], Key=new_key)
+          assert int(meta['ContentLength']) == expected, (meta['ContentLength'], expected)
+          assert meta.get('ContentType') == 'audio/mpeg', meta.get('ContentType')
+
           live='https://raw.githubusercontent.com/'+os.environ['GITHUB_REPOSITORY']+'/main/feed.xml'
           for _ in range(12):
               text=urllib.request.urlopen(live, timeout=20).read().decode('utf-8')
