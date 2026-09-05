@@ -5,6 +5,7 @@ on:
     paths:
       - 'publish/requests/**.json'
       - '!publish/requests/replace-*.json'
+      - '!publish/requests/rename-*.json'
 permissions: {contents: write, actions: read}
 concurrency: {group: podcast-feed-write, cancel-in-progress: false}
 jobs:
@@ -30,7 +31,7 @@ jobs:
       - name: Resolve publish request
         id: req
         run: |
-          REQUEST=$(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep '^publish/requests/.*\.json$' | grep -v '^publish/requests/replace-' | head -n 1); test -n "$REQUEST" || exit 1
+          REQUEST=$(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep '^publish/requests/.*\.json$' | grep -v '^publish/requests/replace-' | grep -v '^publish/requests/rename-' | head -n 1); test -n "$REQUEST" || exit 1
           python -m json.tool "$REQUEST" >/dev/null
           for key in run_id artifact_name audio_filename audio_sha256 slug title description article_url prefix; do value=$(jq -r --arg k "$key" '.[$k] // empty' "$REQUEST"); test -n "$value" || exit 1; echo "$key<<EOF" >> "$GITHUB_OUTPUT"; echo "$value" >> "$GITHUB_OUTPUT"; echo EOF >> "$GITHUB_OUTPUT"; done
       - name: Refresh feed from latest main
