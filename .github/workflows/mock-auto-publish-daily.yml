@@ -1,10 +1,6 @@
 name: Mock Auto Publish Daily
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'mock/requests/mock-daily-*.json'
   workflow_dispatch:
     inputs:
       date:
@@ -54,16 +50,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            DATE="${{ inputs.date }}"
-            TEXT_FILE="${{ inputs.text_file }}"
-          else
-            REQUEST=$(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep -E '^mock/requests/mock-daily-.+\.json$' | head -n 1)
-            test -n "$REQUEST"
-            python -m json.tool "$REQUEST" >/dev/null
-            DATE=$(jq -r '.date // empty' "$REQUEST")
-            TEXT_FILE=$(jq -r '.text_file // empty' "$REQUEST")
-          fi
+          DATE="${{ inputs.date }}"
+          TEXT_FILE="${{ inputs.text_file }}"
           [[ "$DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]
           test -f "$TEXT_FILE"
           STEM=$(basename "$TEXT_FILE" .txt)
