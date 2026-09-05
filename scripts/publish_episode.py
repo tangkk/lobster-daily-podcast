@@ -2,8 +2,10 @@
 import argparse
 import datetime as dt
 import os
+import re
 import xml.etree.ElementTree as ET
 from email.utils import format_datetime
+from urllib.parse import urlparse
 
 ITUNES = "http://www.itunes.com/dtds/podcast-1.0.dtd"
 ATOM = "http://www.w3.org/2005/Atom"
@@ -37,6 +39,64 @@ def set_text(parent, tag, text, attrs=None):
         node.attrib.update(attrs)
     node.text = text
     return node
+
+
+def existing_episode(feed, slug):
+    tree = ET.parse(feed)
+    channel = tree.getroot().find("channel")
+    if channel is None:
+        raise SystemExit("RSS channel missing")
+    matches = [i for i in channel.findall("item") if i.findtext("guid") == slug]
+    if len(matches) > 1:
+        raise SystemExit(f"Duplicate RSS GUID already present: {slug}")
+    return matches[0] if matches else None
+
+
+def object_exists(client, bucket, key):
+    from botocore.exceptions import ClientError
+
+    try:
+        client.head_object(Bucket=bucket, Key=key)
+        return True
+    except ClientError as exc:
+        code = str(exc.response.get("Error", {}).get("Code", ""))
+        status = exc.response.get("ResponseMetadata", {}).get("HTTPStatusCode")
+        if code in {"404", "NoSuchKey", "NotFound"} or status == 404:
+            return False
+        raise
+
+
+def next_media_key(feed, slug, prefix, client, bucket):
+    """Choose the production media key.
+
+    First publication uses <slug>.mp3. Any later publication of the same stable
+    GUID is a rework and MUST use a fresh versioned enclosure key (-v2, -v3, ...).
+    Existing version keys are skipped so a rework never overwrites historical bytes.
+    """
+    prefix = prefix.rstrip("/")
+    item = existing_episode(feed, slug)
+    if item is None:
+        return f"{prefix}/{slug}.mp3", False
+
+    enclosure = item.find("enclosure")
+    if enclosure is None or not enclosure.attrib.get("url"):
+        raise SystemExit(f"Existing episode has no enclosure URL: {slug}")
+
+    current_name = os.path.basename(urlparse(enclosure.attrib["url"]).path)
+    base_name = f"{slug}.mp3"
+    version_match = re.fullmatch(re.escape(slug) + r"-v(\d+)\.mp3", current_name)
+    if current_name == base_name:
+        next_version = 2
+    elif version_match:
+        next_version = int(version_match.group(1)) + 1
+    else:
+        raise SystemExit(f"Unexpected enclosure filename for {slug}: {current_name}")
+
+    while True:
+        key = f"{prefix}/{slug}-v{next_version}.mp3"
+        if not object_exists(client, bucket, key):
+            return key, True
+        next_version += 1
 
 
 def upsert_episode(feed, enclosure_url, size, slug, title, description, duration):
@@ -80,42 +140,6 @@ def upsert_episode(feed, enclosure_url, size, slug, title, description, duration
     tree.write(feed, encoding="utf-8", xml_declaration=True)
 
 
-def backup_existing_object(client, bucket, key, slug):
-    """Back up the current production object before any overwrite.
-
-    No backup is created for a first publish where the canonical object does not yet exist.
-    The backup key is unique per GitHub run when available, otherwise per UTC timestamp.
-    """
-    from botocore.exceptions import ClientError
-
-    try:
-        client.head_object(Bucket=bucket, Key=key)
-    except ClientError as exc:
-        code = str(exc.response.get("Error", {}).get("Code", ""))
-        status = exc.response.get("ResponseMetadata", {}).get("HTTPStatusCode")
-        if code in {"404", "NoSuchKey", "NotFound"} or status == 404:
-            return None
-        raise
-
-    run_id = os.environ.get("GITHUB_RUN_ID", "").strip()
-    attempt = os.environ.get("GITHUB_RUN_ATTEMPT", "").strip()
-    if run_id:
-        version = f"run-{run_id}" + (f"-attempt-{attempt}" if attempt else "")
-    else:
-        version = "utc-" + dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-
-    backup_key = f"_release_backups/{slug}/{version}.mp3"
-    client.copy_object(
-        Bucket=bucket,
-        Key=backup_key,
-        CopySource={"Bucket": bucket, "Key": key},
-        ContentType="audio/mpeg",
-        MetadataDirective="REPLACE",
-    )
-    print(f"BACKUP_CREATED={backup_key}")
-    return backup_key
-
-
 def main():
     ensure_namespaces()
     p = argparse.ArgumentParser()
@@ -131,16 +155,16 @@ def main():
     endpoint = os.environ["R2_ENDPOINT"].strip('"')
     bucket = os.environ["R2_BUCKET"]
     public = os.environ["R2_PUBLIC_URL"].rstrip("/")
-    key = f"{a.prefix.rstrip('/')}/{a.slug}.mp3"
-    enclosure_url = f"{public}/{key}"
-
     client = r2_client(endpoint)
     size = os.path.getsize(a.audio)
 
-    # Same date/slug remains intentionally replaceable, but every overwrite is now recoverable.
-    backup_existing_object(client, bucket, key, a.slug)
+    key, is_rework = next_media_key(a.feed, a.slug, a.prefix, client, bucket)
+    enclosure_url = f"{public}/{key}"
     client.upload_file(a.audio, bucket, key, ExtraArgs={"ContentType": "audio/mpeg"})
     upsert_episode(a.feed, enclosure_url, size, a.slug, a.title, a.description, a.duration)
+
+    print(f"REWORK={'1' if is_rework else '0'}")
+    print(f"MEDIA_KEY={key}")
     print(enclosure_url)
 
 
