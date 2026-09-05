@@ -1,0 +1,141 @@
+name: Rename Episode Media URL
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'publish/requests/rename-*.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: podcast-feed-write
+  cancel-in-progress: false
+
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+      R2_BUCKET: ${{ secrets.R2_BUCKET }}
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --upgrade pip boto3
+
+      - name: Resolve rename request
+        id: req
+        shell: bash
+        run: |
+          set -euo pipefail
+          REQUEST=$(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep -E '^publish/requests/rename-.+\.json$' | head -n 1)
+          test -n "$REQUEST"
+          python -m json.tool "$REQUEST" >/dev/null
+          test "$(jq -r '.operation' "$REQUEST")" = rename_media
+          for key in slug prefix new_filename; do
+            value=$(jq -r --arg k "$key" '.[$k] // empty' "$REQUEST")
+            test -n "$value"
+            echo "$key=$value" >> "$GITHUB_OUTPUT"
+          done
+
+      - name: Refresh feed from latest main
+        run: |
+          git fetch origin main
+          git show origin/main:feed.xml > feed.xml
+
+      - name: Copy existing R2 object and update enclosure URL
+        env:
+          SLUG: ${{ steps.req.outputs.slug }}
+          PREFIX: ${{ steps.req.outputs.prefix }}
+          NEW_FILENAME: ${{ steps.req.outputs.new_filename }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import os
+          import xml.etree.ElementTree as ET
+          from urllib.parse import urlsplit, urlunsplit
+          import boto3
+          from botocore.config import Config
+
+          slug=os.environ['SLUG']
+          prefix=os.environ['PREFIX'].strip('/')
+          new_filename=os.environ['NEW_FILENAME']
+          if '/' in new_filename or not new_filename.endswith('.mp3'):
+              raise SystemExit('new_filename must be a plain .mp3 filename')
+
+          tree=ET.parse('feed.xml')
+          ch=tree.getroot().find('channel')
+          items=[i for i in ch.findall('item') if (i.findtext('guid') or '') == slug]
+          assert len(items)==1, f'expected one episode for {slug}, found {len(items)}'
+          item=items[0]
+          enclosure=item.find('enclosure')
+          old_url=enclosure.attrib['url']
+          old_key=f'{prefix}/{slug}.mp3'
+          new_key=f'{prefix}/{new_filename}'
+
+          c=boto3.client('s3', endpoint_url=os.environ['R2_ENDPOINT'].strip('"'),
+              aws_access_key_id=os.environ['R2_ACCESS_KEY_ID'],
+              aws_secret_access_key=os.environ['R2_SECRET_ACCESS_KEY'], region_name='auto',
+              config=Config(s3={'addressing_style':'path'}))
+          c.copy_object(Bucket=os.environ['R2_BUCKET'], Key=new_key,
+              CopySource={'Bucket':os.environ['R2_BUCKET'],'Key':old_key},
+              ContentType='audio/mpeg', MetadataDirective='REPLACE')
+
+          p=urlsplit(old_url)
+          base=p.path.rsplit('/',1)[0]
+          new_url=urlunsplit((p.scheme,p.netloc,f'{base}/{new_filename}',p.query,p.fragment))
+          enclosure.set('url',new_url)
+          ET.register_namespace('itunes','http://www.itunes.com/dtds/podcast-1.0.dtd')
+          ET.register_namespace('atom','http://www.w3.org/2005/Atom')
+          tree.write('feed.xml', encoding='utf-8', xml_declaration=True)
+          print(new_url)
+          PY
+
+      - name: Commit updated RSS
+        env:
+          SLUG: ${{ steps.req.outputs.slug }}
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add feed.xml
+          git diff --cached --quiet && { echo 'No RSS change'; exit 1; }
+          git commit -m "Version media URL for ${SLUG} [skip ci]"
+          git push origin HEAD:main
+
+      - name: Verify new public media URL and live RSS
+        env:
+          SLUG: ${{ steps.req.outputs.slug }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import os, time, urllib.request, xml.etree.ElementTree as ET
+          slug=os.environ['SLUG']
+          tree=ET.parse('feed.xml')
+          item=[i for i in tree.getroot().find('channel').findall('item') if i.findtext('guid')==slug][0]
+          url=item.find('enclosure').attrib['url']
+          expected=int(item.find('enclosure').attrib['length'])
+          req=urllib.request.Request(url, method='HEAD')
+          with urllib.request.urlopen(req, timeout=20) as r:
+              got=int(r.headers.get('Content-Length') or 0)
+              assert r.status < 400
+              assert got == expected, (got, expected)
+          live='https://raw.githubusercontent.com/'+os.environ['GITHUB_REPOSITORY']+'/main/feed.xml'
+          for _ in range(12):
+              text=urllib.request.urlopen(live, timeout=20).read().decode('utf-8')
+              if url in text:
+                  print('RENAMED MEDIA VERIFIED:', url)
+                  break
+              time.sleep(5)
+          else:
+              raise SystemExit('live RSS did not expose new media URL')
+          PY
