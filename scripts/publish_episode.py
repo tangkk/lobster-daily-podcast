@@ -80,6 +80,42 @@ def upsert_episode(feed, enclosure_url, size, slug, title, description, duration
     tree.write(feed, encoding="utf-8", xml_declaration=True)
 
 
+def backup_existing_object(client, bucket, key, slug):
+    """Back up the current production object before any overwrite.
+
+    No backup is created for a first publish where the canonical object does not yet exist.
+    The backup key is unique per GitHub run when available, otherwise per UTC timestamp.
+    """
+    from botocore.exceptions import ClientError
+
+    try:
+        client.head_object(Bucket=bucket, Key=key)
+    except ClientError as exc:
+        code = str(exc.response.get("Error", {}).get("Code", ""))
+        status = exc.response.get("ResponseMetadata", {}).get("HTTPStatusCode")
+        if code in {"404", "NoSuchKey", "NotFound"} or status == 404:
+            return None
+        raise
+
+    run_id = os.environ.get("GITHUB_RUN_ID", "").strip()
+    attempt = os.environ.get("GITHUB_RUN_ATTEMPT", "").strip()
+    if run_id:
+        version = f"run-{run_id}" + (f"-attempt-{attempt}" if attempt else "")
+    else:
+        version = "utc-" + dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+
+    backup_key = f"_release_backups/{slug}/{version}.mp3"
+    client.copy_object(
+        Bucket=bucket,
+        Key=backup_key,
+        CopySource={"Bucket": bucket, "Key": key},
+        ContentType="audio/mpeg",
+        MetadataDirective="REPLACE",
+    )
+    print(f"BACKUP_CREATED={backup_key}")
+    return backup_key
+
+
 def main():
     ensure_namespaces()
     p = argparse.ArgumentParser()
@@ -100,7 +136,9 @@ def main():
 
     client = r2_client(endpoint)
     size = os.path.getsize(a.audio)
-    # Same date/slug is intentionally replaceable: reruns update the one canonical object.
+
+    # Same date/slug remains intentionally replaceable, but every overwrite is now recoverable.
+    backup_existing_object(client, bucket, key, a.slug)
     client.upload_file(a.audio, bucket, key, ExtraArgs={"ContentType": "audio/mpeg"})
     upsert_episode(a.feed, enclosure_url, size, a.slug, a.title, a.description, a.duration)
     print(enclosure_url)
