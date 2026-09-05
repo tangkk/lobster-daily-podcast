@@ -13,6 +13,7 @@ The Daily Brief is researched and composed once as the canonical written edition
 - Podcast artwork: `cover.jpg`
 - Automatic TTS → R2 → RSS publication
 - Audio replacement / media-URL versioning workflows
+- Versioned backups of overwritten production audio
 - Podcast notifications
 - R2 audio references / podcast metadata
 
@@ -27,12 +28,26 @@ Normal Podcast publication is handled by `.github/workflows/auto-publish-daily.y
 3. Create the listening-first spoken derivative and commit it directly to `main` here as `episodes/epNNN-daily-YYYY-MM-DD.txt`.
 4. Before TTS, apply spoken-only editorial safety rules, sensitive-term checks, pronunciation/date/number normalization, and validation.
 5. The episode push automatically generates final TTS. 龙虾日报 has no normal preview/approval gate.
-6. The workflow uploads/replaces the canonical R2 object and upserts exactly one RSS item for the stable GUID, with the real enclosure URL, real byte length, actual `itunes:duration`, `itunes:episodeType=full`, and updated `lastBuildDate`.
-7. After the RSS commit becomes visible, the independent `tangkk/daily_brief` workflow `Publish Daily After Podcast` detects the matching final Podcast item, publishes the staged written Brief, maps the exact enclosure URL, deploys Pages, and verifies the live player.
+6. On first publish, upload the canonical R2 object normally. On any later overwrite of the same canonical production key, first copy the current object to `_release_backups/<slug>/run-<run_id>-attempt-<n>.mp3`, then upload the new version. The backup is byte-for-byte recoverable and must be created before the overwrite.
+7. Upsert exactly one RSS item for the stable GUID, with the real enclosure URL, real byte length, actual `itunes:duration`, `itunes:episodeType=full`, and updated `lastBuildDate`.
+8. After the RSS commit becomes visible, the independent `tangkk/daily_brief` workflow `Publish Daily After Podcast` detects the matching final Podcast item, publishes the staged written Brief, maps the exact enclosure URL, deploys Pages, and verifies the live player.
 
 There is no cross-repository write token in the normal architecture. The two repositories synchronize through the committed public Podcast `feed.xml`, not by one repository directly writing the other.
 
 `TTS Preview` is manual fallback/debugging only. The older publish-request workflow remains only as a legacy/manual recovery path and is not part of normal daily publication.
+
+## Release backup policy
+
+Every overwrite of an existing canonical production MP3 must be recoverable without regenerating TTS.
+
+- Canonical object: `<prefix>/<slug>.mp3`.
+- Before overwriting an existing canonical object, copy it to `_release_backups/<slug>/run-<GITHUB_RUN_ID>-attempt-<GITHUB_RUN_ATTEMPT>.mp3`.
+- First publication of a slug has nothing to back up and therefore creates no backup.
+- Backups are immutable historical release bytes; never overwrite an existing backup key.
+- A failed upload after the backup step must leave the backup untouched.
+- Media-URL versioning (`-v2`, `-v3`, …) is separate from release backups. Versioned enclosure objects are platform-facing media URLs; `_release_backups/` is internal recovery history.
+- `Replace Approved Episode Audio` already performs its own pre-replacement backup. Any future workflow that can overwrite production audio must implement equivalent backup-before-write semantics.
+- Restoring an old release means copying the selected backup back to the intended production/versioned key and updating RSS metadata only if needed; it must not create a new GUID.
 
 ## Episode redo / rejection recovery SOP
 
@@ -48,19 +63,20 @@ Use this when an already-published episode must be corrected, is rejected by a p
 ### B. If the audio itself must change
 
 5. Update the same canonical spoken-script file. Let `Auto Publish Daily` regenerate TTS and replace the same episode/GUID.
-6. Verify the exact final MP3 bytes, duration and RSS item. Do not declare success at TTS completion alone.
-7. If the podcast platform has probably already fetched or started reviewing the previous media URL, do not rely on overwriting the same URL. Keep the GUID unchanged but version the enclosure media URL, for example:
+6. Before the production MP3 is overwritten, the existing object must be copied into `_release_backups/<slug>/...`. This is mandatory; a redo must never destroy the previous release bytes.
+7. Verify the exact final MP3 bytes, duration and RSS item. Do not declare success at TTS completion alone.
+8. If the podcast platform has probably already fetched or started reviewing the previous media URL, do not rely on overwriting the same URL. Keep the GUID unchanged but version the enclosure media URL, for example:
 
    `daily/ep016-daily-2026-09-05-v2.mp3`
 
    The versioned file must contain the already-approved/latest MP3 bytes; no TTS regeneration is needed merely to change the media URL.
-8. Keep the previous R2 object temporarily. Do not delete the old object during the URL switch; cached requests may still reference it.
+9. Keep the previous R2 object temporarily. Do not delete the old object during the URL switch; cached requests may still reference it.
 
 ### C. Media URL versioning
 
-9. Use the dedicated `Rename Episode Media URL` path for a pure media-URL refresh. It copies the existing R2 object to a new versioned filename and updates only the enclosure URL for the same GUID.
-10. A media-URL rename must not change title, GUID, episode date, description, byte length, duration or audio content.
-11. `rename-*` requests must not trigger `Publish Approved Artifact`. Each recovery operation must have one intended write path only.
+10. Use the dedicated `Rename Episode Media URL` path for a pure media-URL refresh. It copies the existing R2 object to a new versioned filename and updates only the enclosure URL for the same GUID.
+11. A media-URL rename must not change title, GUID, episode date, description, byte length, duration or audio content.
+12. `rename-*` requests must not trigger `Publish Approved Artifact`. Each recovery operation must have one intended write path only.
 
 ### D. Verification contract
 
@@ -74,6 +90,7 @@ A redo is not complete until all applicable checks pass:
 - public/live RSS exposes the new enclosure URL;
 - the written Daily Brief player, when applicable, resolves to the same final RSS/R2 audio object;
 - no duplicate episode was created;
+- if production audio was overwritten, the immediately previous version exists in `_release_backups/<slug>/`;
 - the workflow completion notification was emitted.
 
 Prefer R2/S3 `head_object` or a real GET-capable verification path for object verification. Do not treat an anonymous HTTP `HEAD` 403 from the R2 public endpoint as proof that the object is missing.
@@ -94,14 +111,16 @@ If a workflow finishes but no notification arrives, first check whether its work
 ### F. Recovery decision table
 
 - **Text/source problem before release:** edit canonical spoken script → normal Auto Publish.
-- **Published audio content is wrong:** edit same spoken script → regenerate TTS → same GUID → verify public release.
+- **Published audio content is wrong:** edit same spoken script → regenerate TTS → backup current production MP3 → same GUID → verify public release.
 - **Published audio is correct but platform may be caching/reviewing an older media URL:** do not regenerate TTS → version enclosure filename (`-v2`, `-v3`, …) → same GUID → verify new R2 object + live RSS.
+- **Need an exact historical audio version:** restore from `_release_backups/<slug>/...`; do not rerun TTS unless no historical bytes exist.
 - **Only written-site deployment failed:** do not republish Podcast; rerun/fix written-site deployment.
 - **Only notification failed:** do not rerun the media publication merely to obtain a notification; fix the notify listener/path separately.
 
 ## Idempotence and failure handling
 
 - Same date/slug reruns update the same RSS GUID; they never append a duplicate item.
+- Every overwrite of an existing canonical production MP3 must first create a versioned R2 backup.
 - A media URL may be versioned when platform cache/review behavior requires a fresh enclosure URL, but the GUID remains stable.
 - If TTS or R2/RSS publication fails, the written draft remains unpublished because the written workflow will not find a valid matching Podcast item.
 - If Podcast succeeds but written publication/deployment fails, keep the Podcast episode and rerun the written workflow or retrigger the same staged date; do not republish a duplicate Podcast episode.
