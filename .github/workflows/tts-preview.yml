@@ -62,14 +62,15 @@ jobs:
           test -n "$XFYUN_API_KEY"
           test -n "$XFYUN_API_SECRET"
           mkdir -p build
-      - name: Block sensitive spoken terms
+      - name: Filter sensitive spoken content
         run: |
           set -euo pipefail
-          python scripts/check_sensitive_terms.py "${{ steps.inputs.outputs.text_file }}"
+          python scripts/check_sensitive_terms.py "${{ steps.inputs.outputs.text_file }}" --filter-output build/safe-spoken.txt
+          python scripts/check_sensitive_terms.py build/safe-spoken.txt
       - name: Prepare and validate spoken transcript
         run: |
           set -euo pipefail
-          python scripts/prepare_tts_text.py "${{ steps.inputs.outputs.text_file }}" -o build/tts-transcript.txt
+          python scripts/prepare_tts_text.py build/safe-spoken.txt -o build/tts-transcript.txt
           test -s build/tts-transcript.txt
           python scripts/check_sensitive_terms.py build/tts-transcript.txt
           echo 'Prepared transcript preview:'
