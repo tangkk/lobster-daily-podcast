@@ -88,10 +88,31 @@ jobs:
           set -euo pipefail
           for v in XFYUN_APPID XFYUN_API_KEY XFYUN_API_SECRET R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_ENDPOINT R2_BUCKET R2_PUBLIC_URL; do test -n "${!v}" || { echo "Missing $v"; exit 1; }; done
 
+      - name: Prepare and validate spoken transcript
+        run: |
+          set -euo pipefail
+          mkdir -p build
+          python scripts/prepare_tts_text.py "${{ steps.episode.outputs.text_file }}" -o build/tts-transcript.txt
+          python - <<'PY'
+          import importlib.util
+          from pathlib import Path
+          spec = importlib.util.spec_from_file_location('prep', 'scripts/prepare_tts_text.py')
+          m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+          sample = '2026年9月5日，8点30分，通胀4.1%，SBU 与 Micron。'
+          out = m.prepare(sample, m.load_dict(Path('scripts/pronunciation.json')))
+          expected = ['二零二六年九月五日', '八点三十分', '百分之四点一', '艾斯比优', '美光']
+          missing = [x for x in expected if x not in out]
+          assert not missing, f'TTS normalization smoke test failed, missing: {missing}; output={out!r}'
+          print('TTS normalization smoke test:', out.strip())
+          PY
+          echo 'Prepared transcript preview:'
+          sed -n '1,8p' build/tts-transcript.txt
+
       - name: Generate final TTS
         run: |
-          mkdir -p build
-          python scripts/xfyun-tools/xfyun_segmented_run.py --text-file "${{ steps.episode.outputs.text_file }}" --out "build/${{ steps.episode.outputs.slug }}.mp3" --profile default --pause-ms 350
+          set -euo pipefail
+          test -s build/tts-transcript.txt
+          python scripts/xfyun-tools/xfyun_segmented_run.py --text-file build/tts-transcript.txt --out "build/${{ steps.episode.outputs.slug }}.mp3" --profile default --pause-ms 350
 
       - name: Read final audio metadata
         id: audio
