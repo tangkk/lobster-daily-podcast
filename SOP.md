@@ -18,7 +18,7 @@ This repository owns the complete Podcast layer for Daily Brief.
 Primary workflow: `.github/workflows/auto-publish-daily.yml` (`Auto Publish Daily`).
 
 ```text
-10:00 Daily Brief task
+scheduled Daily Brief task
   -> research + canonical written draft
   -> canonical spoken script in episodes/
   -> Auto Publish Daily
@@ -26,7 +26,7 @@ Primary workflow: `.github/workflows/auto-publish-daily.yml` (`Auto Publish Dail
      -> pronunciation/date/number normalization
      -> TTS
      -> audio metadata (bytes/duration)
-     -> first-publish media object
+     -> first-publish media object or fresh versioned media object on redo
      -> RSS upsert (one stable GUID)
      -> public MP3 + live RSS verification
   -> daily_brief / Publish Daily After Podcast
@@ -48,9 +48,10 @@ The two repositories synchronize through the committed public Podcast `feed.xml`
 
 ### Weekly schedule integration
 
-- Monday–Saturday: the normal Daily Brief canonical written draft and spoken script are generated at 10:00 Asia/Shanghai after Asian markets have opened.
-- Sunday: the 10:00 run is a Weekly Review. Its spoken script includes the integrated AI 信用周期 section from the same canonical written Weekly Review.
-- Sunday uses the same Auto Publish Daily production path, stable GUID/date semantics, TTS normalization, R2 publication, RSS upsert, downstream written-site synchronization, and verification contract as an ordinary Daily Brief episode.
+- Tuesday–Saturday: the normal Daily Brief canonical written draft and spoken script are generated at **07:00 Asia/Shanghai**, for breakfast/commute listening before the main China/Hong Kong cash-equity open.
+- Monday: the normal Daily Brief is generated at **09:00 Asia/Shanghai**. It uses the extra time to synthesize weekend developments and early Asian-session information while avoiding repetition of the Sunday Weekly Review.
+- Sunday: the **10:00 Asia/Shanghai** run is a Weekly Review. Its spoken script includes the integrated AI 信用周期 section from the same canonical written Weekly Review.
+- All three schedule paths use the same Auto Publish Daily production path, stable GUID/date semantics, TTS normalization, R2 publication, RSS upsert, downstream written-site synchronization, and verification contract.
 - There is no separate AI 信用周期 podcast item or audio feed.
 
 ## Path 2 — Already-published episode redo / rejection recovery
