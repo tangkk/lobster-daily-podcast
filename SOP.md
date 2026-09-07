@@ -18,7 +18,7 @@ This repository owns the complete Podcast layer for Daily Brief.
 Primary workflow: `.github/workflows/auto-publish-daily.yml` (`Auto Publish Daily`).
 
 ```text
-06:00 Daily Brief task
+10:00 Daily Brief task
   -> research + canonical written draft
   -> canonical spoken script in episodes/
   -> Auto Publish Daily
@@ -45,6 +45,13 @@ Normal target state: no user intervention is required.
 - RSS already has the slug/GUID -> this is no longer a first publication; treat it as a redo/rework and use a fresh versioned media URL automatically.
 
 The two repositories synchronize through the committed public Podcast `feed.xml`; the Podcast repository does not directly write the written-site repository.
+
+### Weekly schedule integration
+
+- Monday–Saturday: the normal Daily Brief canonical written draft and spoken script are generated at 10:00 Asia/Shanghai after Asian markets have opened.
+- Sunday: the 10:00 run is a Weekly Review. Its spoken script includes the integrated AI 信用周期 section from the same canonical written Weekly Review.
+- Sunday uses the same Auto Publish Daily production path, stable GUID/date semantics, TTS normalization, R2 publication, RSS upsert, downstream written-site synchronization, and verification contract as an ordinary Daily Brief episode.
+- There is no separate AI 信用周期 podcast item or audio feed.
 
 ## Path 2 — Already-published episode redo / rejection recovery
 
