@@ -183,6 +183,7 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 - RSS episode `description` / shownotes must be derived from the first substantive reader-facing summary paragraph of the canonical spoken script.
 - If the spoken script begins with the fixed opening `龙虾日报，YYYY年M月D日。`, skip that identifier/date paragraph when generating shownotes.
 - Never use the fixed spoken opening by itself as shownotes.
+- Append a fixed `文字版：https://tangkk.github.io/daily_brief/YYYY/MM/DD/` line derived deterministically from the episode date. This is workflow-generated metadata, not model-authored copy. It is valid for the Podcast-first chain even before the written page becomes public, because the matching written page is published only after Podcast verification.
 - Keep shownotes concise and factual; do not expose internal editorial, deduplication, sourcing, safety, or workflow logic.
 - Same-date reworks that materially change the spoken summary should update the existing RSS item's description while preserving the stable GUID.
 
