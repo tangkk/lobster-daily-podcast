@@ -178,6 +178,14 @@ Because every redo uses a new versioned object, rollback should normally be a po
 
 Internal `_release_backups/` remain useful for any legacy/exceptional path that truly overwrites an object, but the preferred redo architecture is immutable published media objects + RSS pointer versioning.
 
+## Shownotes generation rule
+
+- RSS episode `description` / shownotes must be derived from the first substantive reader-facing summary paragraph of the canonical spoken script.
+- If the spoken script begins with the fixed opening `龙虾日报，YYYY年M月D日。`, skip that identifier/date paragraph when generating shownotes.
+- Never use the fixed spoken opening by itself as shownotes.
+- Keep shownotes concise and factual; do not expose internal editorial, deduplication, sourcing, safety, or workflow logic.
+- Same-date reworks that materially change the spoken summary should update the existing RSS item's description while preserving the stable GUID.
+
 ## TTS normalization rules
 
 - English hyphens used inside alphabetic compound words are punctuation, not spoken lexical content. Before TTS, normalize an ASCII hyphen between English letters to a natural word boundary (space), so forms such as `white-hat`, `open-source`, `real-time`, and `state-of-the-art` are spoken without saying "hyphen", "dash", or "minus".
