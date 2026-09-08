@@ -97,8 +97,12 @@ jobs:
           print(first[:220])
           PY
           )
+          DATE="${{ steps.episode.outputs.date }}"
+          WRITTEN_URL="https://tangkk.github.io/daily_brief/${DATE:0:4}/${DATE:5:2}/${DATE:8:2}/"
           echo "description<<EOF" >> "$GITHUB_OUTPUT"
           echo "$DESCRIPTION" >> "$GITHUB_OUTPUT"
+          echo "" >> "$GITHUB_OUTPUT"
+          echo "文字版：$WRITTEN_URL" >> "$GITHUB_OUTPUT"
           echo "EOF" >> "$GITHUB_OUTPUT"
 
       - name: Prepare and validate spoken transcript
