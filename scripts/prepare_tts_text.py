@@ -85,6 +85,15 @@ def normalize_spoken_numbers(text: str) -> str:
     return text
 
 
+def normalize_english_hyphens(text: str) -> str:
+    """Treat hyphens inside English compounds as silent word boundaries for TTS.
+
+    Examples: white-hat -> white hat, open-source -> open source,
+    state-of-the-art -> state of the art. Numeric minus/range punctuation is untouched.
+    """
+    return re.sub(r"(?<=[A-Za-z])-(?=[A-Za-z])", " ", text)
+
+
 def validate_spoken_text(text: str) -> None:
     bad_patterns = {
         "Arabic calendar/clock number": r"\d+(?:\.\d+)?\s*(?:年|月|日|号|点|时|分钟?)",
@@ -107,6 +116,7 @@ def prepare(text, pronunciations):
     text = re.sub(r"[*_`]+", "", text)
     text = re.sub(r"^\s*>\s?", "", text, flags=re.M)
     text = normalize_spoken_numbers(text)
+    text = normalize_english_hyphens(text)
     for src in sorted(pronunciations, key=len, reverse=True):
         text = text.replace(src, pronunciations[src])
     text = re.sub(r"[ \t]+", " ", text)
