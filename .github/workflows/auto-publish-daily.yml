@@ -89,7 +89,10 @@ jobs:
           DESCRIPTION=$(python - <<'PY'
           import pathlib, re
           text=pathlib.Path('build/safe-spoken.txt').read_text(encoding='utf-8').strip()
-          first=re.split(r'\n\s*\n',text,maxsplit=1)[0].strip()
+          parts=[p.strip() for p in re.split(r'\n\s*\n',text) if p.strip()]
+          if parts and re.fullmatch(r'龙虾日报，\d{4}年\d{1,2}月\d{1,2}日。?', parts[0]):
+              parts=parts[1:]
+          first=parts[0] if parts else ''
           first=re.sub(r'^今天最重要的一句话是[：:]\s*','',first)
           print(first[:220])
           PY
