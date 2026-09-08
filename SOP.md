@@ -178,6 +178,12 @@ Because every redo uses a new versioned object, rollback should normally be a po
 
 Internal `_release_backups/` remain useful for any legacy/exceptional path that truly overwrites an object, but the preferred redo architecture is immutable published media objects + RSS pointer versioning.
 
+## TTS normalization rules
+
+- English hyphens used inside alphabetic compound words are punctuation, not spoken lexical content. Before TTS, normalize an ASCII hyphen between English letters to a natural word boundary (space), so forms such as `white-hat`, `open-source`, `real-time`, and `state-of-the-art` are spoken without saying "hyphen", "dash", or "minus".
+- Do not apply this rule to numeric minus signs, numeric ranges, dates, identifiers, URLs, filenames, or other cases where `-` carries non-compound semantic or structural meaning.
+- This normalization belongs in the TTS preparation layer; the canonical spoken script may retain standard written English spelling unless an editorial rewrite is independently preferred.
+
 ## Editorial correction rules
 
 - Fix the canonical spoken script first; never patch only MP3/RSS while leaving source stale.
