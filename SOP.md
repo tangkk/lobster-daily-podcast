@@ -187,6 +187,15 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 - Keep shownotes concise and factual; do not expose internal editorial, deduplication, sourcing, safety, or workflow logic.
 - Same-date reworks that materially change the spoken summary should update the existing RSS item's description while preserving the stable GUID.
 
+## Spoken country-name convention
+
+- In every canonical Daily Brief spoken script, country names must appear in Chinese rather than English or English abbreviations when used as country names in normal narration.
+- Examples: `United States` / `U.S.` → `美国`, `United Kingdom` / `UK` → `英国`, `Malaysia` → `马来西亚`, `Japan` → `日本`, `South Korea` → `韩国`.
+- Apply this during spoken-script derivation/generation, not merely as a TTS pronunciation patch, so the canonical spoken text itself is natural Chinese.
+- Preserve English only when it is genuinely part of a proper name, ticker, product/model name, quoted title, URL, or technical expression where translation would reduce accuracy.
+- Before committing the canonical spoken script, perform a country-name pass and rewrite ordinary English country-name occurrences into Chinese.
+- This convention does not require the written edition to translate every English proper noun; it specifically governs the spoken derivative for natural listening.
+
 ## TTS normalization rules
 
 - English hyphens used inside alphabetic compound words are punctuation, not spoken lexical content. Before TTS, normalize an ASCII hyphen between English letters to a natural word boundary (space), so forms such as `white-hat`, `open-source`, `real-time`, and `state-of-the-art` are spoken without saying "hyphen", "dash", or "minus".
