@@ -202,6 +202,13 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 - Do not apply this rule to numeric minus signs, numeric ranges, dates, identifiers, URLs, filenames, or other cases where `-` carries non-compound semantic or structural meaning.
 - This normalization belongs in the TTS preparation layer; the canonical spoken script may retain standard written English spelling unless an editorial rewrite is independently preferred.
 
+## Daily AI Credit Cycle Pulse in spoken editions
+
+- Monday–Saturday canonical spoken scripts may include the Daily Brief's **AI Credit Cycle Pulse / AI 信用周期脉冲** only when the written section contains material incremental evidence that clears the normal Information-Gain gate.
+- Do not force a spoken credit-cycle segment when the cycle state is materially unchanged; written coverage may remain concise while spoken coverage omits low-value repetition.
+- When included, convert the written evidence into concise natural Chinese focused on what changed in financing, real demand, infrastructure economics, hard-cash ROI, or credit risk.
+- Sunday Weekly Review continues to carry the fuller weekly AI 信用周期 synthesis.
+
 ## Editorial correction rules
 
 - Fix the canonical spoken script first; never patch only MP3/RSS while leaving source stale.
