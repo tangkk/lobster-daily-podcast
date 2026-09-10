@@ -48,10 +48,10 @@ The two repositories synchronize through the committed public Podcast `feed.xml`
 
 ### Weekly schedule integration
 
-- Tuesday–Saturday: the normal Daily Brief canonical written draft and spoken script are generated at **07:00 Asia/Shanghai**, for breakfast/commute listening before the main China/Hong Kong cash-equity open.
-- Monday: the normal Daily Brief is generated at **09:00 Asia/Shanghai**. It uses the extra time to synthesize weekend developments and early Asian-session information while avoiding repetition of the Sunday Weekly Review.
-- Sunday: the **10:00 Asia/Shanghai** run is a Weekly Review. Its spoken script includes the integrated AI 信用周期 section from the same canonical written Weekly Review.
-- All three schedule paths use the same Auto Publish Daily production path, stable GUID/date semantics, TTS normalization, R2 publication, RSS upsert, downstream written-site synchronization, and verification contract.
+- Monday–Saturday: the normal Daily Brief canonical written draft and spoken script are generated at **07:00 Asia/Shanghai** by the single `Daily Brief` schedule, for breakfast/commute listening before the main China/Hong Kong cash-equity open.
+- Monday–Saturday: `Daily Brief Watchdog` runs at **07:30 Asia/Shanghai** as recovery-only. It does not create a second edition; if the same-date release is already complete it exits without side effects, otherwise it resumes from the first incomplete durable milestone under the authoritative SOPs.
+- Sunday: the **09:00 Asia/Shanghai** run is `Weekly Review`. Its spoken script includes the integrated AI 信用周期 section from the same canonical written Weekly Review.
+- Daily Brief, Watchdog recovery, and Weekly Review all use the same Auto Publish Daily production path, stable GUID/date semantics, TTS normalization, R2 publication, RSS upsert, downstream written-site synchronization, and verification contract.
 - There is no separate AI 信用周期 podcast item or audio feed.
 
 ## Path 2 — Already-published episode redo / rejection recovery
