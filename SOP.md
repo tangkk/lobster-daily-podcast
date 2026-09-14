@@ -200,6 +200,8 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 
 - English hyphens used inside alphabetic compound words are punctuation, not spoken lexical content. Before TTS, normalize an ASCII hyphen between English letters to a natural word boundary (space), so forms such as `white-hat`, `open-source`, `real-time`, and `state-of-the-art` are spoken without saying "hyphen", "dash", or "minus".
 - Do not apply this rule to numeric minus signs, numeric ranges, dates, identifiers, URLs, filenames, or other cases where `-` carries non-compound semantic or structural meaning.
+- Frequently mispronounced market/company names must be normalized to stable Chinese readings before TTS. At minimum: `Dow` / `Dow Jones` → `道琼斯`, `Nasdaq` / `NASDAQ` → `纳斯达克`, and `Nvidia` / `NVIDIA` → `英伟达`.
+- Prefer using these Chinese forms directly when deriving the canonical spoken script for natural listening; the deterministic pronunciation dictionary remains the final TTS safeguard if an English form survives upstream.
 - This normalization belongs in the TTS preparation layer; the canonical spoken script may retain standard written English spelling unless an editorial rewrite is independently preferred.
 
 ## Daily AI Credit Cycle Pulse in spoken editions
