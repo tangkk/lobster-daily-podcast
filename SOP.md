@@ -206,9 +206,9 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 
 ## Spoken-script pronunciation convention
 
-- In every canonical Daily Brief spoken script, write `DRAM` as `D-RAM` so the intended reading is explicit before the TTS preparation layer.
-- Apply this during spoken-script derivation/generation, not only as a downstream pronunciation-dictionary patch.
-- The written Daily Brief may retain the standard technical spelling `DRAM`; this rule governs only the canonical spoken derivative.
+- In every canonical Daily Brief spoken script, write `DRAM` as `D-RAM`, `SRAM` as `S-RAM`, and `VRAM` as `V-RAM` so the intended readings are explicit before the TTS preparation layer.
+- Apply these replacements during spoken-script derivation/generation, not only as downstream pronunciation-dictionary patches.
+- The written Daily Brief may retain the standard technical spellings `DRAM`, `SRAM`, and `VRAM`; this rule governs only the canonical spoken derivative.
 
 ## Daily AI Credit Cycle Pulse in spoken editions
 
