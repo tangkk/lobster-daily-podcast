@@ -204,6 +204,12 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 - Prefer using these Chinese forms directly when deriving the canonical spoken script for natural listening; the deterministic pronunciation dictionary remains the final TTS safeguard if an English form survives upstream.
 - This normalization belongs in the TTS preparation layer; the canonical spoken script may retain standard written English spelling unless an editorial rewrite is independently preferred.
 
+## Spoken-script pronunciation convention
+
+- In every canonical Daily Brief spoken script, write `DRAM` as `D-RAM` so the intended reading is explicit before the TTS preparation layer.
+- Apply this during spoken-script derivation/generation, not only as a downstream pronunciation-dictionary patch.
+- The written Daily Brief may retain the standard technical spelling `DRAM`; this rule governs only the canonical spoken derivative.
+
 ## Daily AI Credit Cycle Pulse in spoken editions
 
 - Monday–Saturday canonical spoken scripts may include the Daily Brief's **AI Credit Cycle Pulse / AI 信用周期脉冲** only when the written section contains material incremental evidence that clears the normal Information-Gain gate.
