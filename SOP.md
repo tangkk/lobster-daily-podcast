@@ -206,7 +206,7 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 
 ## Spoken prose style
 
-- In every reader-facing canonical spoken Daily Brief and Weekly Review script, avoid the contrastive construction `不是……而是……` and close variants such as `并不是……而是……`, `不是 X，是 Y`, or rhetorical negation followed by a corrective assertion.
+- In every reader-facing canonical spoken Daily Brief and Weekly Review script, avoid contrastive/corrective framing that creates a rhetorical foil before stating the point. Prohibited or strongly avoided forms include `不是……而是……`, `并不是……而是……`, `不是 X，是 Y`, `与其说 A，不如说 B`, `真正值得关注的不是 A，而是 B`, `关键不在 A，在 B`, and close variants.
 - Express the intended point directly in affirmative, natural spoken Chinese. When a real distinction is necessary, state the relevant facts directly without using the `不是……而是……` frame.
 - Preserve factual meaning, uncertainty, nuance, attribution, and information density; this rule changes phrasing only.
 
