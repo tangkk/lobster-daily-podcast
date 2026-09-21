@@ -204,6 +204,12 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 - Prefer using these Chinese forms directly when deriving the canonical spoken script for natural listening; the deterministic pronunciation dictionary remains the final TTS safeguard if an English form survives upstream.
 - This normalization belongs in the TTS preparation layer; the canonical spoken script may retain standard written English spelling unless an editorial rewrite is independently preferred.
 
+## Spoken prose style
+
+- In every reader-facing canonical spoken Daily Brief and Weekly Review script, avoid the contrastive construction `不是……而是……` and close variants such as `并不是……而是……`, `不是 X，是 Y`, or rhetorical negation followed by a corrective assertion.
+- Express the intended point directly in affirmative, natural spoken Chinese. When a real distinction is necessary, state the relevant facts directly without using the `不是……而是……` frame.
+- Preserve factual meaning, uncertainty, nuance, attribution, and information density; this rule changes phrasing only.
+
 ## Spoken-script pronunciation convention
 
 - In every canonical Daily Brief spoken script, write `DRAM` as `D-RAM`, `SRAM` as `S-RAM`, `VRAM` as `V-RAM`, and `NAND` as `nan` so the intended readings are explicit before the TTS preparation layer.
