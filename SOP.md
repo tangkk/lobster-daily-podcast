@@ -149,6 +149,18 @@ This path does **not** rerun TTS.
 
 Mock workflows are validation tools only and must not share the production feed-write concurrency group.
 
+## Isolated test environment
+
+The Podcast repository provides production-isolated validation workflows for release changes.
+
+- `Mock Auto Publish Daily` validates spoken filtering, TTS normalization, the production TTS engine, local RSS upsert simulation, and the written-site handoff without production media/feed writes.
+- `Mock Rework Daily` validates same-GUID rework behavior, fresh versioned enclosure planning, approved-artifact integrity, and rollback simulation without production writes.
+- Mock jobs use read-only repository permissions and must never receive production R2 credentials or join the production `podcast-feed-write` concurrency group.
+- Mock workflows may use the production TTS service only for audio-generation fidelity; generated audio remains a temporary Actions artifact and is never published to production R2/RSS.
+- The written repository's `Test Daily Release Harness` provides the complementary deterministic fixture-based test of downstream publication/recovery and release-state validation.
+- Test and Mock paths must reuse production scripts/invariants wherever possible rather than fork a second implementation.
+- A test pass is evidence of regression safety, not publication success; only the production verification contract can establish a released episode.
+
 ## Verification contract
 
 A production release or redo is complete only when all applicable checks pass:
