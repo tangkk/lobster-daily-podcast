@@ -17,6 +17,7 @@ on:
     - cron: '0 2 * * 0'
 
 permissions:
+  actions: write
   contents: write
 
 concurrency:
@@ -127,3 +128,13 @@ jobs:
           git commit -m "Ingest Daily Brief spoken handoff for $DATE"
           git pull --rebase origin main
           git push origin main
+
+      - name: Dispatch canonical Podcast publisher
+        if: steps.handoff.outputs.ready == 'true' && inputs.dry_run != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EPISODE_PATH: ${{ steps.episode.outputs.path }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh workflow run auto-publish-daily.yml --repo "$GITHUB_REPOSITORY" --ref main -f text_file="$EPISODE_PATH"
