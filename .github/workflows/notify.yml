@@ -4,6 +4,7 @@ on:
   workflow_run:
     workflows:
       - Auto Publish Daily
+      - Ingest Daily Handoff
       - Publish Approved Artifact
       - Replace Approved Episode Audio
       - Rename Episode Media URL
