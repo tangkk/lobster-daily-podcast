@@ -257,7 +257,7 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 Normal Daily Brief publication receives its canonical spoken source from `tangkk/daily_brief`; it must not depend on a second ChatGPT connector write into this repository.
 
 1. Canonical handoff source: `tangkk/daily_brief/handoffs/YYYY-MM-DD-spoken.txt`.
-2. `Ingest Daily Handoff` is the owning cross-repository ingestion workflow. It can be started immediately by `Dispatch Podcast Handoff` in `daily_brief` and also runs a GitHub-native scheduled reconciliation at 08:00 Asia/Shanghai on Monday-Saturday.
+2. `Ingest Daily Handoff` is the owning cross-repository ingestion workflow. It can be started immediately by `Dispatch Podcast Handoff` in `daily_brief` and also runs GitHub-native scheduled reconciliation at 08:00 Asia/Shanghai on Monday-Saturday and 10:00 on Sunday for the Weekly Review.
 3. Ingestion fetches the exact handoff from `daily_brief/main`, validates the fixed spoken opening and date, and then resolves the canonical `episodes/epNNN-daily-YYYY-MM-DD.txt` path.
 4. If the same-date canonical episode already exists with identical content, ingestion is idempotently complete. If it exists with different content, ingestion fails closed; use the explicit same-date rework path rather than silently overwriting it.
 5. For a new date, GitHub Actions commits the canonical episode to this repository. That commit triggers the existing `Auto Publish Daily` workflow; TTS, R2, RSS, stable GUID, verification, and versioning rules remain owned here and unchanged.
