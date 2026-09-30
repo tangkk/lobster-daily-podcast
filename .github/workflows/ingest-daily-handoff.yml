@@ -1,0 +1,108 @@
+name: Ingest Daily Handoff
+
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: Asia/Shanghai date, YYYY-MM-DD
+        required: true
+  schedule:
+    # GitHub cron is UTC. 00:00 UTC = 08:00 Asia/Shanghai.
+    - cron: '0 0 * * 1-6'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-handoff-ingest
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout podcast repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Resolve Asia/Shanghai date
+        id: date
+        env:
+          INPUT_DATE: ${{ inputs.date }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -n "${INPUT_DATE:-}" ]; then DATE="$INPUT_DATE"; else DATE=$(TZ=Asia/Shanghai date +%F); fi
+          [[ "$DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]
+          echo "date=$DATE" >> "$GITHUB_OUTPUT"
+
+      - name: Fetch canonical spoken handoff
+        env:
+          DATE: ${{ steps.date.outputs.date }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL="https://raw.githubusercontent.com/tangkk/daily_brief/main/handoffs/${DATE}-spoken.txt"
+          if ! curl -fsSL --retry 3 --max-time 20 "${URL}?run=${GITHUB_RUN_ID}" -o /tmp/spoken.txt; then
+            if [ "${{ github.event_name }}" = "schedule" ]; then
+              echo "No handoff for $DATE yet; scheduled reconciliation exits cleanly."
+              exit 78
+            fi
+            echo "Missing canonical handoff for $DATE"
+            exit 1
+          fi
+          test -s /tmp/spoken.txt
+          FIRST=$(head -n 1 /tmp/spoken.txt | tr -d '\r')
+          Y=$(date -d "$DATE" +%Y); M=$((10#$(date -d "$DATE" +%m))); D=$((10#$(date -d "$DATE" +%d)))
+          EXPECTED="龙虾日报，${Y}年${M}月${D}日。"
+          test "$FIRST" = "$EXPECTED" || { echo "Invalid spoken opening: $FIRST"; exit 1; }
+
+      - name: Resolve canonical episode path
+        id: episode
+        env:
+          DATE: ${{ steps.date.outputs.date }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t EXISTING < <(find episodes -maxdepth 1 -type f -name "ep*-daily-${DATE}.txt" | sort)
+          if [ "${#EXISTING[@]}" -gt 1 ]; then echo "Duplicate episode paths for $DATE"; exit 1; fi
+          if [ "${#EXISTING[@]}" -eq 1 ]; then
+            PATH_OUT="${EXISTING[0]}"
+          else
+            NEXT=$(python - <<'PY'
+          import pathlib,re
+          nums=[]
+          for p in pathlib.Path('episodes').glob('ep*-daily-*.txt'):
+              m=re.match(r'ep(\d+)-daily-',p.name)
+              if m: nums.append(int(m.group(1)))
+          print(max(nums,default=0)+1)
+          PY
+            )
+            PATH_OUT=$(printf 'episodes/ep%03d-daily-%s.txt' "$NEXT" "$DATE")
+          fi
+          echo "path=$PATH_OUT" >> "$GITHUB_OUTPUT"
+
+      - name: Commit canonical spoken episode
+        env:
+          DATE: ${{ steps.date.outputs.date }}
+          EPISODE_PATH: ${{ steps.episode.outputs.path }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f "$EPISODE_PATH" ] && cmp -s /tmp/spoken.txt "$EPISODE_PATH"; then
+            echo "Canonical spoken episode already matches handoff."
+            exit 0
+          fi
+          if [ -f "$EPISODE_PATH" ]; then
+            echo "Existing same-date spoken episode differs; refusing implicit rework."
+            exit 1
+          fi
+          cp /tmp/spoken.txt "$EPISODE_PATH"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add "$EPISODE_PATH"
+          git commit -m "Ingest Daily Brief spoken handoff for $DATE"
+          git pull --rebase origin main
+          git push origin main
