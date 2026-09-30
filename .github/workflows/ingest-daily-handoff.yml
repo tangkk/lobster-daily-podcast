@@ -106,6 +106,7 @@ jobs:
           echo "path=$PATH_OUT" >> "$GITHUB_OUTPUT"
 
       - name: Commit canonical spoken episode
+        id: commit
         if: steps.handoff.outputs.ready == 'true' && inputs.dry_run != 'true'
         env:
           DATE: ${{ steps.date.outputs.date }}
@@ -115,6 +116,7 @@ jobs:
           set -euo pipefail
           if [ -f "$EPISODE_PATH" ] && cmp -s /tmp/spoken.txt "$EPISODE_PATH"; then
             echo "Canonical spoken episode already matches handoff."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           if [ -f "$EPISODE_PATH" ]; then
@@ -128,9 +130,10 @@ jobs:
           git commit -m "Ingest Daily Brief spoken handoff for $DATE"
           git pull --rebase origin main
           git push origin main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
 
       - name: Dispatch canonical Podcast publisher
-        if: steps.handoff.outputs.ready == 'true' && inputs.dry_run != 'true'
+        if: steps.handoff.outputs.ready == 'true' && inputs.dry_run != 'true' && steps.commit.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           EPISODE_PATH: ${{ steps.episode.outputs.path }}
