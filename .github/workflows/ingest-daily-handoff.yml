@@ -6,6 +6,10 @@ on:
       date:
         description: Asia/Shanghai date, YYYY-MM-DD
         required: true
+      dry_run:
+        description: Validate cross-repo handoff without mutating Podcast state
+        required: false
+        default: 'false'
   schedule:
     # GitHub cron is UTC. 00:00 UTC = 08:00 Asia/Shanghai.
     - cron: '0 0 * * 1-6'
@@ -64,8 +68,18 @@ jobs:
           EXPECTED="龙虾日报，${Y}年${M}月${D}日。"
           test "$FIRST" = "$EXPECTED" || { echo "Invalid spoken opening: $FIRST"; exit 1; }
 
+      - name: Dry-run safety assertion
+        if: steps.handoff.outputs.ready == 'true' && inputs.dry_run == 'true'
+        env:
+          DATE: ${{ steps.date.outputs.date }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$DATE" =~ ^20[5-9][0-9]- ]] || { echo "Dry-run date must be synthetic (2050-2099)"; exit 1; }
+          echo "PASS: cross-repo dispatch and handoff fetch validated; Podcast repository will not be mutated."
+
       - name: Resolve canonical episode path
-        if: steps.handoff.outputs.ready == 'true'
+        if: steps.handoff.outputs.ready == 'true' && inputs.dry_run != 'true'
         id: episode
         env:
           DATE: ${{ steps.date.outputs.date }}
@@ -91,7 +105,7 @@ jobs:
           echo "path=$PATH_OUT" >> "$GITHUB_OUTPUT"
 
       - name: Commit canonical spoken episode
-        if: steps.handoff.outputs.ready == 'true'
+        if: steps.handoff.outputs.ready == 'true' && inputs.dry_run != 'true'
         env:
           DATE: ${{ steps.date.outputs.date }}
           EPISODE_PATH: ${{ steps.episode.outputs.path }}
