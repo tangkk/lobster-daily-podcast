@@ -13,8 +13,8 @@ on:
   schedule:
     # GitHub cron is UTC. 00:17 UTC Mon-Sat = 08:17 Asia/Shanghai Mon-Sat.
     - cron: '17 0 * * 1-6'
-    # Sunday Weekly Review fallback: 02:00 UTC = 10:00 Asia/Shanghai.
-    - cron: '0 2 * * 0'
+    # Sunday Weekly Review fallback: 02:17 UTC = 10:17 Asia/Shanghai.
+    - cron: '17 2 * * 0'
 
 permissions:
   actions: write
