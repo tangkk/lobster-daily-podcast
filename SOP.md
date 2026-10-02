@@ -221,6 +221,7 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 - In every reader-facing canonical spoken Daily Brief and Weekly Review script, avoid contrastive/corrective framing that creates a rhetorical foil before stating the point. Prohibited or strongly avoided forms include `不是……而是……`, `并不是……而是……`, `不是 X，是 Y`, `与其说 A，不如说 B`, `真正值得关注的不是 A，而是 B`, `关键不在 A，在 B`, and close variants.
 - Express the intended point directly in affirmative, natural spoken Chinese. When a real distinction is necessary, state the relevant facts directly without using the `不是……而是……` frame.
 - Preserve factual meaning, uncertainty, nuance, attribution, and information density; this rule changes phrasing only.
+- Do not add generic time-of-day or market-session announcements merely to frame a Daily Brief or Weekly Review (for example, “北京时间7点，亚洲主要股票市场还没有开始交易”). The schedule rationale that the edition is prepared before the cash-equity open is operational context, not spoken copy. Mention whether a market is open only when the session status is materially relevant to a specific reported development, and make the timing precise.
 
 ## Spoken-script pronunciation convention
 
