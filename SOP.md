@@ -245,6 +245,7 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 - Podcast platform review has rejected an episode that named the North Korean leader in a missile-test item. By owner decision, spoken content does not cover North Korea (DPRK) news at all and never names North Korean leadership (for example `金正恩`). Apply the same caution to naming foreign heads of state in military or security contexts.
 
 - By owner decision, foreign election coverage (results, polls, campaigns, runoffs) is excluded from spoken scripts by default, including the summary paragraph; it may remain in the written Daily Brief. The TTS service refused a Brazil-election paragraph (xfyun 26006) on every attempt. A related market move may be mentioned only as a market move.
+- By owner decision, keep strongly political topics out of spoken scripts as much as possible: elections and campaigns, party politics, leaders' political statements, coups and protests, wars and military operations, sanctions, diplomatic disputes, and similar political-security news. Include one only when it has immediate, direct, and material market, energy, supply-chain, or technology impact, and then state only that economic consequence briefly with neutral institutional attribution, without political narrative, quotes, or named political leaders where avoidable. The spoken script need not mirror every written headline.
 
 ## Idempotence and side-effect rules
 
