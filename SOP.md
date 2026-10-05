@@ -244,6 +244,8 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 - Rephrase sensitive wording at generation time whenever possible; downstream sentence deletion is only a final fail-safe.
 - Podcast platform review has rejected an episode that named the North Korean leader in a missile-test item. By owner decision, spoken content does not cover North Korea (DPRK) news at all and never names North Korean leadership (for example `金正恩`). Apply the same caution to naming foreign heads of state in military or security contexts.
 
+- By owner decision, foreign election coverage (results, polls, campaigns, runoffs) is excluded from spoken scripts by default, including the summary paragraph; it may remain in the written Daily Brief. The TTS service refused a Brazil-election paragraph (xfyun 26006) on every attempt. A related market move may be mentioned only as a market move.
+
 ## Idempotence and side-effect rules
 
 - A single recovery operation has one intended production write path.
