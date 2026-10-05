@@ -76,7 +76,16 @@ def next_media_key(feed, slug, prefix, client, bucket):
     prefix = prefix.rstrip("/")
     item = existing_episode(feed, slug)
     if item is None:
-        return f"{prefix}/{slug}.mp3", False
+        base_key = f"{prefix}/{slug}.mp3"
+        if not object_exists(client, bucket, base_key):
+            return base_key, False
+        # The GUID was withdrawn from RSS but its media remains; never overwrite it.
+        next_version = 2
+        while True:
+            key = f"{prefix}/{slug}-v{next_version}.mp3"
+            if not object_exists(client, bucket, key):
+                return key, True
+            next_version += 1
 
     enclosure = item.find("enclosure")
     if enclosure is None or not enclosure.attrib.get("url"):
