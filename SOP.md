@@ -242,7 +242,7 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 - For China-related spoken content, apply the current spoken-only China policy before TTS: default-exclude political/policy/trade/diplomatic/regulatory/bilateral material unless it has immediate, direct and material global market/supply-chain impact.
 - China-related factual claims should use China-based media and Chinese official/primary sources as the primary evidentiary basis.
 - Rephrase sensitive wording at generation time whenever possible; downstream sentence deletion is only a final fail-safe.
-- Podcast platform review has rejected an episode that named the North Korean leader in a missile-test item. Do not name North Korean leadership (for example `金正恩`) in spoken content; attribute neutrally (for example `朝鲜官方媒体报道`). DPRK missile, weapons-test, and military items are default-exclude unless they have immediate, direct, and material global market or supply-chain impact. Apply the same caution to naming foreign heads of state in military or security contexts.
+- Podcast platform review has rejected an episode that named the North Korean leader in a missile-test item. By owner decision, spoken content does not cover North Korea (DPRK) news at all and never names North Korean leadership (for example `金正恩`). Apply the same caution to naming foreign heads of state in military or security contexts.
 
 ## Idempotence and side-effect rules
 
