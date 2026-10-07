@@ -236,6 +236,13 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 - When included, convert the written evidence into concise natural Chinese focused on what changed in financing, real demand, infrastructure economics, hard-cash ROI, or credit risk.
 - Sunday Weekly Review continues to carry the fuller weekly AI 信用周期 synthesis.
 
+## Number of the Day, compute dashboard, and call review in spoken editions
+
+- Monday–Saturday spoken scripts include the written edition's **今日数字** as one short paragraph right after the opening summary paragraph (Sunday: **本周数字**). Read the number in natural spoken Chinese with its unit and one sentence of meaning.
+- The **算力与供应链看板** enters the spoken script only when a tracked indicator moved materially, as one or two sentences.
+- **判断复盘** enters the spoken script only for a call graded 成立 or 不成立 on clear evidence, in two or three sentences naming when the call was made. Sunday may carry a slightly fuller weekly review.
+- Keep the opening summary paragraph first, since it generates RSS shownotes.
+
 ## Editorial correction rules
 
 - Fix the canonical spoken script first; never patch only MP3/RSS while leaving source stale.
