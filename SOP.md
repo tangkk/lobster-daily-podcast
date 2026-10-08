@@ -192,7 +192,8 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 
 ## Shownotes generation rule
 
-- RSS episode `description` / shownotes must be derived from the first substantive reader-facing summary paragraph of the canonical spoken script.
+- RSS episode `description` / shownotes must be derived from the first substantive reader-facing summary paragraph of the canonical spoken script, plus the following **今日数字** (Sunday: **本周数字**) paragraph when present, both in full without truncation (owner decision 2026-10-08).
+- The 今日数字/本周数字 paragraph must be the paragraph immediately after the summary and must begin with `今日数字` or `本周数字` so the workflow can detect it.
 - If the spoken script begins with the fixed opening `龙虾日报，YYYY年M月D日。`, skip that identifier/date paragraph when generating shownotes.
 - Never use the fixed spoken opening by itself as shownotes.
 - Append a fixed `文字版：https://tangkk.github.io/daily_brief/YYYY/MM/DD/` line derived deterministically from the episode date. This is workflow-generated metadata, not model-authored copy. It is valid for the Podcast-first chain even before the written page becomes public, because the matching written page is published only after Podcast verification.
@@ -238,7 +239,7 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 
 ## Number of the Day, compute dashboard, and call review in spoken editions
 
-- Monday–Saturday spoken scripts include the written edition's **今日数字** as one short paragraph right after the opening summary paragraph (Sunday: **本周数字**). Read the number in natural spoken Chinese with its unit and one sentence of meaning.
+- Monday–Saturday spoken scripts include the written edition's **今日数字** as one short paragraph right after the opening summary paragraph (Sunday: **本周数字**). Start that paragraph with the words `今日数字` (or `本周数字`); shownotes run through its end. Read the number in natural spoken Chinese with its unit and one sentence of meaning.
 - The **算力与供应链看板** enters the spoken script only when a tracked indicator moved materially, as one or two sentences.
 - **判断复盘** enters the spoken script only for a call graded 成立 or 不成立 on clear evidence, in two or three sentences naming when the call was made. Sunday may carry a slightly fuller weekly review.
 - Keep the opening summary paragraph first, since it generates RSS shownotes.

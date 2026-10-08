@@ -135,8 +135,11 @@ jobs:
             node.text=text
           set_text('title',f'龙虾日报｜{date[:4]}年{date[5:7]}月{date[8:10]}日')
           safe=open('build/safe-spoken.txt',encoding='utf-8').read().strip()
-          desc=re.split(r'\n\s*\n',safe,maxsplit=1)[0].strip()
-          desc=re.sub(r'^今天最重要的一句话是[：:]\s*','',desc)[:220]
+          paras=[p.strip() for p in re.split(r'\n\s*\n',safe) if p.strip()]
+          if paras and re.fullmatch(r'龙虾日报，\d{4}年\d{1,2}月\d{1,2}日。?', paras[0]): paras=paras[1:]
+          notes=[re.sub(r'^今天最重要的一句话是[：:]\s*','',paras[0])] if paras else ['']
+          if len(paras)>1 and re.match(r'^(今日数字|本周数字)', paras[1]): notes.append(paras[1])
+          desc='\n\n'.join(notes)
           set_text('description',desc); set_text('guid',slug,{'isPermaLink':'false'})
           url=f'https://mock.invalid/daily/{slug}.mp3'
           set_text('enclosure',None,{'url':url,'length':size,'type':'audio/mpeg'})
