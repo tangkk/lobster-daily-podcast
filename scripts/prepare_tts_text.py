@@ -94,6 +94,19 @@ def normalize_english_hyphens(text: str) -> str:
     return re.sub(r"(?<=[A-Za-z])-(?=[A-Za-z])", " ", text)
 
 
+def normalize_number_of_day_pause(text: str) -> str:
+    """Pause after the 今日数字/本周数字 label so the number is not rushed.
+
+    今日数字是约五百亿美元 / 今日数字：约五百亿美元 -> 今日数字。约五百亿美元
+    """
+    return re.sub(
+        r"^(今日数字|本周数字)\s*(?:是|为|：|:|，|,|。)?\s*",
+        r"\1。",
+        text,
+        flags=re.M,
+    )
+
+
 def validate_spoken_text(text: str) -> None:
     bad_patterns = {
         "Arabic calendar/clock number": r"\d+(?:\.\d+)?\s*(?:年|月|日|号|点|时|分钟?)",
@@ -117,6 +130,7 @@ def prepare(text, pronunciations):
     text = re.sub(r"^\s*>\s?", "", text, flags=re.M)
     text = normalize_spoken_numbers(text)
     text = normalize_english_hyphens(text)
+    text = normalize_number_of_day_pause(text)
     for src in sorted(pronunciations, key=len, reverse=True):
         text = text.replace(src, pronunciations[src])
     text = re.sub(r"[ \t]+", " ", text)

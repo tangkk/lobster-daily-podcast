@@ -215,6 +215,7 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 - Do not apply this rule to numeric minus signs, numeric ranges, dates, identifiers, URLs, filenames, or other cases where `-` carries non-compound semantic or structural meaning.
 - Frequently mispronounced market/company names must be normalized to stable Chinese readings before TTS. At minimum: `Dow` / `Dow Jones` → `道琼斯`, `Nasdaq` / `NASDAQ` → `纳斯达克`, and `Nvidia` / `NVIDIA` → `英伟达`.
 - Prefer using these Chinese forms directly when deriving the canonical spoken script for natural listening; the deterministic pronunciation dictionary remains the final TTS safeguard if an English form survives upstream.
+- After the `今日数字`/`本周数字` label, TTS preparation inserts a full-stop pause (`今日数字是…` / `今日数字：…` → `今日数字。…`) so the number is not rushed. The canonical script and shownotes keep the `今日数字：` form.
 - This normalization belongs in the TTS preparation layer; the canonical spoken script may retain standard written English spelling unless an editorial rewrite is independently preferred.
 
 ## Spoken prose style
@@ -239,7 +240,7 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 
 ## Number of the Day, compute dashboard, and call review in spoken editions
 
-- Monday–Saturday spoken scripts include the written edition's **今日数字** as one short paragraph right after the opening summary paragraph (Sunday: **本周数字**). Start that paragraph with the words `今日数字` (or `本周数字`); shownotes run through its end. Read the number in natural spoken Chinese with its unit and one sentence of meaning.
+- Monday–Saturday spoken scripts include the written edition's **今日数字** as one short paragraph right after the opening summary paragraph (Sunday: **本周数字**). Start that paragraph with `今日数字：` (or `本周数字：`) followed by the number, for example `今日数字：约五百亿美元，……`; shownotes run through its end. Read the number in natural spoken Chinese with its unit and one sentence of meaning.
 - The **算力与供应链看板** enters the spoken script only when a tracked indicator moved materially, as one or two sentences.
 - **判断复盘** enters the spoken script only for a call graded 成立 or 不成立 on clear evidence, in two or three sentences naming when the call was made. Sunday may carry a slightly fuller weekly review.
 - Keep the opening summary paragraph first, since it generates RSS shownotes.
