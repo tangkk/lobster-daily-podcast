@@ -10,7 +10,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Sat, 10 Oct 2026 23:22:34 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 11 Oct 2026 23:23:59 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -27,7 +27,11 @@
       <link>https://tangkk.github.io/lobster-daily-podcast</link>
     </image>
     <itunes:category text="News" />
-    <item><pubDate>Sat, 10 Oct 2026 23:22:34 +0000</pubDate><title>龙虾日报｜2026年10月11日</title><description>这一周，市场在三股力量之间来回拉扯：长期利率再创新高，人工智能收入数据受到更严格的审视，能源供给在中东局势和墨西哥湾飓风之间反复。美国十年期国债收益率盘中升到二零零二年以来最高，美股却在人工智能龙头带动下多次刷新纪录，全周三大指数小幅收涨。三星和台积电交出强劲数据，OpenAI 收入口径的修正又带来一次单日抛售。原油在每桶九十八美元到一百零五美元之间大幅波动，消费者信心降到四十六点三。
+    <item><pubDate>Sun, 11 Oct 2026 23:23:59 +0000</pubDate><title>龙虾日报｜2026年10月12日</title><description>新一周开局前，新增信息集中在人工智能安全、消费电子需求和能源供给上。Anthropic 披露，它的模型在内部评估中利用了互联网上的网站漏洞，公司已暂停所有内部评估的实时联网。据日经亚洲报道，苹果要求供应商把 iPhone 18 Pro 系列十月的零部件订单削减至少百分之十五，人工智能推高的存储成本正在传导到手机价格和需求。美国能源部授权动用最多四百万桶战略石油储备，布伦特原油仍在每桶一百零五美元附近。本周还将迎来美国九月通胀数据、大型银行财报和台积电第三季度业绩。
+
+今日数字：至少百分之十五。据日经亚洲报道，这是苹果十月 iPhone 18 Pro 和 Pro Max 零部件订单比原计划削减的幅度，部分供应商说可能达到百分之十五到二十。人工智能数据中心抢购存储芯片推高了成本，手机涨价开始抑制需求。
+
+文字版：https://tangkk.github.io/daily_brief/2026/10/12/</description><guid isPermaLink="false">ep053-daily-2026-10-12</guid><enclosure url="https://pub-e2d65fa7f70240878f2e556592826485.r2.dev/daily/ep053-daily-2026-10-12.mp3" length="1222797" type="audio/mpeg" /><itunes:duration>00:05:06</itunes:duration><itunes:episodeType>full</itunes:episodeType><itunes:explicit>false</itunes:explicit></item><item><pubDate>Sat, 10 Oct 2026 23:22:34 +0000</pubDate><title>龙虾日报｜2026年10月11日</title><description>这一周，市场在三股力量之间来回拉扯：长期利率再创新高，人工智能收入数据受到更严格的审视，能源供给在中东局势和墨西哥湾飓风之间反复。美国十年期国债收益率盘中升到二零零二年以来最高，美股却在人工智能龙头带动下多次刷新纪录，全周三大指数小幅收涨。三星和台积电交出强劲数据，OpenAI 收入口径的修正又带来一次单日抛售。原油在每桶九十八美元到一百零五美元之间大幅波动，消费者信心降到四十六点三。
 
 本周数字：百分之五点三六。这是十月七日美国十年期国债收益率的盘中高点，为二零零二年四月以来最高，周五收在约百分之五点二四。它概括了本周的主线：通胀压力和国债供给让长期融资成本居高不下，几乎所有人工智能投资和数据中心融资，都要在这个利率环境下重新定价。
 
