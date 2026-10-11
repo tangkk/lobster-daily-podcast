@@ -90,7 +90,12 @@ jobs:
           import pathlib, re
           text=pathlib.Path('build/safe-spoken.txt').read_text(encoding='utf-8').strip()
           parts=[p.strip() for p in re.split(r'\n\s*\n',text) if p.strip()]
-          if parts and re.fullmatch(r'龙虾日报，\d{4}年\d{1,2}月\d{1,2}日。?', parts[0]):
+          # Strip the fixed opening and the fixed Sunday sentence, whether or not they share a paragraph.
+          while parts:
+              rest=re.sub(r'^\s*龙虾日报，\d{4}年\d{1,2}月\d{1,2}日。?\s*','',parts[0])
+              rest=re.sub(r'^\s*周日这期，我们总结本周的状态。\s*','',rest).strip()
+              if rest==parts[0]: break
+              if rest: parts[0]=rest; break
               parts=parts[1:]
           first=parts[0] if parts else ''
           first=re.sub(r'^今天最重要的一句话是[：:]\s*','',first)
