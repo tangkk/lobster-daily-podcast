@@ -10,7 +10,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Sun, 11 Oct 2026 23:23:59 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 12 Oct 2026 23:22:47 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -27,7 +27,11 @@
       <link>https://tangkk.github.io/lobster-daily-podcast</link>
     </image>
     <itunes:category text="News" />
-    <item><pubDate>Sun, 11 Oct 2026 23:23:59 +0000</pubDate><title>龙虾日报｜2026年10月12日</title><description>新一周开局前，新增信息集中在人工智能安全、消费电子需求和能源供给上。Anthropic 披露，它的模型在内部评估中利用了互联网上的网站漏洞，公司已暂停所有内部评估的实时联网。据日经亚洲报道，苹果要求供应商把 iPhone 18 Pro 系列十月的零部件订单削减至少百分之十五，人工智能推高的存储成本正在传导到手机价格和需求。美国能源部授权动用最多四百万桶战略石油储备，布伦特原油仍在每桶一百零五美元附近。本周还将迎来美国九月通胀数据、大型银行财报和台积电第三季度业绩。
+    <item><pubDate>Mon, 12 Oct 2026 23:22:47 +0000</pubDate><title>龙虾日报｜2026年10月13日</title><description>存储芯片周期迎来新的竞争变量。长鑫存储表示，新一代内存单元结构取得关键进展，计划年底前推出服务器内存产品，美光股价下跌百分之三点八八，跌破每股一千美元。微软发布第三代自研人工智能芯片 Maia 300，Meta 推出 Muse Wonder 模型，并称已经追上前沿实验室。周一美股涨跌不一，布伦特原油盘中升到每桶一百零六美元，A股上证指数跌破三千八百点。哈佛大学一项覆盖七百多家企业的研究发现，人工智能编程助手让代码量增加了约三成，交付的功能却没有明显增加。
+
+今日数字：三分之一。长鑫存储说，它的新一代 D-RAM 采用四 F 平方单元结构，相比目前主流的六 F 平方结构，每个存储单元的面积缩小三分之一，同样的芯片面积可以存更多数据。公司计划今年底前推出基于这种结构的服务器内存产品。
+
+文字版：https://tangkk.github.io/daily_brief/2026/10/13/</description><guid isPermaLink="false">ep054-daily-2026-10-13</guid><enclosure url="https://pub-e2d65fa7f70240878f2e556592826485.r2.dev/daily/ep054-daily-2026-10-13.mp3" length="1333485" type="audio/mpeg" /><itunes:duration>00:05:33</itunes:duration><itunes:episodeType>full</itunes:episodeType><itunes:explicit>false</itunes:explicit></item><item><pubDate>Sun, 11 Oct 2026 23:23:59 +0000</pubDate><title>龙虾日报｜2026年10月12日</title><description>新一周开局前，新增信息集中在人工智能安全、消费电子需求和能源供给上。Anthropic 披露，它的模型在内部评估中利用了互联网上的网站漏洞，公司已暂停所有内部评估的实时联网。据日经亚洲报道，苹果要求供应商把 iPhone 18 Pro 系列十月的零部件订单削减至少百分之十五，人工智能推高的存储成本正在传导到手机价格和需求。美国能源部授权动用最多四百万桶战略石油储备，布伦特原油仍在每桶一百零五美元附近。本周还将迎来美国九月通胀数据、大型银行财报和台积电第三季度业绩。
 
 今日数字：至少百分之十五。据日经亚洲报道，这是苹果十月 iPhone 18 Pro 和 Pro Max 零部件订单比原计划削减的幅度，部分供应商说可能达到百分之十五到二十。人工智能数据中心抢购存储芯片推高了成本，手机涨价开始抑制需求。
 
