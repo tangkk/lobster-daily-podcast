@@ -215,6 +215,7 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 - Do not apply this rule to numeric minus signs, numeric ranges, dates, identifiers, URLs, filenames, or other cases where `-` carries non-compound semantic or structural meaning.
 - Frequently mispronounced market/company names must be normalized to stable Chinese readings before TTS. At minimum: `Dow` / `Dow Jones` → `道琼斯`, `Nasdaq` / `NASDAQ` → `纳斯达克`, and `Nvidia` / `NVIDIA` → `英伟达`.
 - Prefer using these Chinese forms directly when deriving the canonical spoken script for natural listening; the deterministic pronunciation dictionary remains the final TTS safeguard if an English form survives upstream.
+- One- or two-digit model/generation numbers after an English name are converted to Chinese numbers before TTS (`iPhone 18` → `iPhone 十八`, `Windows 11` → `Windows 十一`), because the TTS engine sometimes reads them digit by digit. Decimals (`Opus 5.5`), version strings (`3.2.1`), percentages, and numbers of three or more digits are left unchanged.
 - After the `今日数字`/`本周数字` label, TTS preparation inserts a full-stop pause (`今日数字是…` / `今日数字：…` → `今日数字。…`) so the number is not rushed. The canonical script and shownotes keep the `今日数字：` form.
 - This normalization belongs in the TTS preparation layer; the canonical spoken script may retain standard written English spelling unless an editorial rewrite is independently preferred.
 

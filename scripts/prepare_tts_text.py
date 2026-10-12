@@ -94,6 +94,19 @@ def normalize_english_hyphens(text: str) -> str:
     return re.sub(r"(?<=[A-Za-z])-(?=[A-Za-z])", " ", text)
 
 
+def normalize_product_generation_numbers(text: str) -> str:
+    """Read 1-2 digit model/generation numbers after an English name as Chinese numbers.
+
+    iPhone 18 -> iPhone 十八, Windows 11 -> Windows 十一. Decimals (Opus 5.5),
+    version strings (3.2.1), percentages, and 3+ digit numbers are untouched.
+    """
+    return re.sub(
+        r"(?<=[A-Za-z]) (\d{1,2})(?![\d.%])",
+        lambda m: " " + cn_cardinal(int(m.group(1))),
+        text,
+    )
+
+
 def normalize_number_of_day_pause(text: str) -> str:
     """Pause after the 今日数字/本周数字 label so the number is not rushed.
 
@@ -130,6 +143,7 @@ def prepare(text, pronunciations):
     text = re.sub(r"^\s*>\s?", "", text, flags=re.M)
     text = normalize_spoken_numbers(text)
     text = normalize_english_hyphens(text)
+    text = normalize_product_generation_numbers(text)
     text = normalize_number_of_day_pause(text)
     for src in sorted(pronunciations, key=len, reverse=True):
         text = text.replace(src, pronunciations[src])
