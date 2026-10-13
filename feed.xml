@@ -10,7 +10,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Mon, 12 Oct 2026 23:22:47 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 13 Oct 2026 23:24:48 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -27,7 +27,11 @@
       <link>https://tangkk.github.io/lobster-daily-podcast</link>
     </image>
     <itunes:category text="News" />
-    <item><pubDate>Mon, 12 Oct 2026 23:22:47 +0000</pubDate><title>龙虾日报｜2026年10月13日</title><description>存储芯片周期迎来新的竞争变量。长鑫存储表示，新一代内存单元结构取得关键进展，计划年底前推出服务器内存产品，美光股价下跌百分之三点八八，跌破每股一千美元。微软发布第三代自研人工智能芯片 Maia 300，Meta 推出 Muse Wonder 模型，并称已经追上前沿实验室。周一美股涨跌不一，布伦特原油盘中升到每桶一百零六美元，A股上证指数跌破三千八百点。哈佛大学一项覆盖七百多家企业的研究发现，人工智能编程助手让代码量增加了约三成，交付的功能却没有明显增加。
+    <item><pubDate>Tue, 13 Oct 2026 23:24:48 +0000</pubDate><title>龙虾日报｜2026年10月14日</title><description>美国大型银行第三季度财报季开局分化：高盛和花旗利润大增，摩根大通则罕见低于预期，首席执行官戴蒙警告财政赤字、通胀黏性和利率上升的风险。国际数据公司的数据显示，英伟达上半年在中国人工智能加速器市场的份额降到百分之三十四，国产芯片出货首次超过图形处理器。博通首席执行官把部分人工智能投资者比作赌场里的玩家，芯片股继续回调。美国汽油均价连续第一百六十五天保持在每加仑四美元以上，打破二零二二年的纪录。
+
+今日数字：百分之三十四。据路透援引国际数据公司的数据，这是英伟达今年上半年在中国人工智能加速器市场的出货份额，出货量约六十七万八千颗，同比下降百分之四十四；华为的份额升到百分之二十八。中国的人工智能算力正在快速转向本土芯片。
+
+文字版：https://tangkk.github.io/daily_brief/2026/10/14/</description><guid isPermaLink="false">ep055-daily-2026-10-14</guid><enclosure url="https://pub-e2d65fa7f70240878f2e556592826485.r2.dev/daily/ep055-daily-2026-10-14.mp3" length="1119405" type="audio/mpeg" /><itunes:duration>00:04:40</itunes:duration><itunes:episodeType>full</itunes:episodeType><itunes:explicit>false</itunes:explicit></item><item><pubDate>Mon, 12 Oct 2026 23:22:47 +0000</pubDate><title>龙虾日报｜2026年10月13日</title><description>存储芯片周期迎来新的竞争变量。长鑫存储表示，新一代内存单元结构取得关键进展，计划年底前推出服务器内存产品，美光股价下跌百分之三点八八，跌破每股一千美元。微软发布第三代自研人工智能芯片 Maia 300，Meta 推出 Muse Wonder 模型，并称已经追上前沿实验室。周一美股涨跌不一，布伦特原油盘中升到每桶一百零六美元，A股上证指数跌破三千八百点。哈佛大学一项覆盖七百多家企业的研究发现，人工智能编程助手让代码量增加了约三成，交付的功能却没有明显增加。
 
 今日数字：三分之一。长鑫存储说，它的新一代 D-RAM 采用四 F 平方单元结构，相比目前主流的六 F 平方结构，每个存储单元的面积缩小三分之一，同样的芯片面积可以存更多数据。公司计划今年底前推出基于这种结构的服务器内存产品。
 
