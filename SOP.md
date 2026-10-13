@@ -245,6 +245,7 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 - The **算力与供应链看板** enters the spoken script only when a tracked indicator moved materially, as one or two sentences.
 - **判断复盘** enters the spoken script only for a call graded 成立 or 不成立 on clear evidence, in two or three sentences naming when the call was made. Sunday may carry a slightly fuller weekly review.
 - The **AI 应用落地看板** enters the spoken script only for one or two items with material new evidence (revenue, paid users, deployments, contracts) in healthcare, coding agents, legal, robotics, autonomous driving, finance/insurance/customer service, AI assistants and companions, advertising and e-commerce, education, incumbent software under AI pressure, or consumer AI content (AI short dramas and video, AI music, AI podcasts and audio, gaming). Defense items stay out of spoken scripts.
+- Sunday spoken scripts include the written Weekly Review's **概念小课堂** when present, as one short plain-language paragraph near the end, before the next-week outlook. Open it with `概念小课堂：` followed by the concept name.
 - Keep the opening summary paragraph first, since it generates RSS shownotes.
 
 ## Editorial correction rules
