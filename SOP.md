@@ -244,7 +244,7 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 - Monday–Saturday spoken scripts include the written edition's **今日数字** as one short paragraph right after the opening summary paragraph (Sunday: **本周数字**). Start that paragraph with `今日数字：` (or `本周数字：`) followed by the number, for example `今日数字：约五百亿美元，……`; shownotes run through its end. Read the number in natural spoken Chinese with its unit and one sentence of meaning.
 - The **算力与供应链看板** enters the spoken script only when a tracked indicator moved materially, as one or two sentences.
 - **判断复盘** enters the spoken script only for a call graded 成立 or 不成立 on clear evidence, in two or three sentences naming when the call was made. Sunday may carry a slightly fuller weekly review.
-- The **AI 应用落地看板** enters the spoken script only for one or two items with material new evidence (revenue, paid users, deployments, contracts) in healthcare, coding agents, legal, robotics, autonomous driving, finance/insurance/customer service, or consumer AI content (AI short dramas and video, AI music, AI podcasts and audio). Defense items stay out of spoken scripts.
+- The **AI 应用落地看板** enters the spoken script only for one or two items with material new evidence (revenue, paid users, deployments, contracts) in healthcare, coding agents, legal, robotics, autonomous driving, finance/insurance/customer service, AI assistants and companions, advertising and e-commerce, education, incumbent software under AI pressure, or consumer AI content (AI short dramas and video, AI music, AI podcasts and audio, gaming). Defense items stay out of spoken scripts.
 - Keep the opening summary paragraph first, since it generates RSS shownotes.
 
 ## Editorial correction rules
