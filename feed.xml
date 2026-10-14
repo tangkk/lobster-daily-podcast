@@ -10,7 +10,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Tue, 13 Oct 2026 23:24:48 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 14 Oct 2026 23:25:00 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -27,7 +27,11 @@
       <link>https://tangkk.github.io/lobster-daily-podcast</link>
     </image>
     <itunes:category text="News" />
-    <item><pubDate>Tue, 13 Oct 2026 23:24:48 +0000</pubDate><title>龙虾日报｜2026年10月14日</title><description>美国大型银行第三季度财报季开局分化：高盛和花旗利润大增，摩根大通则罕见低于预期，首席执行官戴蒙警告财政赤字、通胀黏性和利率上升的风险。国际数据公司的数据显示，英伟达上半年在中国人工智能加速器市场的份额降到百分之三十四，国产芯片出货首次超过图形处理器。博通首席执行官把部分人工智能投资者比作赌场里的玩家，芯片股继续回调。美国汽油均价连续第一百六十五天保持在每加仑四美元以上，打破二零二二年的纪录。
+    <item><pubDate>Wed, 14 Oct 2026 23:25:00 +0000</pubDate><title>龙虾日报｜2026年10月15日</title><description>美国九月消费者价格指数同比上涨百分之三点七，高于预期，核心通胀升到百分之二点六，市场重新计入美联储本月加息的可能。利率压力直接传导到人工智能融资链条：算力云厂商 CoreWeave 的债券收益率升到接近百分之十五，股价单日下跌约百分之十五，费城半导体指数下跌约百分之四点三。供给端数据依然强劲，阿斯麦第三季度销售额创下纪录，并说二零二七和二零二八年的计划产能都无法完全满足客户需求。中国九月出口同比增长百分之三十六点三。
+
+今日数字：百分之十四点五。这是 CoreWeave 一笔十二点五亿美元、二零三二年到期债券的收益率，十月十三日收在这个纪录高位，盘中一度触及百分之十五，今年夏天还只有百分之九左右。这家公司靠举债购买显卡、再出租算力，利率上行正在让它的融资成本快速上升。
+
+文字版：https://tangkk.github.io/daily_brief/2026/10/15/</description><guid isPermaLink="false">ep056-daily-2026-10-15</guid><enclosure url="https://pub-e2d65fa7f70240878f2e556592826485.r2.dev/daily/ep056-daily-2026-10-15.mp3" length="1408269" type="audio/mpeg" /><itunes:duration>00:05:52</itunes:duration><itunes:episodeType>full</itunes:episodeType><itunes:explicit>false</itunes:explicit></item><item><pubDate>Tue, 13 Oct 2026 23:24:48 +0000</pubDate><title>龙虾日报｜2026年10月14日</title><description>美国大型银行第三季度财报季开局分化：高盛和花旗利润大增，摩根大通则罕见低于预期，首席执行官戴蒙警告财政赤字、通胀黏性和利率上升的风险。国际数据公司的数据显示，英伟达上半年在中国人工智能加速器市场的份额降到百分之三十四，国产芯片出货首次超过图形处理器。博通首席执行官把部分人工智能投资者比作赌场里的玩家，芯片股继续回调。美国汽油均价连续第一百六十五天保持在每加仑四美元以上，打破二零二二年的纪录。
 
 今日数字：百分之三十四。据路透援引国际数据公司的数据，这是英伟达今年上半年在中国人工智能加速器市场的出货份额，出货量约六十七万八千颗，同比下降百分之四十四；华为的份额升到百分之二十八。中国的人工智能算力正在快速转向本土芯片。
 
