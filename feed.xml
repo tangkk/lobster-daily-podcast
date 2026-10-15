@@ -10,7 +10,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Wed, 14 Oct 2026 23:25:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 15 Oct 2026 23:23:19 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -27,7 +27,11 @@
       <link>https://tangkk.github.io/lobster-daily-podcast</link>
     </image>
     <itunes:category text="News" />
-    <item><pubDate>Wed, 14 Oct 2026 23:25:00 +0000</pubDate><title>龙虾日报｜2026年10月15日</title><description>美国九月消费者价格指数同比上涨百分之三点七，高于预期，核心通胀升到百分之二点六，市场重新计入美联储本月加息的可能。利率压力直接传导到人工智能融资链条：算力云厂商 CoreWeave 的债券收益率升到接近百分之十五，股价单日下跌约百分之十五，费城半导体指数下跌约百分之四点三。供给端数据依然强劲，阿斯麦第三季度销售额创下纪录，并说二零二七和二零二八年的计划产能都无法完全满足客户需求。中国九月出口同比增长百分之三十六点三。
+    <item><pubDate>Thu, 15 Oct 2026 23:23:19 +0000</pubDate><title>龙虾日报｜2026年10月16日</title><description>台积电第三季度净利润同比增长百分之六十八点七，连续第六个季度创纪录，并把今年美元收入增长预期上调到百分之四十四左右，说智能体人工智能正在推高芯片需求。市场却还在消化人工智能融资和估值风险：周四韩国综合股价指数下跌百分之八，SK 海力士下跌百分之十一，日经指数下跌百分之五；戴尔在巴克莱下调评级后下跌百分之十一。美国九月生产者价格指数同比上涨百分之六点三，是二零二二年以来最高。据报道，Anthropic 第三季度收入一百六十八亿美元，部分投资者预期它的上市估值会下调。
+
+今日数字：百分之四十四左右。这是台积电上调后的今年美元收入增长预期，此前是百分之四十左右；公司预计第四季度收入五百二十三亿到五百四十三亿美元，按中值计算同比增长百分之五十八。在芯片股剧烈回调的同时，人工智能芯片最上游的代工厂仍在上调全年预期。
+
+文字版：https://tangkk.github.io/daily_brief/2026/10/16/</description><guid isPermaLink="false">ep057-daily-2026-10-16</guid><enclosure url="https://pub-e2d65fa7f70240878f2e556592826485.r2.dev/daily/ep057-daily-2026-10-16.mp3" length="1427469" type="audio/mpeg" /><itunes:duration>00:05:57</itunes:duration><itunes:episodeType>full</itunes:episodeType><itunes:explicit>false</itunes:explicit></item><item><pubDate>Wed, 14 Oct 2026 23:25:00 +0000</pubDate><title>龙虾日报｜2026年10月15日</title><description>美国九月消费者价格指数同比上涨百分之三点七，高于预期，核心通胀升到百分之二点六，市场重新计入美联储本月加息的可能。利率压力直接传导到人工智能融资链条：算力云厂商 CoreWeave 的债券收益率升到接近百分之十五，股价单日下跌约百分之十五，费城半导体指数下跌约百分之四点三。供给端数据依然强劲，阿斯麦第三季度销售额创下纪录，并说二零二七和二零二八年的计划产能都无法完全满足客户需求。中国九月出口同比增长百分之三十六点三。
 
 今日数字：百分之十四点五。这是 CoreWeave 一笔十二点五亿美元、二零三二年到期债券的收益率，十月十三日收在这个纪录高位，盘中一度触及百分之十五，今年夏天还只有百分之九左右。这家公司靠举债购买显卡、再出租算力，利率上行正在让它的融资成本快速上升。
 
