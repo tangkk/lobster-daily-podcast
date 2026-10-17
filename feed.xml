@@ -10,7 +10,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Fri, 16 Oct 2026 23:21:55 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 17 Oct 2026 23:10:39 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -27,7 +27,11 @@
       <link>https://tangkk.github.io/lobster-daily-podcast</link>
     </image>
     <itunes:category text="News" />
-    <item><pubDate>Fri, 16 Oct 2026 23:21:55 +0000</pubDate><title>龙虾日报｜2026年10月17日</title><description>纳斯达克周五下跌百分之二点一，全周累计下跌百分之四点五，是六月下旬以来最差的一周；芯片股抛售之后，软件股也开始大跌。布伦特原油盘中触及每桶一百一十美元，是五月以来第一次。交易员同时把美联储本月加息的概率下调到百分之十五左右。人工智能融资方面，据英国《金融时报》报道，评级机构给了 Anthropic 投机级中最高一档的信用评级，相关芯片融资的次级债收益率约百分之八点五。
+    <item><pubDate>Sat, 17 Oct 2026 23:10:39 +0000</pubDate><title>龙虾日报｜2026年10月18日</title><description>这一周，人工智能产业链的上游和资本市场给出了方向相反的信号。台积电把全年美元收入增长预期上调到百分之四十四左右，阿斯麦说二零二七和二零二八年的计划产能都无法满足需求。同一周，美国九月消费者价格指数升到百分之三点七，生产者价格指数升到百分之六点三；算力云厂商 CoreWeave 的债券收益率逼近百分之十五，抛售从存储芯片扩散到服务器和软件股，纳斯达克全周下跌百分之四点五。周五布伦特原油触及每桶一百一十美元。人工智能的需求数据仍在走强，市场开始按信用质量和利润兑现能力，给产业链各个环节重新定价。
+
+本周数字：约六个百分点。CoreWeave 二零三二年到期债券的收益率十月十三日收在百分之十四点五；据英国《金融时报》报道，和 Anthropic 信用风险直接相关的芯片融资次级债，发行收益率约百分之八点五，两者相差约六个百分点。同样是人工智能算力相关的债务，债权人对高杠杆的算力租赁商和拥有大额收入的模型公司，已经给出了明显不同的价格。
+
+文字版：https://tangkk.github.io/daily_brief/2026/10/18/</description><guid isPermaLink="false">ep059-daily-2026-10-18</guid><enclosure url="https://pub-e2d65fa7f70240878f2e556592826485.r2.dev/daily/ep059-daily-2026-10-18.mp3" length="2041581" type="audio/mpeg" /><itunes:duration>00:08:30</itunes:duration><itunes:episodeType>full</itunes:episodeType><itunes:explicit>false</itunes:explicit></item><item><pubDate>Fri, 16 Oct 2026 23:21:55 +0000</pubDate><title>龙虾日报｜2026年10月17日</title><description>纳斯达克周五下跌百分之二点一，全周累计下跌百分之四点五，是六月下旬以来最差的一周；芯片股抛售之后，软件股也开始大跌。布伦特原油盘中触及每桶一百一十美元，是五月以来第一次。交易员同时把美联储本月加息的概率下调到百分之十五左右。人工智能融资方面，据英国《金融时报》报道，评级机构给了 Anthropic 投机级中最高一档的信用评级，相关芯片融资的次级债收益率约百分之八点五。
 
 今日数字：百分之四点五。这是纳斯达克综合指数本周的累计跌幅，结束了此前持续一个月的上涨；同期标普五百下跌百分之一点九，道琼斯反而上涨百分之零点七。在通胀、利率和人工智能估值的担忧下，资金正在从科技股转向传统板块。
 
