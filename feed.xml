@@ -10,7 +10,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Mon, 19 Oct 2026 23:09:18 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 20 Oct 2026 23:10:26 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -27,7 +27,11 @@
       <link>https://tangkk.github.io/lobster-daily-podcast</link>
     </image>
     <itunes:category text="News" />
-    <item><pubDate>Mon, 19 Oct 2026 23:09:18 +0000</pubDate><title>龙虾日报｜2026年10月20日</title><description>中国第三季度国内生产总值同比增长百分之四点五，比二季度的百分之四点三有所回升，前三季度累计增长百分之四点六；九月工业增加值增长百分之五点五，社会消费品零售只增长百分之一点一，前三季度固定资产投资下降百分之七点二。美股周一科技股反弹，纳斯达克上涨百分之一点一，存储股领涨，美国银行认为存储股估值已经见底。据彭博报道，Nscale 正和 Anthropic 洽谈约四百五十亿美元的第二笔算力合同。据报道，DeepSeek 计划最早今年底开始用华为昇腾芯片预训练模型。
+    <item><pubDate>Tue, 20 Oct 2026 23:10:26 +0000</pubDate><title>龙虾日报｜2026年10月21日</title><description>据《华尔街日报》报道，Anthropic 的招股书草案显示，公司上半年收入一百六十三亿美元，约四分之一来自两家没有长期合同约束的客户，未来约十年的算力采购承诺达到五千一百八十亿美元。SpaceX 第三季度收入增长百分之一百六十一，向 Anthropic、谷歌等公司出租算力的人工智能业务收入七十五亿美元，首次超过星链。Netflix 第三季度利润超预期，但下调了全年广告收入预期，盘后股价下跌。美股周二道指上涨百分之一，布伦特原油一度逼近每桶一百一十二美元后回落。中国十月贷款市场报价利率连续第十七个月不变。
+
+今日数字：五千一百八十亿美元。据《华尔街日报》报道，这是 Anthropic 招股书草案披露的、未来大约十年的算力采购承诺，其中约百分之八十不可取消。作为对比，公司今年上半年的收入是一百六十三亿美元。
+
+文字版：https://tangkk.github.io/daily_brief/2026/10/21/</description><guid isPermaLink="false">ep062-daily-2026-10-21</guid><enclosure url="https://pub-e2d65fa7f70240878f2e556592826485.r2.dev/daily/ep062-daily-2026-10-21.mp3" length="1406733" type="audio/mpeg" /><itunes:duration>00:05:52</itunes:duration><itunes:episodeType>full</itunes:episodeType><itunes:explicit>false</itunes:explicit></item><item><pubDate>Mon, 19 Oct 2026 23:09:18 +0000</pubDate><title>龙虾日报｜2026年10月20日</title><description>中国第三季度国内生产总值同比增长百分之四点五，比二季度的百分之四点三有所回升，前三季度累计增长百分之四点六；九月工业增加值增长百分之五点五，社会消费品零售只增长百分之一点一，前三季度固定资产投资下降百分之七点二。美股周一科技股反弹，纳斯达克上涨百分之一点一，存储股领涨，美国银行认为存储股估值已经见底。据彭博报道，Nscale 正和 Anthropic 洽谈约四百五十亿美元的第二笔算力合同。据报道，DeepSeek 计划最早今年底开始用华为昇腾芯片预训练模型。
 
 今日数字：百分之四点五。这是中国第三季度国内生产总值的同比增速，二季度是百分之四点三，一季度是百分之五；前三季度累计增长百分之四点六，在百分之四点五到百分之五的年度目标区间内。出口和工业生产支撑了回升，消费和投资仍然偏弱。
 
