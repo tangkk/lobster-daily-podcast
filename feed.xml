@@ -5,7 +5,11 @@
     <link>https://tangkk.github.io/lobster-daily-podcast</link>
     <atom:link href="https://tangkk.github.io/lobster-daily-podcast/feed.xml" rel="self" type="application/rss+xml" />
     <language>zh-CN</language>
-    <description>AI、市场、中国与世界，每日重要信息简报。内容由 AI 搜索、整理并生成，仅供信息参考；重要事实与投资决策请以原始来源及官方信息为准。
+    <description>每天早上 7 点，用 5 分钟听懂 AI、市场、中国与世界的重要变化。
+
+每期从一个“今日数字”开始，追踪 AI 产业的资金链与真实落地，记录我们的判断，并定期回头检验对错。周日是一周回顾，附“概念小课堂”。
+
+内容由 AI 搜索、整理并生成，仅供信息参考；重要事实与投资决策请以原始来源及官方信息为准。
 
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
@@ -14,7 +18,11 @@
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
-    <itunes:summary>AI、市场、中国与世界，每日重要信息简报。内容由 AI 搜索、整理并生成，仅供信息参考；重要事实与投资决策请以原始来源及官方信息为准。</itunes:summary>
+    <itunes:summary>每天早上 7 点，用 5 分钟听懂 AI、市场、中国与世界的重要变化。
+
+每期从一个“今日数字”开始，追踪 AI 产业的资金链与真实落地，记录我们的判断，并定期回头检验对错。周日是一周回顾，附“概念小课堂”。
+
+内容由 AI 搜索、整理并生成，仅供信息参考；重要事实与投资决策请以原始来源及官方信息为准。</itunes:summary>
     <itunes:explicit>false</itunes:explicit>
     <itunes:owner>
       <itunes:name>龙虾日报</itunes:name>
