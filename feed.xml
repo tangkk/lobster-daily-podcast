@@ -14,7 +14,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Sat, 24 Oct 2026 23:10:41 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2026 23:08:52 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -35,7 +35,11 @@
       <link>https://tangkk.github.io/lobster-daily-podcast</link>
     </image>
     <itunes:category text="News" />
-    <item><pubDate>Sat, 24 Oct 2026 23:10:41 +0000</pubDate><title>龙虾日报｜2026年10月25日</title><description>这一周，人工智能产业的财务结构第一次被大范围公开检验。据《华尔街日报》报道，Anthropic 的招股书草案显示，上半年收入一百六十三亿美元，未来大约十年的算力承诺五千一百八十亿美元；SpaceX 的算力出租收入单季七十五亿美元，超过了星链；Meta 的单季资本开支三百四十九亿美元，让自由现金流转负。市场的反应集中在资本开支最重的环节，周四费城半导体指数暴跌百分之六点七，OpenAI 的私募估值据报下调了一千五百亿美元。同一周，十年期美债收益率在避险买盘中跌破百分之五，布伦特原油则升到每桶一百一十六点七二美元，是四月以来最高。市场对人工智能的担忧，正在从融资成本转向资本开支能否带来足够的现金回报。
+    <item><pubDate>Sun, 25 Oct 2026 23:08:52 +0000</pubDate><title>龙虾日报｜2026年10月26日</title><description>布伦特原油上周五收在每桶一百一十六点七二美元，是四月底以来最高；周末有消息称沙特多处能源设施遭到袭击，沙特方面没有确认受损，周一早盘油价回落约百分之一点五。亚马逊首席执行官贾西表示，亚马逊云服务今年的算力已经售罄，二零二七年也基本售罄。据科技媒体 The Information 报道，数据中心租户要求的延期交付违约金，已经升到每天五百万美元以上；OpenAI 以三成以上的折扣，从 Anthropic 手中争取到编程平台 Replit 的大额合同。本周美联储议息，Alphabet、微软和亚马逊公布业绩。
+
+今日数字：每天五百万美元以上。据 The Information 报道，这是数据中心租户在新合同里要求的延期交付违约金，今年春天还只有每天一百万美元左右；高盛预计，美国排期中的数据中心容量只有大约一半能按时交付。算力供不应求，交付风险正在由开发商承担。
+
+文字版：https://tangkk.github.io/daily_brief/2026/10/26/</description><guid isPermaLink="false">ep067-daily-2026-10-26</guid><enclosure url="https://pub-e2d65fa7f70240878f2e556592826485.r2.dev/daily/ep067-daily-2026-10-26.mp3" length="1063533" type="audio/mpeg" /><itunes:duration>00:04:26</itunes:duration><itunes:episodeType>full</itunes:episodeType><itunes:explicit>false</itunes:explicit></item><item><pubDate>Sat, 24 Oct 2026 23:10:41 +0000</pubDate><title>龙虾日报｜2026年10月25日</title><description>这一周，人工智能产业的财务结构第一次被大范围公开检验。据《华尔街日报》报道，Anthropic 的招股书草案显示，上半年收入一百六十三亿美元，未来大约十年的算力承诺五千一百八十亿美元；SpaceX 的算力出租收入单季七十五亿美元，超过了星链；Meta 的单季资本开支三百四十九亿美元，让自由现金流转负。市场的反应集中在资本开支最重的环节，周四费城半导体指数暴跌百分之六点七，OpenAI 的私募估值据报下调了一千五百亿美元。同一周，十年期美债收益率在避险买盘中跌破百分之五，布伦特原油则升到每桶一百一十六点七二美元，是四月以来最高。市场对人工智能的担忧，正在从融资成本转向资本开支能否带来足够的现金回报。
 
 本周数字：超过百分之二十六。据路透报道，费城半导体指数十月二十二日暴跌百分之六点七之后，比六月二十二日的纪录高点下跌了超过百分之二十六，不过今年以来仍然上涨百分之五十一点五。同一周，台积电、阿斯麦和英伟达的供应商都在为二零二七到二零二八年扩产，股价和订单之间的落差，是本周最直观的信号。
 
