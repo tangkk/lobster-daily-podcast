@@ -14,7 +14,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Mon, 26 Oct 2026 07:21:56 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 26 Oct 2026 23:10:25 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -35,7 +35,11 @@
       <link>https://tangkk.github.io/lobster-daily-podcast</link>
     </image>
     <itunes:category text="News" />
-    <item><pubDate>Sun, 25 Oct 2026 23:08:52 +0000</pubDate><title>龙虾日报｜2026年10月26日</title><description>布伦特原油上周五收在每桶一百一十六点七二美元，是四月底以来最高；周末有消息称沙特多处能源设施遭到袭击，沙特方面没有确认受损，周一早盘油价回落约百分之一点五。亚马逊首席执行官贾西表示，亚马逊云服务今年的算力已经售罄，二零二七年也基本售罄。据科技媒体 The Information 报道，数据中心租户要求的延期交付违约金，已经升到每天五百万美元以上；OpenAI 以三成以上的折扣，从 Anthropic 手中争取到编程平台 Replit 的大额合同。本周美联储议息，Alphabet、微软和亚马逊公布业绩。
+    <item><pubDate>Mon, 26 Oct 2026 23:10:25 +0000</pubDate><title>龙虾日报｜2026年10月27日</title><description>Anthropic 周一向美国证券交易委员会公开提交了招股书，披露上半年收入超过一百六十亿美元，约五分之一来自两家客户，并与 SpaceX 旗下的算力业务签订了到二零二九年、总额最高一千二百零五亿美元的算力协议。据彭博和路透报道，芯片公司博通联合几家大银行和黑石，搭建了六百三十亿美元的特殊目的实体，购买芯片后租给 Anthropic。Meta 宣布计划融资最高九百五十亿美元用于人工智能基础设施；微软向约六万名员工提供自愿离职方案。招股书带动芯片股反弹，纳斯达克上涨百分之零点八二；沙特国防大臣访问德黑兰之后，油价回落。
+
+今日数字：最高一千二百零五亿美元。Anthropic 在招股书中披露，根据和 SpaceX 旗下算力业务的协议，公司同意在延续到二零二九年的期限内，支付总额最高一千二百零五亿美元，全部容量交付后，大约每月三十一亿美元。作为对比，Anthropic 上半年的收入约一百六十三亿美元。
+
+文字版：https://tangkk.github.io/daily_brief/2026/10/27/</description><guid isPermaLink="false">ep068-daily-2026-10-27</guid><enclosure url="https://pub-e2d65fa7f70240878f2e556592826485.r2.dev/daily/ep068-daily-2026-10-27.mp3" length="1283757" type="audio/mpeg" /><itunes:duration>00:05:21</itunes:duration><itunes:episodeType>full</itunes:episodeType><itunes:explicit>false</itunes:explicit></item><item><pubDate>Sun, 25 Oct 2026 23:08:52 +0000</pubDate><title>龙虾日报｜2026年10月26日</title><description>布伦特原油上周五收在每桶一百一十六点七二美元，是四月底以来最高；周末有消息称沙特多处能源设施遭到袭击，沙特方面没有确认受损，周一早盘油价回落约百分之一点五。亚马逊首席执行官贾西表示，亚马逊云服务今年的算力已经售罄，二零二七年也基本售罄。据科技媒体 The Information 报道，数据中心租户要求的延期交付违约金，已经升到每天五百万美元以上；OpenAI 以三成以上的折扣，从 Anthropic 手中争取到编程平台 Replit 的大额合同。本周美联储议息，Alphabet、微软和亚马逊公布业绩。
 
 今日数字：每天五百万美元以上。据 The Information 报道，这是数据中心租户在新合同里要求的延期交付违约金，今年春天还只有每天一百万美元左右；高盛预计，美国排期中的数据中心容量只有大约一半能按时交付。算力供不应求，交付风险正在由开发商承担。
 
