@@ -14,7 +14,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Tue, 27 Oct 2026 18:53:51 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 27 Oct 2026 18:57:11 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -34,10 +34,13 @@
       <title>龙虾日报</title>
       <link>https://tangkk.github.io/lobster-daily-podcast</link>
     </image>
+    <itunes:category text="Business">
+      <itunes:category text="Investing" />
+    </itunes:category>
+    <itunes:category text="Technology" />
     <itunes:category text="News">
       <itunes:category text="Business News" />
     </itunes:category>
-    <itunes:category text="Technology" />
     <itunes:keywords>AI,人工智能,财经,早报,美股,科技新闻,投资,龙虾日报</itunes:keywords>
     <item><pubDate>Mon, 26 Oct 2026 23:10:25 +0000</pubDate><title>龙虾日报｜2026年10月27日</title><description>Anthropic 周一向美国证券交易委员会公开提交了招股书，披露上半年收入超过一百六十亿美元，约五分之一来自两家客户，并与 SpaceX 旗下的算力业务签订了到二零二九年、总额最高一千二百零五亿美元的算力协议。据彭博和路透报道，芯片公司博通联合几家大银行和黑石，搭建了六百三十亿美元的特殊目的实体，购买芯片后租给 Anthropic。Meta 宣布计划融资最高九百五十亿美元用于人工智能基础设施；微软向约六万名员工提供自愿离职方案。招股书带动芯片股反弹，纳斯达克上涨百分之零点八二；沙特国防大臣访问德黑兰之后，油价回落。
 
