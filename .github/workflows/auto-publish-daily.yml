@@ -161,6 +161,26 @@ jobs:
           test "$D" != "00:00:00"
           echo "path=$AUDIO" >> "$GITHUB_OUTPUT"; echo "bytes=$BYTES" >> "$GITHUB_OUTPUT"; echo "duration=$D" >> "$GITHUB_OUTPUT"
 
+      - name: Add chapters to shownotes
+        id: chapters
+        env:
+          DESCRIPTION: ${{ steps.safe.outputs.description }}
+          DATE: ${{ steps.episode.outputs.date }}
+          TIMELINE: build/${{ steps.episode.outputs.slug }}.mp3.segments.json
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '%s' "$DESCRIPTION" > build/description.txt
+          SUNDAY=""; [ "$(date -d "$DATE" +%u)" = "7" ] && SUNDAY="--sunday"
+          if [ -s "$TIMELINE" ]; then
+            python scripts/shownotes_chapters.py --description-file build/description.txt --timeline "$TIMELINE" $SUNDAY > build/description-final.txt || cp build/description.txt build/description-final.txt
+          else
+            echo "No segment timeline; publishing shownotes without chapters."
+            cp build/description.txt build/description-final.txt
+          fi
+          sed -n '/^章节$/,/^文字版/p' build/description-final.txt
+          { echo "description<<EOF"; cat build/description-final.txt; echo; echo "EOF"; } >> "$GITHUB_OUTPUT"
+
       - name: Refresh Podcast RSS from latest main
         run: |
           set -euo pipefail
@@ -171,7 +191,7 @@ jobs:
         id: podcast
         run: |
           set -euo pipefail
-          URL=$(python scripts/publish_episode.py --audio "${{ steps.audio.outputs.path }}" --slug "${{ steps.episode.outputs.slug }}" --title "${{ steps.episode.outputs.title }}" --description "${{ steps.safe.outputs.description }}" --duration "${{ steps.audio.outputs.duration }}" --prefix daily | tail -n 1)
+          URL=$(python scripts/publish_episode.py --audio "${{ steps.audio.outputs.path }}" --slug "${{ steps.episode.outputs.slug }}" --title "${{ steps.episode.outputs.title }}" --description "${{ steps.chapters.outputs.description }}" --duration "${{ steps.audio.outputs.duration }}" --prefix daily | tail -n 1)
           test -n "$URL"; echo "enclosure_url=$URL" >> "$GITHUB_OUTPUT"
 
       - name: Verify local Podcast RSS
