@@ -111,6 +111,11 @@ jobs:
           echo "description<<EOF" >> "$GITHUB_OUTPUT"
           echo "$DESCRIPTION" >> "$GITHUB_OUTPUT"
           echo "" >> "$GITHUB_OUTPUT"
+          # Sunday Weekly Review only: invite listener feedback.
+          if [ "$(date -d "$DATE" +%u)" = "7" ]; then
+            echo "想让我们多关注哪个领域、或者增加什么板块？欢迎在评论区留言。" >> "$GITHUB_OUTPUT"
+            echo "" >> "$GITHUB_OUTPUT"
+          fi
           echo "文字版：$WRITTEN_URL" >> "$GITHUB_OUTPUT"
           echo "EOF" >> "$GITHUB_OUTPUT"
 

@@ -247,6 +247,7 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 - Sunday spoken scripts include the written Weekly Review's **概念小课堂** when present, as one short plain-language paragraph near the end, before the next-week outlook. Open it with `概念小课堂：` followed by the concept name.
 - Spoken scripts may include predictions and judgments: the written edition's 可验证判断 (one or two) as short plain sentences near the end, before the outlook, with the indicator and time window stated (for example `我们的判断是：未来两周十年期美债收益率仍将维持在百分之五以上。`). Do not review or grade past calls. Avoid political, electoral, and military predictions.
 - The written edition's **被忽视的信号** (at most one) may be included as one or two sentences after the predictions and before the outlook, opening with `被忽视的信号：`. Omit it when the written edition has none.
+- **Listener feedback invitation (Sunday only, owner decision 2026-10-27):** the Sunday Weekly Review spoken script ends with one sentence inviting feedback, for example `如果你希望我们多关注哪个领域、或者增加什么板块，欢迎在评论区留言告诉我们。` Sunday shownotes add the line `想让我们多关注哪个领域、或者增加什么板块？欢迎在评论区留言。` before the 文字版 link; the workflow adds it automatically. Monday–Saturday episodes carry neither.
 - Keep the opening summary paragraph first, since it generates RSS shownotes.
 
 ## Editorial correction rules

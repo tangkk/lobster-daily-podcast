@@ -145,6 +145,7 @@ jobs:
           notes=[re.sub(r'^今天最重要的一句话是[：:]\s*','',paras[0])] if paras else ['']
           if len(paras)>1 and re.match(r'^(今日数字|本周数字)', paras[1]): notes.append(paras[1])
           desc='\n\n'.join(notes)
+          if dt.date.fromisoformat(date).isoweekday()==7: desc+='\n\n想让我们多关注哪个领域、或者增加什么板块？欢迎在评论区留言。'
           set_text('description',desc); set_text('guid',slug,{'isPermaLink':'false'})
           url=f'https://mock.invalid/daily/{slug}.mp3'
           set_text('enclosure',None,{'url':url,'length':size,'type':'audio/mpeg'})
