@@ -68,6 +68,14 @@ jobs:
           Y=$(date -d "$DATE" +%Y); M=$((10#$(date -d "$DATE" +%m))); D=$((10#$(date -d "$DATE" +%d)))
           EXPECTED="龙虾日报，${Y}年${M}月${D}日。"
           test "$FIRST" = "$EXPECTED" || { echo "Invalid spoken opening: $FIRST"; exit 1; }
+          # Optional one-line episode headline written alongside the spoken handoff.
+          TITLE_URL="https://raw.githubusercontent.com/tangkk/daily_brief/main/handoffs/${DATE}-title.txt"
+          if curl -fsSL --retry 3 --max-time 20 "${TITLE_URL}?run=${GITHUB_RUN_ID}" -o /tmp/title.txt && [ -s /tmp/title.txt ]; then
+            echo "Fetched episode headline for $DATE"
+          else
+            rm -f /tmp/title.txt
+            echo "No episode headline for $DATE; publisher will use the date-only title."
+          fi
 
       - name: Dry-run safety assertion
         if: steps.handoff.outputs.ready == 'true' && inputs.dry_run == 'true'
@@ -114,8 +122,18 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          TITLE_PATH="titles/${DATE}.txt"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           if [ -f "$EPISODE_PATH" ] && cmp -s /tmp/spoken.txt "$EPISODE_PATH"; then
             echo "Canonical spoken episode already matches handoff."
+            if [ -f /tmp/title.txt ] && ! cmp -s /tmp/title.txt "$TITLE_PATH" 2>/dev/null; then
+              mkdir -p titles && cp /tmp/title.txt "$TITLE_PATH"
+              git add "$TITLE_PATH"
+              git commit -m "Update episode headline for $DATE"
+              git pull --rebase origin main
+              git push origin main
+            fi
             echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
@@ -124,9 +142,8 @@ jobs:
             exit 1
           fi
           cp /tmp/spoken.txt "$EPISODE_PATH"
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add "$EPISODE_PATH"
+          if [ -f /tmp/title.txt ]; then mkdir -p titles && cp /tmp/title.txt "$TITLE_PATH" && git add "$TITLE_PATH"; fi
           git commit -m "Ingest Daily Brief spoken handoff for $DATE"
           git pull --rebase origin main
           git push origin main

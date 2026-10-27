@@ -190,6 +190,13 @@ Because every redo uses a new versioned object, rollback should normally be a po
 
 Internal `_release_backups/` remain useful for any legacy/exceptional path that truly overwrites an object, but the preferred redo architecture is immutable published media objects + RSS pointer versioning.
 
+## Episode title rule
+
+- Owner decision 2026-10-27: episode titles carry the day's main thread. Weekday: `龙虾日报｜M月D日：<headline>`; Sunday: `龙虾日报｜周回顾 M月D日：<headline>`.
+- The headline comes from `tangkk/daily_brief/handoffs/YYYY-MM-DD-title.txt` (one line). `Ingest Daily Handoff` fetches it with the spoken handoff and stores it at `titles/YYYY-MM-DD.txt` (outside `episodes/`, so it never triggers `Auto Publish Daily` by itself). A headline-only change updates `titles/` without republishing audio.
+- `Auto Publish Daily` builds the title with `scripts/episode_title.py`. If the headline file is missing, empty, or contains a blocked term, it falls back to the date-only title `龙虾日报｜YYYY年MM月DD日`.
+- Existing published episodes keep their titles; the rule applies to new publications and reworks.
+
 ## Shownotes generation rule
 
 - RSS episode `description` / shownotes must be derived from the first substantive reader-facing summary paragraph of the canonical spoken script, plus the following **今日数字** (Sunday: **本周数字**) paragraph when present, both in full without truncation (owner decision 2026-10-08).
