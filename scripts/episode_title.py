@@ -10,7 +10,7 @@ import re
 import sys
 from pathlib import Path
 
-MAX_HEADLINE = 48
+MAX_HEADLINE = 72  # hard safety cap in raw characters; editorial target is ~40 CJK-width
 
 
 def clean(headline: str) -> str:
