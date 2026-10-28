@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Build the RSS episode title from a date and an optional one-line headline.
 
-Weekday:  龙虾日报｜10月27日：<headline>
-Sunday:   龙虾日报｜周回顾 10月25日：<headline>
+Weekday:  10.28｜<headline>
+Sunday:   周回顾 10.25｜<headline>
 Falls back to the date-only title when the headline is missing or unusable.
 """
 import datetime as dt
@@ -10,7 +10,7 @@ import re
 import sys
 from pathlib import Path
 
-MAX_HEADLINE = 40
+MAX_HEADLINE = 48
 
 
 def clean(headline: str) -> str:
@@ -26,8 +26,9 @@ def build(date: str, headline: str) -> str:
     h = clean(headline)
     if not h:
         return fallback
-    label = f"周回顾 {d.month}月{d.day}日" if d.isoweekday() == 7 else f"{d.month}月{d.day}日"
-    return f"龙虾日报｜{label}：{h}"
+    stamp = f"{d.month}.{d.day:02d}"
+    label = f"周回顾 {stamp}" if d.isoweekday() == 7 else stamp
+    return f"{label}｜{h}"
 
 
 if __name__ == "__main__":

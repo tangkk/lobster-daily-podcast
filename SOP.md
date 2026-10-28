@@ -192,7 +192,7 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 
 ## Episode title rule
 
-- Owner decision 2026-10-27: episode titles carry the day's main thread. Weekday: `龙虾日报｜M月D日：<headline>`; Sunday: `龙虾日报｜周回顾 M月D日：<headline>`.
+- Owner decision 2026-10-27, revised 2026-10-28: episode titles carry the day's main threads, without the show name (platforms already display it). Weekday: `M.DD｜<headline>` (for example `10.28｜英伟达入股 Meta 30 亿美元；科创 50 跌 4.8%；甲骨文引入谷歌 AI 芯片`); Sunday: `周回顾 M.DD｜<headline>`.
 - The headline comes from `tangkk/daily_brief/handoffs/YYYY-MM-DD-title.txt` (one line). `Ingest Daily Handoff` fetches it with the spoken handoff and stores it at `titles/YYYY-MM-DD.txt` (outside `episodes/`, so it never triggers `Auto Publish Daily` by itself). A headline-only change updates `titles/` without republishing audio.
 - `Auto Publish Daily` builds the title with `scripts/episode_title.py`. If the headline file is missing, empty, or contains a blocked term, it falls back to the date-only title `龙虾日报｜YYYY年MM月DD日`.
 - Existing published episodes keep their titles; the rule applies to new publications and reworks.
