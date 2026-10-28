@@ -70,7 +70,7 @@ jobs:
           DATE="${BASH_REMATCH[2]}"
           TITLE="龙虾日报｜${DATE:0:4}年${DATE:5:2}月${DATE:8:2}日"
           if [ -s "titles/${DATE}.txt" ] && python scripts/check_sensitive_terms.py "titles/${DATE}.txt" >/dev/null; then
-            TITLE=$(python scripts/episode_title.py "$DATE" "titles/${DATE}.txt")
+            TITLE=$(python scripts/episode_title.py "$DATE" "titles/${DATE}.txt" "titles/${DATE}-stress.json")
           fi
           echo "Episode title: $TITLE"
           echo "text_file=$TEXT_FILE" >> "$GITHUB_OUTPUT"

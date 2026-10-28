@@ -76,6 +76,12 @@ jobs:
             rm -f /tmp/title.txt
             echo "No episode headline for $DATE; publisher will use the date-only title."
           fi
+          STRESS_URL="https://raw.githubusercontent.com/tangkk/daily_brief/main/handoffs/${DATE}-stress.json"
+          if curl -fsSL --retry 3 --max-time 20 "${STRESS_URL}?run=${GITHUB_RUN_ID}" -o /tmp/stress.json && [ -s /tmp/stress.json ]; then
+            echo "Fetched stress index reading for $DATE"
+          else
+            rm -f /tmp/stress.json
+          fi
 
       - name: Dry-run safety assertion
         if: steps.handoff.outputs.ready == 'true' && inputs.dry_run == 'true'
@@ -127,10 +133,12 @@ jobs:
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           if [ -f "$EPISODE_PATH" ] && cmp -s /tmp/spoken.txt "$EPISODE_PATH"; then
             echo "Canonical spoken episode already matches handoff."
-            if [ -f /tmp/title.txt ] && ! cmp -s /tmp/title.txt "$TITLE_PATH" 2>/dev/null; then
-              mkdir -p titles && cp /tmp/title.txt "$TITLE_PATH"
-              git add "$TITLE_PATH"
-              git commit -m "Update episode headline for $DATE"
+            STRESS_PATH="titles/${DATE}-stress.json"
+            if { [ -f /tmp/title.txt ] && ! cmp -s /tmp/title.txt "$TITLE_PATH" 2>/dev/null; } || { [ -f /tmp/stress.json ] && ! cmp -s /tmp/stress.json "$STRESS_PATH" 2>/dev/null; }; then
+              mkdir -p titles
+              if [ -f /tmp/title.txt ]; then cp /tmp/title.txt "$TITLE_PATH"; git add "$TITLE_PATH"; fi
+              if [ -f /tmp/stress.json ]; then cp /tmp/stress.json "$STRESS_PATH"; git add "$STRESS_PATH"; fi
+              git commit -m "Update episode headline metadata for $DATE"
               git pull --rebase origin main
               git push origin main
             fi
@@ -144,6 +152,7 @@ jobs:
           cp /tmp/spoken.txt "$EPISODE_PATH"
           git add "$EPISODE_PATH"
           if [ -f /tmp/title.txt ]; then mkdir -p titles && cp /tmp/title.txt "$TITLE_PATH" && git add "$TITLE_PATH"; fi
+          if [ -f /tmp/stress.json ]; then mkdir -p titles && cp /tmp/stress.json "titles/${DATE}-stress.json" && git add "titles/${DATE}-stress.json"; fi
           git commit -m "Ingest Daily Brief spoken handoff for $DATE"
           git pull --rebase origin main
           git push origin main

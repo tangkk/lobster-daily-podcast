@@ -194,6 +194,7 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 
 - Owner decision 2026-10-27, revised 2026-10-28: episode titles carry the day's main threads, without the show name (platforms already display it). Weekday: `M.DD｜<headline>` (for example `10.28｜英伟达入股 Meta 30 亿美元；科创 50 跌 4.8%；甲骨文引入谷歌 AI 芯片`); Sunday: `周回顾 M.DD｜<headline>`.
 - The headline comes from `tangkk/daily_brief/handoffs/YYYY-MM-DD-title.txt` (one line). `Ingest Daily Handoff` fetches it with the spoken handoff and stores it at `titles/YYYY-MM-DD.txt` (outside `episodes/`, so it never triggers `Auto Publish Daily` by itself). A headline-only change updates `titles/` without republishing audio.
+- Owner decision 2026-10-28: when `daily_brief` provides `handoffs/YYYY-MM-DD-stress.json` (the 龙虾压力指数 reading), `Ingest Daily Handoff` stores it as `titles/YYYY-MM-DD-stress.json` and the title becomes `M.DD｜压力指数 NN｜<headline>` (Sunday: `周回顾 M.DD｜压力指数 NN｜<headline>`), with NN rounded to an integer. Without a reading the segment is simply omitted.
 - `Auto Publish Daily` builds the title with `scripts/episode_title.py`. If the headline file is missing, empty, or contains a blocked term, it falls back to the date-only title `龙虾日报｜YYYY年MM月DD日`.
 - Existing published episodes keep their titles; the rule applies to new publications and reworks.
 
@@ -255,6 +256,7 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 - Spoken scripts may include predictions and judgments: the written edition's 可验证判断 (one or two) as short plain sentences near the end, before the outlook, with the indicator and time window stated (for example `我们的判断是：未来两周十年期美债收益率仍将维持在百分之五以上。`). Do not review or grade past calls. Avoid political, electoral, and military predictions.
 - The written edition's **被忽视的信号** (at most one) may be included as one or two sentences after the predictions and before the outlook, opening with `被忽视的信号：`. Omit it when the written edition has none.
 - **Listener feedback invitation (Sunday only, owner decision 2026-10-27):** the Sunday Weekly Review spoken script ends with one sentence inviting feedback, for example `如果你希望我们多关注哪个领域、或者增加什么板块，欢迎在评论区留言告诉我们。` Sunday shownotes add the line `想让我们多关注哪个领域、或者增加什么板块？欢迎在评论区留言。` before the 文字版 link; the workflow adds it automatically. Monday–Saturday episodes carry neither.
+- **龙虾压力指数** in spoken scripts: one sentence only when the reading moves 10 points or more in a day, or crosses 50 or 80 (for example `龙虾压力指数升到八十五，是一年来的高位，主要来自油价和美元。`); otherwise omit, since the episode title carries it daily.
 - Keep the opening summary paragraph first, since it generates RSS shownotes.
 
 ## Editorial correction rules
