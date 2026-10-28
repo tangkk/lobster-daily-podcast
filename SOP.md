@@ -197,6 +197,7 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 - Owner decision 2026-10-28: when `daily_brief` provides `handoffs/YYYY-MM-DD-stress.json` (the 龙虾压力指数 reading), `Ingest Daily Handoff` stores it as `titles/YYYY-MM-DD-stress.json` and the title becomes `M.DD｜<headline>｜压力指数 NN` (Sunday: `周回顾 M.DD｜<headline>｜压力指数 NN`), with NN rounded to an integer and placed last (owner decision 2026-10-28). Without a reading the segment is simply omitted.
 - `Auto Publish Daily` builds the title with `scripts/episode_title.py`. If the headline file is missing, empty, or contains a blocked term, it falls back to the date-only title `龙虾日报｜YYYY年MM月DD日`.
 - Existing published episodes keep their titles; the rule applies to new publications and reworks.
+- The written post uses the same title (owner decision 2026-10-28): `daily_brief` copies the episode title from this RSS into the post front matter when it publishes. If an episode title is changed after the written post is public, update that post's `title:` to match.
 
 ## Shownotes generation rule
 
