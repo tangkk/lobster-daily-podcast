@@ -194,7 +194,7 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 
 - Owner decision 2026-10-27, revised 2026-10-28: episode titles carry the day's main threads, without the show name (platforms already display it). Weekday: `M.DD｜<headline>` (for example `10.28｜英伟达入股 Meta 30 亿美元；科创 50 跌 4.8%；甲骨文引入谷歌 AI 芯片`); Sunday: `周回顾 M.DD｜<headline>`.
 - The headline comes from `tangkk/daily_brief/handoffs/YYYY-MM-DD-title.txt` (one line). `Ingest Daily Handoff` fetches it with the spoken handoff and stores it at `titles/YYYY-MM-DD.txt` (outside `episodes/`, so it never triggers `Auto Publish Daily` by itself). A headline-only change updates `titles/` without republishing audio.
-- Owner decision 2026-10-28: when `daily_brief` provides `handoffs/YYYY-MM-DD-stress.json` (the 龙虾压力指数 reading), `Ingest Daily Handoff` stores it as `titles/YYYY-MM-DD-stress.json` and the title becomes `M.DD｜压力指数 NN｜<headline>` (Sunday: `周回顾 M.DD｜压力指数 NN｜<headline>`), with NN rounded to an integer. Without a reading the segment is simply omitted.
+- Owner decision 2026-10-28: when `daily_brief` provides `handoffs/YYYY-MM-DD-stress.json` (the 龙虾压力指数 reading), `Ingest Daily Handoff` stores it as `titles/YYYY-MM-DD-stress.json` and the title becomes `M.DD｜<headline>｜压力指数 NN` (Sunday: `周回顾 M.DD｜<headline>｜压力指数 NN`), with NN rounded to an integer and placed last (owner decision 2026-10-28). Without a reading the segment is simply omitted.
 - `Auto Publish Daily` builds the title with `scripts/episode_title.py`. If the headline file is missing, empty, or contains a blocked term, it falls back to the date-only title `龙虾日报｜YYYY年MM月DD日`.
 - Existing published episodes keep their titles; the rule applies to new publications and reworks.
 

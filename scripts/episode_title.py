@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Build the RSS episode title from a date and an optional one-line headline.
 
-Weekday:  10.28｜压力指数 83｜<headline>
-Sunday:   周回顾 10.25｜压力指数 83｜<headline>
+Weekday:  10.28｜<headline>｜压力指数 83
+Sunday:   周回顾 10.25｜<headline>｜压力指数 83
 The 压力指数 segment appears only when a stress reading file is given.
 Falls back to the date-only title when the headline is missing or unusable.
 """
@@ -30,15 +30,17 @@ def stress_label(path) -> str:
     return f"压力指数 {value:.0f}" if 0 <= value <= 100 else ""
 
 
-def build(date: str, headline: str, stress: str = "") -> str:
+def build(date: str, headline: str, stress: str = "", weekly=None) -> str:
     d = dt.date.fromisoformat(date)
     fallback = f"龙虾日报｜{d:%Y}年{d:%m}月{d:%d}日"
     h = clean(headline)
     if not h:
         return fallback
     stamp = f"{d.month}.{d.day:02d}"
-    label = f"周回顾 {stamp}" if d.isoweekday() == 7 else stamp
-    return f"{label}｜{stress}｜{h}" if stress else f"{label}｜{h}"
+    if weekly is None:
+        weekly = d.isoweekday() == 7
+    label = f"周回顾 {stamp}" if weekly else stamp
+    return f"{label}｜{h}｜{stress}" if stress else f"{label}｜{h}"
 
 
 if __name__ == "__main__":
