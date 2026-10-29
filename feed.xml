@@ -5,7 +5,7 @@
     <link>https://tangkk.github.io/lobster-daily-podcast</link>
     <atom:link href="https://tangkk.github.io/lobster-daily-podcast/feed.xml" rel="self" type="application/rss+xml" />
     <language>zh-CN</language>
-    <description>每天早上 7 点，用 5 分钟听懂 AI、市场、中国与世界的重要变化。
+    <description>每天早上，用 5 分钟听懂 AI、市场、中国与世界的重要变化。
 
 每期从一个“今日数字”开始，追踪 AI 产业的资金链与真实落地。周日是一周回顾，附“概念小课堂”。
 
@@ -14,11 +14,11 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Thu, 29 Oct 2026 00:08:51 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 29 Oct 2026 00:20:56 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
-    <itunes:summary>每天早上 7 点，用 5 分钟听懂 AI、市场、中国与世界的重要变化。
+    <itunes:summary>每天早上，用 5 分钟听懂 AI、市场、中国与世界的重要变化。
 
 每期从一个“今日数字”开始，追踪 AI 产业的资金链与真实落地。周日是一周回顾，附“概念小课堂”。
 
@@ -42,7 +42,7 @@
       <itunes:category text="Business News" />
     </itunes:category>
     <itunes:keywords>AI,人工智能,财经,早报,美股,科技新闻,投资,龙虾日报</itunes:keywords>
-    <item><pubDate>Thu, 29 Oct 2026 00:08:51 +0000</pubDate><title>10.29｜美联储按兵不动；SK 海力士利润大增；A 股成长反弹</title><description>美联储维持利率不变后，美股小幅收高，十年期美国国债收益率升至百分之五点零二，布伦特原油升至每桶一百一十一点六四美元。SK 海力士公布业绩后股价上涨百分之十点九，带动韩国综合指数上涨百分之六点六；A股周三也出现放量反弹，科创五十上涨百分之二点四五。
+    <item><pubDate>Thu, 29 Oct 2026 00:08:51 +0000</pubDate><title>10.29｜美联储按兵不动；SK 海力士利润大增；A 股成长反弹｜压力指数 81</title><description>美联储维持利率不变后，美股小幅收高，十年期美国国债收益率升至百分之五点零二，布伦特原油升至每桶一百一十一点六四美元。SK 海力士公布业绩后股价上涨百分之十点九，带动韩国综合指数上涨百分之六点六；A股周三也出现放量反弹，科创五十上涨百分之二点四五。
 
 今日数字：百分之十点九。这是 SK 海力士业绩公布后单日涨幅。公司称人工智能使用量上升推动存储需求，并预计需求在二零三零年前持续快于供给。
 
