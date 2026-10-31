@@ -49,9 +49,9 @@ The two repositories synchronize through the committed public Podcast `feed.xml`
 ### Weekly schedule integration
 
 - Monday–Saturday: the combined `Daily Brief Work` scheduled task selects the normal Daily Brief and generates its canonical written draft and spoken script at **07:00 Asia/Shanghai**, for breakfast/commute listening before the main China/Hong Kong cash-equity open.
-- Daily: the V1-hosted `daily-brief-watchdog` runs at **07:30 Asia/Shanghai** as recovery-only for the Monday–Saturday Daily Brief and Sunday Weekly Review. There is no ChatGPT-side Daily Brief Watchdog. It does not create a second edition; if the same-date release is already complete it exits without side effects, otherwise it resumes from the first incomplete durable milestone under the authoritative SOPs.
+- The V1 and ChatGPT Watchdogs are disabled. On failure, the user invokes manual recovery in Chat / Work; no independent content-generation recovery task should start without explicit owner approval.
 - Sunday: the same `Daily Brief Work` task runs at **07:00 Asia/Shanghai** and selects `Weekly Review`. Its spoken script includes the integrated AI 信用周期 section from the same canonical written Weekly Review. The separate Weekly Review scheduled task is disabled to prevent duplicate Sunday runs.
-- Daily Brief, Watchdog recovery, and Weekly Review all use the same Auto Publish Daily production path, stable GUID/date semantics, TTS normalization, R2 publication, RSS upsert, downstream written-site synchronization, and verification contract.
+- Daily Brief and Weekly Review share the Auto Publish Daily production path, stable GUID/date semantics, TTS normalization, R2 publication, RSS upsert, downstream written-site synchronization, and verification contract. Manual recovery resumes only incomplete stages.
 - There is no separate AI 信用周期 podcast item or audio feed.
 
 ## Path 2 — Already-published episode redo / rejection recovery
@@ -81,7 +81,7 @@ existing episode GUID
 Hard requirements:
 
 - GUID/date identity stays unchanged.
-- `title` and original `pubDate` normally stay unchanged.
+- Original `pubDate` stays unchanged. Preserve `title` if accurate; when the correction changes the leading story, update title metadata and downstream written title to match without changing GUID.
 - enclosure URL **must change** to a fresh versioned filename.
 - if current URL is `<slug>.mp3`, redo becomes `<slug>-v2.mp3`.
 - if current URL is `<slug>-v2.mp3`, redo becomes `<slug>-v3.mp3`, etc.
@@ -286,7 +286,7 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 Normal Daily Brief publication receives its canonical spoken source from `tangkk/daily_brief`; it must not depend on a second ChatGPT connector write into this repository.
 
 1. Canonical handoff source: `tangkk/daily_brief/handoffs/YYYY-MM-DD-spoken.txt`.
-2. `Ingest Daily Handoff` is the owning cross-repository ingestion workflow. It can be started immediately by `Dispatch Podcast Handoff` in `daily_brief` and also runs GitHub-native scheduled reconciliation at 08:00 Asia/Shanghai on Monday-Saturday and 10:00 on Sunday for the Weekly Review.
+2. `Ingest Daily Handoff` is the owning cross-repository ingestion workflow. It can be started immediately by `Dispatch Podcast Handoff` in `daily_brief` and also runs GitHub-native scheduled ingestion fallback at 08:17 Asia/Shanghai Monday–Saturday and 10:17 Sunday for the Weekly Review.
 3. Ingestion fetches the exact handoff from `daily_brief/main`, validates the fixed spoken opening and date, and then resolves the canonical `episodes/epNNN-daily-YYYY-MM-DD.txt` path.
 4. If the same-date canonical episode already exists with identical content, ingestion is idempotently complete. If it exists with different content, ingestion fails closed; use the explicit same-date rework path rather than silently overwriting it.
 5. For a new date, GitHub Actions commits the canonical episode to this repository. That commit triggers the existing `Auto Publish Daily` workflow; TTS, R2, RSS, stable GUID, verification, and versioning rules remain owned here and unchanged.
