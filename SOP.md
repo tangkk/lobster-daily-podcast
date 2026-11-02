@@ -49,7 +49,7 @@ The two repositories synchronize through the committed public Podcast `feed.xml`
 ### Weekly schedule integration
 
 - Monday–Saturday: the combined `Daily Brief Work` scheduled task selects the normal Daily Brief and generates its canonical written draft and spoken script at **07:00 Asia/Shanghai**, for breakfast/commute listening before the main China/Hong Kong cash-equity open.
-- The V1 and ChatGPT Watchdogs are disabled. On failure, the user invokes manual recovery in Chat / Work; no independent content-generation recovery task should start without explicit owner approval.
+- The sole V1 `daily-brief-watchdog` timer fires at **07:00 Asia/Shanghai** as a recovery backstop for the Daily Brief and Sunday Weekly Review. If the same-date release is not already verified, it waits until 07:15 and checks again before considering recovery. It exits without content changes when the primary run is progressing. There is no ChatGPT-side watchdog; do not create a second edition or another schedule. Owner-requested manual recovery still uses canonical same-date checkpoints and resumes only incomplete stages.
 - Sunday: the same `Daily Brief Work` task runs at **07:00 Asia/Shanghai** and selects `Weekly Review`. Its spoken script includes the integrated AI 信用周期 section from the same canonical written Weekly Review. The separate Weekly Review scheduled task is disabled to prevent duplicate Sunday runs.
 - Daily Brief and Weekly Review share the Auto Publish Daily production path, stable GUID/date semantics, TTS normalization, R2 publication, RSS upsert, downstream written-site synchronization, and verification contract. Manual recovery resumes only incomplete stages.
 - There is no separate AI 信用周期 podcast item or audio feed.
