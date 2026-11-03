@@ -78,6 +78,31 @@ jobs:
           echo "date=$DATE" >> "$GITHUB_OUTPUT"
           echo "title=$TITLE" >> "$GITHUB_OUTPUT"
 
+      - name: Enforce spoken length for first publication
+        env:
+          DATE: ${{ steps.episode.outputs.date }}
+          TEXT_FILE: ${{ steps.episode.outputs.text_file }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          # The same GUID in the existing feed means a deliberate rework; do not
+          # retroactively apply a new first-publication rule to old episodes.
+          if python - <<'PY'
+          import os, re, xml.etree.ElementTree as ET
+          root = ET.parse("feed.xml").getroot()
+          pattern = re.compile(r"^ep[0-9]+-daily-" + re.escape(os.environ["DATE"]) + r"$")
+          matches = [item for item in root.findall("./channel/item")
+                     if pattern.match(item.findtext("guid") or "")]
+          if len(matches) > 1:
+              raise SystemExit("Duplicate same-date GUIDs in Podcast RSS")
+          raise SystemExit(0 if matches else 1)
+          PY
+          then
+            echo "Existing RSS episode: explicit rework path, historical length floor not applied."
+          else
+            python scripts/check_spoken_length.py --date "$DATE" --file "$TEXT_FILE"
+          fi
+
       - name: Validate secrets
         run: |
           set -euo pipefail
