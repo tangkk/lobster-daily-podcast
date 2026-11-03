@@ -199,6 +199,14 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 - Existing published episodes keep their titles; the rule applies to new publications and reworks.
 - The written post uses the same title (owner decision 2026-10-28): `daily_brief` copies the episode title from this RSS into the post front matter when it publishes. If an episode title is changed after the written post is public, update that post's `title:` to match.
 
+## Spoken length and depth gate (owner decision 2026-11-03)
+
+- **New Monday–Saturday episodes:** minimum **1,300 Chinese Han characters** in the complete canonical spoken source. **New Sunday Weekly Reviews:** minimum **1,800 Chinese Han characters**. Count Han characters in Unicode U+3400–U+9FFF; exclude English, numerals, punctuation and whitespace. The fixed dated opening counts, but titles, metadata, and RSS descriptions do not count. The validator `scripts/check_spoken_length.py --date YYYY-MM-DD --file FILE` is the authoritative deterministic check for new episodes.
+- The spoken script must explain the significance of sourced facts, material comparisons with earlier values, causal or technical mechanisms where supported, and what measurable result to watch. Deepen selected high-value stories instead of adding weak stories, repetition, generic filler, speculation, or recycled commentary. The thresholds are minimums; a longer useful script is welcome.
+- `Ingest Daily Handoff` rejects a short **new** handoff before canonical episode creation and before launching TTS. Record failure for editorial recovery. The original `daily_brief` authoring process should count before commit so that a rejected handoff is exceptional.
+- Existing identical episodes pass idempotently regardless of historical length. Already-published recordings are grandfathered: do not force re-TTS or rewrite solely for this threshold. Explicit content reworks remain governed by the same-date rework/approval contract.
+- If the selected news genuinely cannot support the required length with accurately sourced context, stop and report the editorial blocker; never reach the minimum with fabricated or redundant material.
+
 ## Shownotes generation rule
 
 - RSS episode `description` / shownotes must be derived from the first substantive reader-facing summary paragraph of the canonical spoken script, plus the following **今日数字** (Sunday: **本周数字**) paragraph when present, both in full without truncation (owner decision 2026-10-08).
