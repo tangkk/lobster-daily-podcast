@@ -149,6 +149,9 @@ jobs:
             echo "Existing same-date spoken episode differs; refusing implicit rework."
             exit 1
           fi
+          # New editions must meet the spoken-content floor before any write/dispatch.
+          # Existing identical canonical episodes remain idempotent; reworks use their own path.
+          python scripts/check_spoken_length.py --date "$DATE" --file /tmp/spoken.txt
           cp /tmp/spoken.txt "$EPISODE_PATH"
           git add "$EPISODE_PATH"
           if [ -f /tmp/title.txt ]; then mkdir -p titles && cp /tmp/title.txt "$TITLE_PATH" && git add "$TITLE_PATH"; fi
