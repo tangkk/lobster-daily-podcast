@@ -1,0 +1,46 @@
+name: Test Spoken Length Gate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/check_spoken_length.py'
+      - '.github/workflows/test-spoken-length.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Check exact new-episode character boundaries
+        run: |
+          python - <<'PY'
+          import pathlib, subprocess, tempfile
+          with tempfile.TemporaryDirectory() as tmp:
+              path = pathlib.Path(tmp) / "spoken.txt"
+              cases = [
+                  ("2026-11-02", 1299, False),
+                  ("2026-11-02", 1300, True),
+                  ("2026-11-01", 1799, False),
+                  ("2026-11-01", 1800, True),
+              ]
+              for date, n, expected in cases:
+                  path.write_text("龙" * n + " AI 2026.\n", encoding="utf-8")
+                  result = subprocess.run(
+                      ["python", "scripts/check_spoken_length.py",
+                       "--date", date, "--file", str(path)],
+                      capture_output=True, text=True,
+                  )
+                  assert (result.returncode == 0) == expected, (
+                      date, n, result.stdout, result.stderr
+                  )
+                  print(f"PASS {date} {n} characters: accepted={expected}")
+          PY
