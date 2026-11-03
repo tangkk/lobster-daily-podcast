@@ -14,7 +14,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Mon, 02 Nov 2026 23:09:38 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 03 Nov 2026 23:12:59 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -42,7 +42,11 @@
       <itunes:category text="Business News" />
     </itunes:category>
     <itunes:keywords>AI,人工智能,财经,早报,美股,科技新闻,投资,龙虾日报</itunes:keywords>
-    <item><pubDate>Mon, 02 Nov 2026 23:09:38 +0000</pubDate><title>11.03｜Marvell 1150 亿美元收购 Lumentum；Palantir 营收增 96%；苹果营收 1145 亿｜压力指数 85</title><description>今天的重点是光互连并购、企业人工智能收入，以及市场对科技投资的定价。Marvell 宣布以约一千一百五十亿美元的企业价值收购 Lumentum。Palantir 第三季度收入同比增长百分之九十六，美国商业收入增长百分之一百四十八。苹果季度收入增长约百分之十二。与此同时，纳斯达克周一下跌百分之一点一，中国宣布降低股票回购增持再贷款利率，布伦特原油单日下跌百分之七点六。
+    <item><pubDate>Tue, 03 Nov 2026 23:12:59 +0000</pubDate><title>11.04｜AMD 数据中心收入增 97%；Arista 营收增 58.5%；苹果毛利率指引下调｜压力指数 85</title><description>今天的核心是，人工智能基础设施的需求，正在芯片、网络和供电三个环节形成实际销售。AMD 的季度数据中心收入接近翻倍，Arista 的网络设备收入增长接近六成，伊顿的数据中心相关销售增长六成半。另一端，苹果预计存储成本和人工智能功能支出会压低本季毛利率。澳大利亚央行再度加息，美国职位空缺回升，市场需要同时评估增长与融资成本。
+
+今日数字：八十五点四六亿美元，这是 AMD 第三季度数据中心业务的已确认收入，比去年同期增长百分之九十七。这个业务同时包含服务器处理器和人工智能加速器，因此不能把全部金额理解成图形处理器销售。它已经占 AMD 当季总收入的大约百分之六十四，规模足以改变整家公司的盈利结构。
+
+文字版：https://tangkk.github.io/daily_brief/2026/11/04/</description><guid isPermaLink="false">ep076-daily-2026-11-04</guid><enclosure url="https://pub-e2d65fa7f70240878f2e556592826485.r2.dev/daily/ep076-daily-2026-11-04.mp3" length="1718061" type="audio/mpeg" /><itunes:duration>00:07:09</itunes:duration><itunes:episodeType>full</itunes:episodeType><itunes:explicit>false</itunes:explicit></item><item><pubDate>Mon, 02 Nov 2026 23:09:38 +0000</pubDate><title>11.03｜Marvell 1150 亿美元收购 Lumentum；Palantir 营收增 96%；苹果营收 1145 亿｜压力指数 85</title><description>今天的重点是光互连并购、企业人工智能收入，以及市场对科技投资的定价。Marvell 宣布以约一千一百五十亿美元的企业价值收购 Lumentum。Palantir 第三季度收入同比增长百分之九十六，美国商业收入增长百分之一百四十八。苹果季度收入增长约百分之十二。与此同时，纳斯达克周一下跌百分之一点一，中国宣布降低股票回购增持再贷款利率，布伦特原油单日下跌百分之七点六。
 
 今日数字：一千一百五十亿美元。这是 Marvell 收购 Lumentum 的公告所列隐含企业价值。交易采用换股方式，双方已经签署协议，后续还需要完成股东和监管程序。它衡量的是人工智能数据中心光互连资产的一笔重大并购，而非已经实现的销售收入。
 
