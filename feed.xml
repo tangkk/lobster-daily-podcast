@@ -14,7 +14,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Tue, 03 Nov 2026 23:12:59 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 04 Nov 2026 23:10:55 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -42,7 +42,11 @@
       <itunes:category text="Business News" />
     </itunes:category>
     <itunes:keywords>AI,人工智能,财经,早报,美股,科技新闻,投资,龙虾日报</itunes:keywords>
-    <item><pubDate>Tue, 03 Nov 2026 23:12:59 +0000</pubDate><title>11.04｜AMD 数据中心收入增 97%；Arista 营收增 58.5%；苹果毛利率指引下调｜压力指数 85</title><description>今天的核心是，人工智能基础设施的需求，正在芯片、网络和供电三个环节形成实际销售。AMD 的季度数据中心收入接近翻倍，Arista 的网络设备收入增长接近六成，伊顿的数据中心相关销售增长六成半。另一端，苹果预计存储成本和人工智能功能支出会压低本季毛利率。澳大利亚央行再度加息，美国职位空缺回升，市场需要同时评估增长与融资成本。
+    <item><pubDate>Wed, 04 Nov 2026 23:10:55 +0000</pubDate><title>11.05｜布伦特跌 8.7%；科创 50 涨 9.92%；Arm 营收增 27%｜压力指数 76</title><description>今天最显著的变化来自能源和市场价格。布伦特原油单日下跌百分之八点七，收于每桶九十四点六二美元；中国科创五十指数上涨百分之九点九二，带动半导体股反弹。美国大型股票指数也上行，不过英伟达和算力出租商 CoreWeave 继续下跌。财报方面，Arm 的季度收入增长百分之二十七，Coherent 的数据中心与通信业务收入明显增加。美国十月私人部门就业增加八万六千人，九月电脑进口额也大幅上升。
+
+今日数字：每桶九十四点六二美元，这是布伦特原油十一月四日的收盘价，较前一日下跌百分之八点七。它关系到未来能源通胀的输入，也影响石油企业的收入预期；接下来要看价格能否保持在一百美元以下。
+
+文字版：https://tangkk.github.io/daily_brief/2026/11/05/</description><guid isPermaLink="false">ep077-daily-2026-11-05</guid><enclosure url="https://pub-e2d65fa7f70240878f2e556592826485.r2.dev/daily/ep077-daily-2026-11-05.mp3" length="1787661" type="audio/mpeg" /><itunes:duration>00:07:27</itunes:duration><itunes:episodeType>full</itunes:episodeType><itunes:explicit>false</itunes:explicit></item><item><pubDate>Tue, 03 Nov 2026 23:12:59 +0000</pubDate><title>11.04｜AMD 数据中心收入增 97%；Arista 营收增 58.5%；苹果毛利率指引下调｜压力指数 85</title><description>今天的核心是，人工智能基础设施的需求，正在芯片、网络和供电三个环节形成实际销售。AMD 的季度数据中心收入接近翻倍，Arista 的网络设备收入增长接近六成，伊顿的数据中心相关销售增长六成半。另一端，苹果预计存储成本和人工智能功能支出会压低本季毛利率。澳大利亚央行再度加息，美国职位空缺回升，市场需要同时评估增长与融资成本。
 
 今日数字：八十五点四六亿美元，这是 AMD 第三季度数据中心业务的已确认收入，比去年同期增长百分之九十七。这个业务同时包含服务器处理器和人工智能加速器，因此不能把全部金额理解成图形处理器销售。它已经占 AMD 当季总收入的大约百分之六十四，规模足以改变整家公司的盈利结构。
 
