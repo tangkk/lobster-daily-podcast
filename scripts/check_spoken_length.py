@@ -11,7 +11,7 @@ import re
 import sys
 
 HAN = re.compile(r"[\u3400-\u9fff]")
-LIMITS = {"daily": 1300, "weekly": 1800}
+LIMITS = {"daily": 1200, "weekly": 1800}
 
 
 def count_han(text: str) -> int:
