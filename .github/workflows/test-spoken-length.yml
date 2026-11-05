@@ -27,8 +27,8 @@ jobs:
           with tempfile.TemporaryDirectory() as tmp:
               path = pathlib.Path(tmp) / "spoken.txt"
               cases = [
-                  ("2026-11-02", 1299, False),
-                  ("2026-11-02", 1300, True),
+                  ("2026-11-02", 1199, False),
+                  ("2026-11-02", 1200, True),
                   ("2026-11-01", 1799, False),
                   ("2026-11-01", 1800, True),
               ]
