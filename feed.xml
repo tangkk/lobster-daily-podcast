@@ -14,7 +14,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Wed, 04 Nov 2026 23:10:55 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 05 Nov 2026 23:10:56 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -42,7 +42,11 @@
       <itunes:category text="Business News" />
     </itunes:category>
     <itunes:keywords>AI,人工智能,财经,早报,美股,科技新闻,投资,龙虾日报</itunes:keywords>
-    <item><pubDate>Wed, 04 Nov 2026 23:10:55 +0000</pubDate><title>11.05｜布伦特跌 8.7%；科创 50 涨 9.92%；Arm 营收增 27%｜压力指数 76</title><description>今天最显著的变化来自能源和市场价格。布伦特原油单日下跌百分之八点七，收于每桶九十四点六二美元；中国科创五十指数上涨百分之九点九二，带动半导体股反弹。美国大型股票指数也上行，不过英伟达和算力出租商 CoreWeave 继续下跌。财报方面，Arm 的季度收入增长百分之二十七，Coherent 的数据中心与通信业务收入明显增加。美国十月私人部门就业增加八万六千人，九月电脑进口额也大幅上升。
+    <item><pubDate>Thu, 05 Nov 2026 23:10:56 +0000</pubDate><title>11.06｜标普跌 4.4%；英国央行加息至 4%；AppLovin 营收增 55%｜压力指数 84</title><description>今天最重要的变化是美国股市的大幅下跌。标普五百指数跌百分之四点四，纳斯达克跌百分之五点五，英伟达和其他算力产业链股票跌幅更大。英国央行将利率提高到百分之四，并上调对明年通胀的预测。美国第三季度劳动生产率加快增长，广告技术公司 AppLovin 披露强劲收入和现金流。月之暗面公开了 Kimi 新模型的权重；美国新申请失业救济的人数则降到十八点九万。
+
+今日数字：百分之四点四，这是标普五百指数十一月五日的单日跌幅。指数收于七千三百五十三点七三点，前一天上涨的幅度已经被超过。接下来要看这次价格调整是否伴随算力订单和融资条件的实际变化。
+
+文字版：https://tangkk.github.io/daily_brief/2026/11/06/</description><guid isPermaLink="false">ep078-daily-2026-11-06</guid><enclosure url="https://pub-e2d65fa7f70240878f2e556592826485.r2.dev/daily/ep078-daily-2026-11-06.mp3" length="1274925" type="audio/mpeg" /><itunes:duration>00:05:19</itunes:duration><itunes:episodeType>full</itunes:episodeType><itunes:explicit>false</itunes:explicit></item><item><pubDate>Wed, 04 Nov 2026 23:10:55 +0000</pubDate><title>11.05｜布伦特跌 8.7%；科创 50 涨 9.92%；Arm 营收增 27%｜压力指数 76</title><description>今天最显著的变化来自能源和市场价格。布伦特原油单日下跌百分之八点七，收于每桶九十四点六二美元；中国科创五十指数上涨百分之九点九二，带动半导体股反弹。美国大型股票指数也上行，不过英伟达和算力出租商 CoreWeave 继续下跌。财报方面，Arm 的季度收入增长百分之二十七，Coherent 的数据中心与通信业务收入明显增加。美国十月私人部门就业增加八万六千人，九月电脑进口额也大幅上升。
 
 今日数字：每桶九十四点六二美元，这是布伦特原油十一月四日的收盘价，较前一日下跌百分之八点七。它关系到未来能源通胀的输入，也影响石油企业的收入预期；接下来要看价格能否保持在一百美元以下。
 
