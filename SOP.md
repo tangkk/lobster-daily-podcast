@@ -268,6 +268,13 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 - **龙虾压力指数** in spoken scripts: one sentence only when the reading moves 10 points or more in a day, or crosses 50 or 80 (for example `龙虾压力指数升到八十五，是一年来的高位，主要来自油价和美元。`); otherwise omit, since the episode title carries it daily.
 - Keep the opening summary paragraph first, since it generates RSS shownotes.
 
+## Major AI policy and regulatory-risk coverage (owner decision 2026-11-06)
+
+- The written Daily Brief SOP now requires a **daily independent discovery and omission audit** of globally consequential AI policy and regulatory risk: frontier-model R&D/deployment restrictions, proposed or effective legislation, agency rules/enforcement, chip/compute/data-center controls, and direct commercial implications. This is **not** an automatic spoken headline slot.
+- When deriving the spoken edition, actively review any qualifying written AI policy/regulatory development for direct, material effects on AI technology, training/inference, compute supply, model deployment, financing, market access, or actual market pricing. Explain the relevant verified impact clearly and neutrally if it passes the existing spoken-topic/sensitivity rules.
+- Keep bill introduction, politician statement, committee action, enacted law and in-force enforcement distinct. State the correct jurisdiction, actor, date, legal status and whether penalties are only proposed. Do not present a pending proposal as a current ban, equate an individual legislator's advocacy with official party policy, or infer market causation without evidence.
+- The written-side research and audit obligations do **not** waive Podcast safety rules regarding strongly political narratives, China-related policy, foreign elections, restricted terms or platform TTS refusal. Omit the spoken item if no safely expressible, direct, material economic/technical consequence exists; keep qualifying facts in the written edition under its own rules. Do not add low-value political updates merely to reach the spoken length floor.
+
 ## Editorial correction rules
 
 - Fix the canonical spoken script first; never patch only MP3/RSS while leaving source stale.
