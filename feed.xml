@@ -14,7 +14,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Thu, 05 Nov 2026 23:10:56 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 06 Nov 2026 23:10:53 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -42,7 +42,11 @@
       <itunes:category text="Business News" />
     </itunes:category>
     <itunes:keywords>AI,人工智能,财经,早报,美股,科技新闻,投资,龙虾日报</itunes:keywords>
-    <item><pubDate>Thu, 05 Nov 2026 23:10:56 +0000</pubDate><title>11.06｜标普跌 4.4%；英国央行加息至 4%；AppLovin 营收增 55%｜压力指数 84</title><description>今天最重要的变化是美国股市的大幅下跌。标普五百指数跌百分之四点四，纳斯达克跌百分之五点五，英伟达和其他算力产业链股票跌幅更大。英国央行将利率提高到百分之四，并上调对明年通胀的预测。美国第三季度劳动生产率加快增长，广告技术公司 AppLovin 披露强劲收入和现金流。月之暗面公开了 Kimi 新模型的权重；美国新申请失业救济的人数则降到十八点九万。
+    <item><pubDate>Fri, 06 Nov 2026 23:10:53 +0000</pubDate><title>11.07｜日经与韩国综指均跌约 6%；IREN 云收入达 2 亿美元；美国新增就业 16.5 万｜压力指数 84</title><description>十一月六日，亚洲半导体市场再次承受明显压力：日本日经指数和韩国综合指数都下跌约百分之六。随后美国公布十月就业数据，新增岗位十六点五万个，失业率百分之四点一，美股收盘相对稳定。算力租赁商 IREN 披露，季度人工智能云收入升到两亿美元，同时仍有约六十亿美元扩张资金需要筹措。Cloudflare 的平台收入增长，Moderna 上调全年收入预期；一项新研究则显示，人工智能解读生物实验数据的能力有所进步，但距离可靠的独立判断还有差距。
+
+今日数字：约六十亿美元。这是 IREN 为下一财年剩余资本开支规划的目标融资规模，可能来自新的设备融资、客户预付款、数据中心融资或其他渠道。它还没有全部落实，实际可用资金取决于市场条件和合同执行。
+
+文字版：https://tangkk.github.io/daily_brief/2026/11/07/</description><guid isPermaLink="false">ep079-daily-2026-11-07</guid><enclosure url="https://pub-e2d65fa7f70240878f2e556592826485.r2.dev/daily/ep079-daily-2026-11-07.mp3" length="1297197" type="audio/mpeg" /><itunes:duration>00:05:24</itunes:duration><itunes:episodeType>full</itunes:episodeType><itunes:explicit>false</itunes:explicit></item><item><pubDate>Thu, 05 Nov 2026 23:10:56 +0000</pubDate><title>11.06｜标普跌 4.4%；英国央行加息至 4%；AppLovin 营收增 55%｜压力指数 84</title><description>今天最重要的变化是美国股市的大幅下跌。标普五百指数跌百分之四点四，纳斯达克跌百分之五点五，英伟达和其他算力产业链股票跌幅更大。英国央行将利率提高到百分之四，并上调对明年通胀的预测。美国第三季度劳动生产率加快增长，广告技术公司 AppLovin 披露强劲收入和现金流。月之暗面公开了 Kimi 新模型的权重；美国新申请失业救济的人数则降到十八点九万。
 
 今日数字：百分之四点四，这是标普五百指数十一月五日的单日跌幅。指数收于七千三百五十三点七三点，前一天上涨的幅度已经被超过。接下来要看这次价格调整是否伴随算力订单和融资条件的实际变化。
 
