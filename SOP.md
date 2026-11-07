@@ -243,6 +243,13 @@ Internal `_release_backups/` remain useful for any legacy/exceptional path that 
 - Preserve factual meaning, uncertainty, nuance, attribution, and information density; this rule changes phrasing only.
 - Do not add generic time-of-day or market-session announcements merely to frame a Daily Brief or Weekly Review (for example, “北京时间7点，亚洲主要股票市场还没有开始交易”). The schedule rationale that the edition is prepared before the cash-equity open is operational context, not spoken copy. Mention whether a market is open only when the session status is materially relevant to a specific reported development, and make the timing precise.
 
+## Spoken temporal phrasing and date de-duplication (owner decision 2026-11-07)
+
+- Keep the fixed opening `龙虾日报，YYYY年M月D日。` exactly as required. That is the **Asia/Shanghai episode date**, not a claim that all reported events happened that day. Covering the preceding calendar day's Asian markets, the latest completed US session, and overnight news is correct.
+- For normal narration, **do not mechanically repeat a fully spoken calendar date** in the opening summary, its subsequent detailed treatment, or several neighboring items. State an event's full date only when necessary to distinguish chronology or prevent confusion, especially when comparing different sessions, publication vs reporting periods, legal effective dates, deadlines and international time zones.
+- Prefer natural time references such as “昨天”, “当天”, “前一交易日”, “最新一个交易日”, or omission when the context is already unambiguous. For a report released on November 6 covering October employment, prefer “美国最新公布的十月就业报告显示……” to redundant “十一月六日公布……”. Do not repeatedly open paragraphs with “昨天”. Relative words must be interpreted against the *edition's Asia/Shanghai date*, **not** the machine's runtime clock; where US/Asian time zones make “昨天” misleading, use a market-session reference or explicit date.
+- During spoken-script derivation **and immediately before TTS handoff**, perform a light editorial date-repetition and naturalness pass: check each full date for a genuine reason, make the minimum necessary rewrite, preserve facts and source timing, and do not erase important dates merely to lower a date count. This is **not** a deterministic frequency gate and must not change the existing Han-character floor, editorial length target, TTS settings or historical releases.
+
 ## Spoken-script pronunciation convention
 
 - In every canonical Daily Brief spoken script, write `DRAM` as `D-RAM`, `SRAM` as `S-RAM`, `VRAM` as `V-RAM`, `NAND` as `nan`, and `Qwen` as `千问` so the intended readings are explicit before the TTS preparation layer.
