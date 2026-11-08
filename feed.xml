@@ -14,7 +14,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Sat, 07 Nov 2026 23:13:08 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 Nov 2026 23:11:48 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -42,7 +42,11 @@
       <itunes:category text="Business News" />
     </itunes:category>
     <itunes:keywords>AI,人工智能,财经,早报,美股,科技新闻,投资,龙虾日报</itunes:keywords>
-    <item><pubDate>Sat, 07 Nov 2026 23:13:08 +0000</pubDate><title>周回顾 11.08｜标普全周跌 2.7%；IREN 云收入达 2 亿美元；美国新增就业 16.5 万｜压力指数 84</title><description>这一周，人工智能产业的销售进展与融资压力同时变得更清楚。标普五百指数全周下跌约百分之二点七，日本和韩国的主要股指在周五各跌约百分之六。与此同时，算力供应商 IREN 的季度云收入升到两亿美元，但下一财年扩张计划中还有约六十亿美元需要目标融资。美国十月新增就业十六点五万人，明显高于过去一年的月均水平。我们要把已实现的收入、未来合同、融资计划和股市价格分开观察，才能判断这轮投资如何回收。
+    <item><pubDate>Sun, 08 Nov 2026 23:11:48 +0000</pubDate><title>11.09｜OpenAI 融资 110 亿；微软结束甲骨文租约；谷歌接手算力园区｜压力指数 84</title><description>人工智能基础设施的资金、租约和项目建设出现三项新进展。路透社报道，OpenAI 已完成新一轮融资的首笔一百一十亿美元。微软据报道决定不再续签甲骨文的一份旧芯片算力租约。谷歌则收购了 Crusoe 在美国怀俄明州尚未建成的数据中心场址。医疗领域，一种口服免疫药的三期试验达到主要终点；美国药监机构也在调查已上市基因疗法的肿瘤风险。最近完成的美国交易日仍是上周五，周末没有新的美股收盘价格。
+
+今日数字：一百一十亿美元。这是路透社援引知情人士所报道的 OpenAI 本轮融资首笔已交割金额。报道所述估值约为一点二五万亿美元。已交割的资金为公司采购算力提供了现实支持，但尚未完成的融资目标和未来产品收入仍须分别观察。
+
+文字版：https://tangkk.github.io/daily_brief/2026/11/09/</description><guid isPermaLink="false">ep081-daily-2026-11-09</guid><enclosure url="https://pub-e2d65fa7f70240878f2e556592826485.r2.dev/daily/ep081-daily-2026-11-09.mp3" length="1321869" type="audio/mpeg" /><itunes:duration>00:05:30</itunes:duration><itunes:episodeType>full</itunes:episodeType><itunes:explicit>false</itunes:explicit></item><item><pubDate>Sat, 07 Nov 2026 23:13:08 +0000</pubDate><title>周回顾 11.08｜标普全周跌 2.7%；IREN 云收入达 2 亿美元；美国新增就业 16.5 万｜压力指数 84</title><description>这一周，人工智能产业的销售进展与融资压力同时变得更清楚。标普五百指数全周下跌约百分之二点七，日本和韩国的主要股指在周五各跌约百分之六。与此同时，算力供应商 IREN 的季度云收入升到两亿美元，但下一财年扩张计划中还有约六十亿美元需要目标融资。美国十月新增就业十六点五万人，明显高于过去一年的月均水平。我们要把已实现的收入、未来合同、融资计划和股市价格分开观察，才能判断这轮投资如何回收。
 
 本周数字：两亿美元。这是 IREN 最近一个季度已确认的人工智能云业务收入，前一季度为七千一百万美元。公司还披露了二百零三亿美元订单存量；后者要等设备交付、客户使用服务之后，才能逐步进入收入报表。这个差别贯穿本周的产业和市场变化。
 
