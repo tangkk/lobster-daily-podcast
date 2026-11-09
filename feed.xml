@@ -14,7 +14,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Sun, 08 Nov 2026 23:11:48 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 09 Nov 2026 23:10:55 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -42,7 +42,11 @@
       <itunes:category text="Business News" />
     </itunes:category>
     <itunes:keywords>AI,人工智能,财经,早报,美股,科技新闻,投资,龙虾日报</itunes:keywords>
-    <item><pubDate>Sun, 08 Nov 2026 23:11:48 +0000</pubDate><title>11.09｜OpenAI 融资 110 亿；微软结束甲骨文租约；谷歌接手算力园区｜压力指数 84</title><description>人工智能基础设施的资金、租约和项目建设出现三项新进展。路透社报道，OpenAI 已完成新一轮融资的首笔一百一十亿美元。微软据报道决定不再续签甲骨文的一份旧芯片算力租约。谷歌则收购了 Crusoe 在美国怀俄明州尚未建成的数据中心场址。医疗领域，一种口服免疫药的三期试验达到主要终点；美国药监机构也在调查已上市基因疗法的肿瘤风险。最近完成的美国交易日仍是上周五，周末没有新的美股收盘价格。
+    <item><pubDate>Mon, 09 Nov 2026 23:10:55 +0000</pubDate><title>11.10｜Anthropic 发布 Fable 5.2；美股反弹 2.3%；谷歌扩充 TPU｜压力指数 79</title><description>今天的主线是模型能力、算力配置与市场定价同时变化。Anthropic 推出 Claude Fable 5.2 和准入范围更窄的 Mythos 5.2，调整了速度与价格。美国最新一个交易日，标普五百指数上涨百分之二点三，布伦特原油回落；谷歌又发布两种第八代 TPU 系统。中国十月的生产端物价涨幅高于消费端。减重药试验和自动驾驶算力合同，也提供了新的医疗与应用证据。
+
+今日数字：每百万输入 token 八美元，这是 Anthropic 公布的新版高端模型标准接口价格。每百万输出 token 为四十美元。企业实际要支付多少，还要看完成一次任务用掉多少 token，以及任务成功率。
+
+文字版：https://tangkk.github.io/daily_brief/2026/11/10/</description><guid isPermaLink="false">ep082-daily-2026-11-10</guid><enclosure url="https://pub-e2d65fa7f70240878f2e556592826485.r2.dev/daily/ep082-daily-2026-11-10.mp3" length="1345485" type="audio/mpeg" /><itunes:duration>00:05:36</itunes:duration><itunes:episodeType>full</itunes:episodeType><itunes:explicit>false</itunes:explicit></item><item><pubDate>Sun, 08 Nov 2026 23:11:48 +0000</pubDate><title>11.09｜OpenAI 融资 110 亿；微软结束甲骨文租约；谷歌接手算力园区｜压力指数 84</title><description>人工智能基础设施的资金、租约和项目建设出现三项新进展。路透社报道，OpenAI 已完成新一轮融资的首笔一百一十亿美元。微软据报道决定不再续签甲骨文的一份旧芯片算力租约。谷歌则收购了 Crusoe 在美国怀俄明州尚未建成的数据中心场址。医疗领域，一种口服免疫药的三期试验达到主要终点；美国药监机构也在调查已上市基因疗法的肿瘤风险。最近完成的美国交易日仍是上周五，周末没有新的美股收盘价格。
 
 今日数字：一百一十亿美元。这是路透社援引知情人士所报道的 OpenAI 本轮融资首笔已交割金额。报道所述估值约为一点二五万亿美元。已交割的资金为公司采购算力提供了现实支持，但尚未完成的融资目标和未来产品收入仍须分别观察。
 
