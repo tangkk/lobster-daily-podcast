@@ -14,7 +14,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Tue, 10 Nov 2026 23:10:46 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 11 Nov 2026 23:13:45 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -42,7 +42,11 @@
       <itunes:category text="Business News" />
     </itunes:category>
     <itunes:keywords>AI,人工智能,财经,早报,美股,科技新闻,投资,龙虾日报</itunes:keywords>
-    <item><pubDate>Tue, 10 Nov 2026 23:10:46 +0000</pubDate><title>11.11｜CoreWeave 季收 36.61 亿美元；美国 CPI 涨 0.4%；台积电月收增 59.7%｜压力指数 81</title><description>今天的主线是 AI 基建的收入与融资压力同步上升。CoreWeave 第三季度收入同比超过翻倍，但利息支出和净亏损也明显扩大。美国十月消费者价格环比上涨百分之零点四，最新一个交易日股票下跌、国债收益率上升。台积电十月营收同比增长近六成，英飞凌则给出新财年数据中心电源业务接近四十亿欧元的收入目标。谷歌向付费企业和开发者开放高端模型 Carbon。
+    <item><pubDate>Wed, 11 Nov 2026 23:13:45 +0000</pubDate><title>11.12｜Anthropic IPO拟募593亿美元；西门子能源订单1640亿欧元；千问4预览上线｜压力指数 78</title><description>今天的主线是模型公司即将进入公开市场，而电力设备和算力服务的收入、成本仍在快速变化。Anthropic 给出首次公开发行的拟定价格区间；按中点计算，公司新发股份对应约五百九十三亿美元。西门子能源年度订单积压达到一千六百四十亿欧元。阿里云开放千问四旗舰模型预览。最新美国交易日，AI 股票大幅反弹，中国光通信股票也明显上涨。
+
+今日数字：约五百九十三亿美元。这是 Anthropic 拟发行新股按招股书价格区间中点计算的发行总额。最终价格和实际融资额还没有确定，现有股东出售股票所得也不会进入公司。
+
+文字版：https://tangkk.github.io/daily_brief/2026/11/12/</description><guid isPermaLink="false">ep084-daily-2026-11-12</guid><enclosure url="https://pub-e2d65fa7f70240878f2e556592826485.r2.dev/daily/ep084-daily-2026-11-12.mp3" length="1344140" type="audio/mpeg" /><itunes:duration>00:05:36</itunes:duration><itunes:episodeType>full</itunes:episodeType><itunes:explicit>false</itunes:explicit></item><item><pubDate>Tue, 10 Nov 2026 23:10:46 +0000</pubDate><title>11.11｜CoreWeave 季收 36.61 亿美元；美国 CPI 涨 0.4%；台积电月收增 59.7%｜压力指数 81</title><description>今天的主线是 AI 基建的收入与融资压力同步上升。CoreWeave 第三季度收入同比超过翻倍，但利息支出和净亏损也明显扩大。美国十月消费者价格环比上涨百分之零点四，最新一个交易日股票下跌、国债收益率上升。台积电十月营收同比增长近六成，英飞凌则给出新财年数据中心电源业务接近四十亿欧元的收入目标。谷歌向付费企业和开发者开放高端模型 Carbon。
 
 今日数字：八点四六亿美元。这是 CoreWeave 第三季度的净利息支出，上年同期为三点一亿美元。算力收入在增长，融资费用也在快速累积；仅看合同规模，很难判断建设的最终回报。
 
