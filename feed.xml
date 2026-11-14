@@ -14,7 +14,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Fri, 13 Nov 2026 23:11:17 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 14 Nov 2026 23:14:17 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -42,7 +42,13 @@
       <itunes:category text="Business News" />
     </itunes:category>
     <itunes:keywords>AI,人工智能,财经,早报,美股,科技新闻,投资,龙虾日报</itunes:keywords>
-    <item><pubDate>Fri, 13 Nov 2026 23:11:17 +0000</pubDate><title>11.14｜微软 365 大范围故障；美国 PPI 同比 6.5%；鸿海季收 3.02 万亿｜压力指数 84</title><description>微软三六五的邮件和关联服务发生跨地区故障，企业办公、部分公共机构和人工智能工具连接受到影响。美国十月生产者价格同比上涨百分之六点五，为近四年最高。鸿海第三季度收入增长四成六，人工智能服务器是主要驱动力；Cerebras 和中芯国际也公布新的销售数据。美国十月成屋销售降至二零一零年以来最低。
+    <item><pubDate>Sat, 14 Nov 2026 23:14:17 +0000</pubDate><title>周回顾 11.15｜Anthropic 一年付款义务 707 亿；标普周涨 2.5%；CoreWeave 季收 36.61 亿｜压力指数 84</title><description>这一周，人工智能行业披露了更多已实现收入，也披露了更大的未来付款责任。Anthropic 前九个月收入达到三百三十二亿美元，而从九月底起十二个月内到期的合同付款义务约七百零七亿美元。CoreWeave 季度收入达到三十六点六一亿美元，单季净利息支出也达到八点四六亿美元。美国标普五百指数全周反弹百分之二点五，但周五芯片股下跌，十年期国债收益率升至约百分之五点一五。投资规模、客户付款、合同交付和融资成本，现在都能用更具体的数字核对。
+
+本周数字：约七百零七亿美元。这是 Anthropic 招股书列出的未来十二个月合同付款义务，主要涉及算力和基础设施，其中约四十二亿美元附带先决条件或者启动前终止权。它代表未来可能发生的付款安排，不能直接拿前九个月的收入与它相减，算出所谓资金缺口。现有现金、未来收入、实际支出和可能完成的上市募资，都有各自的时间表。
+
+想让我们多关注哪个领域、或者增加什么板块？欢迎在评论区留言。
+
+文字版：https://tangkk.github.io/daily_brief/2026/11/15/</description><guid isPermaLink="false">ep087-daily-2026-11-15</guid><enclosure url="https://pub-e2d65fa7f70240878f2e556592826485.r2.dev/daily/ep087-daily-2026-11-15.mp3" length="2451500" type="audio/mpeg" /><itunes:duration>00:10:13</itunes:duration><itunes:episodeType>full</itunes:episodeType><itunes:explicit>false</itunes:explicit></item><item><pubDate>Fri, 13 Nov 2026 23:11:17 +0000</pubDate><title>11.14｜微软 365 大范围故障；美国 PPI 同比 6.5%；鸿海季收 3.02 万亿｜压力指数 84</title><description>微软三六五的邮件和关联服务发生跨地区故障，企业办公、部分公共机构和人工智能工具连接受到影响。美国十月生产者价格同比上涨百分之六点五，为近四年最高。鸿海第三季度收入增长四成六，人工智能服务器是主要驱动力；Cerebras 和中芯国际也公布新的销售数据。美国十月成屋销售降至二零一零年以来最低。
 
 今日数字：百分之六点五。这是美国十月生产者价格指数的同比涨幅，高于九月的百分之六点三；同一月份的环比涨幅则从前一个月的百分之一点四放缓到百分之零点三。
 
