@@ -14,7 +14,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Sat, 14 Nov 2026 23:14:17 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 15 Nov 2026 23:17:43 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -42,7 +42,11 @@
       <itunes:category text="Business News" />
     </itunes:category>
     <itunes:keywords>AI,人工智能,财经,早报,美股,科技新闻,投资,龙虾日报</itunes:keywords>
-    <item><pubDate>Sat, 14 Nov 2026 23:14:17 +0000</pubDate><title>周回顾 11.15｜Anthropic 一年付款义务 707 亿；标普周涨 2.5%；CoreWeave 季收 36.61 亿｜压力指数 84</title><description>这一周，人工智能行业披露了更多已实现收入，也披露了更大的未来付款责任。Anthropic 前九个月收入达到三百三十二亿美元，而从九月底起十二个月内到期的合同付款义务约七百零七亿美元。CoreWeave 季度收入达到三十六点六一亿美元，单季净利息支出也达到八点四六亿美元。美国标普五百指数全周反弹百分之二点五，但周五芯片股下跌，十年期国债收益率升至约百分之五点一五。投资规模、客户付款、合同交付和融资成本，现在都能用更具体的数字核对。
+    <item><pubDate>Sun, 15 Nov 2026 23:17:43 +0000</pubDate><title>11.16｜美联储估算算力相关发债超6800亿；特斯拉开放Cybercab个人预订；OpenAI推出支付钱包｜压力指数 84</title><description>美联储最新金融稳定报告量化了算力投资背后的债务：今年截至十月，先进计算相关发债超过六千八百亿美元。特斯拉开始邀请部分客户预订个人使用的 Cybercab，首次给出车价和持续订阅费。OpenAI 的智能体支付钱包开始有限上线，DeepSeek 则开放搜索、文件和语音能力接口。中国两款不同用途的飞机，也在周末完成新的试飞阶段。
+
+今日数字：超过六千八百亿美元。这是美联储估算的今年截至十月先进计算基础设施相关债务发行额，约为二零二三年全年的五倍。统计包括可追踪的公开发行和部分私募证券，私人交易没有全部纳入。
+
+文字版：https://tangkk.github.io/daily_brief/2026/11/16/</description><guid isPermaLink="false">ep088-daily-2026-11-16</guid><enclosure url="https://pub-e2d65fa7f70240878f2e556592826485.r2.dev/daily/ep088-daily-2026-11-16.mp3" length="1382252" type="audio/mpeg" /><itunes:duration>00:05:45</itunes:duration><itunes:episodeType>full</itunes:episodeType><itunes:explicit>false</itunes:explicit></item><item><pubDate>Sat, 14 Nov 2026 23:14:17 +0000</pubDate><title>周回顾 11.15｜Anthropic 一年付款义务 707 亿；标普周涨 2.5%；CoreWeave 季收 36.61 亿｜压力指数 84</title><description>这一周，人工智能行业披露了更多已实现收入，也披露了更大的未来付款责任。Anthropic 前九个月收入达到三百三十二亿美元，而从九月底起十二个月内到期的合同付款义务约七百零七亿美元。CoreWeave 季度收入达到三十六点六一亿美元，单季净利息支出也达到八点四六亿美元。美国标普五百指数全周反弹百分之二点五，但周五芯片股下跌，十年期国债收益率升至约百分之五点一五。投资规模、客户付款、合同交付和融资成本，现在都能用更具体的数字核对。
 
 本周数字：约七百零七亿美元。这是 Anthropic 招股书列出的未来十二个月合同付款义务，主要涉及算力和基础设施，其中约四十二亿美元附带先决条件或者启动前终止权。它代表未来可能发生的付款安排，不能直接拿前九个月的收入与它相减，算出所谓资金缺口。现有现金、未来收入、实际支出和可能完成的上市募资，都有各自的时间表。
 
