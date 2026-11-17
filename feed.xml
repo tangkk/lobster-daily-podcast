@@ -14,7 +14,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Mon, 16 Nov 2026 23:12:54 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 17 Nov 2026 23:14:32 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -42,7 +42,11 @@
       <itunes:category text="Business News" />
     </itunes:category>
     <itunes:keywords>AI,人工智能,财经,早报,美股,科技新闻,投资,龙虾日报</itunes:keywords>
-    <item><pubDate>Mon, 16 Nov 2026 23:12:54 +0000</pubDate><title>11.17｜美股科技板块再跌；中国10月零售仅增0.4%；AMD完成World Labs收购｜压力指数 85</title><description>美国最新一个交易日出现广泛下跌，纳斯达克指数跌约百分之二点五，芯片股继续承压。中国十月消费品零售额同比只增长百分之零点四，前十个月固定资产投资下降百分之八点一。日本第三季度经济初值几乎停滞。AMD 完成对三维世界模型公司 World Labs 的收购，美国大型银行的交易处理也发生新的技术故障。
+    <item><pubDate>Tue, 17 Nov 2026 23:14:32 +0000</pubDate><title>11.18｜英伟达季收 1158 亿美元；微软发布自研模型；百度 AI 云增 94%｜压力指数 86</title><description>英伟达公布新财季收入一千一百五十八亿美元，数据中心业务继续高速增长，并预计下一季度总收入约一千三百亿美元。微软推出自己的编程模型，百度披露人工智能云收入增长九成以上。美国十月零售增速放慢，工业总产出下降；这些数据让算力投资与更广泛的实体需求形成鲜明对照。今天我们先看已确认的收入和利润，再看模型竞争、消费和生产。
+
+今日数字：一千零七十六亿美元，这是英伟达最新财季的数据中心收入，同比增长百分之一百一十。它说明芯片供应商确实收到了大规模订单，云服务商和最终用户能否持续收回投资，还需要各自的财务数据证明。
+
+文字版：https://tangkk.github.io/daily_brief/2026/11/18/</description><guid isPermaLink="false">ep090-daily-2026-11-18</guid><enclosure url="https://pub-e2d65fa7f70240878f2e556592826485.r2.dev/daily/ep090-daily-2026-11-18.mp3" length="1257932" type="audio/mpeg" /><itunes:duration>00:05:14</itunes:duration><itunes:episodeType>full</itunes:episodeType><itunes:explicit>false</itunes:explicit></item><item><pubDate>Mon, 16 Nov 2026 23:12:54 +0000</pubDate><title>11.17｜美股科技板块再跌；中国10月零售仅增0.4%；AMD完成World Labs收购｜压力指数 85</title><description>美国最新一个交易日出现广泛下跌，纳斯达克指数跌约百分之二点五，芯片股继续承压。中国十月消费品零售额同比只增长百分之零点四，前十个月固定资产投资下降百分之八点一。日本第三季度经济初值几乎停滞。AMD 完成对三维世界模型公司 World Labs 的收购，美国大型银行的交易处理也发生新的技术故障。
 
 今日数字：百分之二点五。这是纳斯达克综合指数在美国最新交易日的收盘跌幅，收盘点位为两万四千五百零九点七六。标普五百和道琼斯指数也分别下跌约百分之一点九和百分之一点四，显示多个行业受到影响。
 
