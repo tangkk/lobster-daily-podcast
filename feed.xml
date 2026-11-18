@@ -14,7 +14,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Tue, 17 Nov 2026 23:14:32 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 18 Nov 2026 23:11:35 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -42,7 +42,11 @@
       <itunes:category text="Business News" />
     </itunes:category>
     <itunes:keywords>AI,人工智能,财经,早报,美股,科技新闻,投资,龙虾日报</itunes:keywords>
-    <item><pubDate>Tue, 17 Nov 2026 23:14:32 +0000</pubDate><title>11.18｜英伟达季收 1158 亿美元；微软发布自研模型；百度 AI 云增 94%｜压力指数 86</title><description>英伟达公布新财季收入一千一百五十八亿美元，数据中心业务继续高速增长，并预计下一季度总收入约一千三百亿美元。微软推出自己的编程模型，百度披露人工智能云收入增长九成以上。美国十月零售增速放慢，工业总产出下降；这些数据让算力投资与更广泛的实体需求形成鲜明对照。今天我们先看已确认的收入和利润，再看模型竞争、消费和生产。
+    <item><pubDate>Wed, 18 Nov 2026 23:11:35 +0000</pubDate><title>11.19｜Anthropic IPO 据报定价 83 美元；腾讯季度自由现金流流出 691 亿｜压力指数 84</title><description>Anthropic 的首次公开发行据报定在每股八十三美元，高于原先申报区间。腾讯第三季度云服务收入增长百分之三十五，同时支付大量算力采购预付款，自由现金流净流出六百九十一亿元人民币。美国联储新公布的会议纪要显示，几乎所有与会者认为未来数月可能仍需加息，并关注人工智能投资与债务风险。今天我们重点看模型融资价格、云业务的现金投入，以及利率预期如何影响投资链条。
+
+今日数字：六百九十一亿元人民币，这是腾讯第三季度披露的自由现金流净流出额。公司同期支付资本开支六百五十一亿元，云服务收入增长百分之三十五。销售增长与采购现金支出发生在不同环节，后续要看采购的算力交付后能否形成稳定回款。
+
+文字版：https://tangkk.github.io/daily_brief/2026/11/19/</description><guid isPermaLink="false">ep091-daily-2026-11-19</guid><enclosure url="https://pub-e2d65fa7f70240878f2e556592826485.r2.dev/daily/ep091-daily-2026-11-19.mp3" length="1183052" type="audio/mpeg" /><itunes:duration>00:04:56</itunes:duration><itunes:episodeType>full</itunes:episodeType><itunes:explicit>false</itunes:explicit></item><item><pubDate>Tue, 17 Nov 2026 23:14:32 +0000</pubDate><title>11.18｜英伟达季收 1158 亿美元；微软发布自研模型；百度 AI 云增 94%｜压力指数 86</title><description>英伟达公布新财季收入一千一百五十八亿美元，数据中心业务继续高速增长，并预计下一季度总收入约一千三百亿美元。微软推出自己的编程模型，百度披露人工智能云收入增长九成以上。美国十月零售增速放慢，工业总产出下降；这些数据让算力投资与更广泛的实体需求形成鲜明对照。今天我们先看已确认的收入和利润，再看模型竞争、消费和生产。
 
 今日数字：一千零七十六亿美元，这是英伟达最新财季的数据中心收入，同比增长百分之一百一十。它说明芯片供应商确实收到了大规模订单，云服务商和最终用户能否持续收回投资，还需要各自的财务数据证明。
 
