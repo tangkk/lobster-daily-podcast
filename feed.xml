@@ -14,7 +14,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Wed, 18 Nov 2026 23:11:35 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 19 Nov 2026 23:11:51 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -42,7 +42,11 @@
       <itunes:category text="Business News" />
     </itunes:category>
     <itunes:keywords>AI,人工智能,财经,早报,美股,科技新闻,投资,龙虾日报</itunes:keywords>
-    <item><pubDate>Wed, 18 Nov 2026 23:11:35 +0000</pubDate><title>11.19｜Anthropic IPO 据报定价 83 美元；腾讯季度自由现金流流出 691 亿｜压力指数 84</title><description>Anthropic 的首次公开发行据报定在每股八十三美元，高于原先申报区间。腾讯第三季度云服务收入增长百分之三十五，同时支付大量算力采购预付款，自由现金流净流出六百九十一亿元人民币。美国联储新公布的会议纪要显示，几乎所有与会者认为未来数月可能仍需加息，并关注人工智能投资与债务风险。今天我们重点看模型融资价格、云业务的现金投入，以及利率预期如何影响投资链条。
+    <item><pubDate>Thu, 19 Nov 2026 23:11:51 +0000</pubDate><title>11.20｜标普跌 2%；Anthropic 首日涨 17%；阿里云营收增 53%｜压力指数 84</title><description>美国股市广泛下跌，标普五百指数跌百分之二，超过九成成分股收低。与此同时，Anthropic 上市首日收盘比发行价高约百分之十七。阿里巴巴公布新季度 AI 云及算力收入增长百分之五十三，联想基础设施业务收入增长百分之一百七十八。今天我们看市场如何为人工智能投资重新定价，也看供应链里已经实现的收入和现金流。
+
+今日数字：九成以上，这是美国十九日标普五百指数成分股收低的比例。指数连续第六个交易日下跌，当天跌幅达到百分之二。下跌波及多个行业；价格变化仍不能直接证明客户减少了算力采购。
+
+文字版：https://tangkk.github.io/daily_brief/2026/11/20/</description><guid isPermaLink="false">ep092-daily-2026-11-20</guid><enclosure url="https://pub-e2d65fa7f70240878f2e556592826485.r2.dev/daily/ep092-daily-2026-11-20.mp3" length="1316012" type="audio/mpeg" /><itunes:duration>00:05:29</itunes:duration><itunes:episodeType>full</itunes:episodeType><itunes:explicit>false</itunes:explicit></item><item><pubDate>Wed, 18 Nov 2026 23:11:35 +0000</pubDate><title>11.19｜Anthropic IPO 据报定价 83 美元；腾讯季度自由现金流流出 691 亿｜压力指数 84</title><description>Anthropic 的首次公开发行据报定在每股八十三美元，高于原先申报区间。腾讯第三季度云服务收入增长百分之三十五，同时支付大量算力采购预付款，自由现金流净流出六百九十一亿元人民币。美国联储新公布的会议纪要显示，几乎所有与会者认为未来数月可能仍需加息，并关注人工智能投资与债务风险。今天我们重点看模型融资价格、云业务的现金投入，以及利率预期如何影响投资链条。
 
 今日数字：六百九十一亿元人民币，这是腾讯第三季度披露的自由现金流净流出额。公司同期支付资本开支六百五十一亿元，云服务收入增长百分之三十五。销售增长与采购现金支出发生在不同环节，后续要看采购的算力交付后能否形成稳定回款。
 
