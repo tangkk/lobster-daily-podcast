@@ -14,7 +14,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Fri, 20 Nov 2026 23:11:25 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 21 Nov 2026 23:12:38 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -42,7 +42,13 @@
       <itunes:category text="Business News" />
     </itunes:category>
     <itunes:keywords>AI,人工智能,财经,早报,美股,科技新闻,投资,龙虾日报</itunes:keywords>
-    <item><pubDate>Fri, 20 Nov 2026 23:11:25 +0000</pubDate><title>11.21｜标普跌 3.7%；快手季利降 84%；Intuit 出售 Mailchimp｜压力指数 86</title><description>美国股市最新交易日大幅下跌，标普五百指数跌百分之三点七，纳斯达克今年以来的涨幅转负，半导体股调整更深。快手新季度利润明显收缩，Intuit 同意出售 Mailchimp。今天我们把市场价格、企业实际收入和基础设施规则分开观察，重点看哪些变化已经发生，哪些仍在等待最终决定。
+    <item><pubDate>Sat, 21 Nov 2026 23:12:38 +0000</pubDate><title>周回顾 11.22｜标普周跌 8.6%；英伟达季收 1158 亿；Anthropic 发行 813 亿｜压力指数 87</title><description>美国标普五百指数一周下跌百分之八点六，纳斯达克下跌百分之十，人工智能投资相关的股权定价迅速收紧。另一面，英伟达报告一千一百五十八亿美元季度收入，Anthropic 完成八百一十三亿美元规模的公开发行，中国多家云服务商也披露了新的销售额。市场价格、供应商收入、企业融资与最终客户付费是四种不同的证据。本周要追问的是，收入和现金流能否持续覆盖设备、能源以及融资成本。
+
+本周数字：百分之八点六，这是标普五百截至周五的单周跌幅，为一年半以来最深。纳斯达克同期跌百分之十。这个数字反映投资者重新要求更明确的回报，单凭股价仍无法判断企业是否取消了算力订单。
+
+想让我们多关注哪个领域、或者增加什么板块？欢迎在评论区留言。
+
+文字版：https://tangkk.github.io/daily_brief/2026/11/22/</description><guid isPermaLink="false">ep094-daily-2026-11-22</guid><enclosure url="https://pub-e2d65fa7f70240878f2e556592826485.r2.dev/daily/ep094-daily-2026-11-22.mp3" length="2096108" type="audio/mpeg" /><itunes:duration>00:08:44</itunes:duration><itunes:episodeType>full</itunes:episodeType><itunes:explicit>false</itunes:explicit></item><item><pubDate>Fri, 20 Nov 2026 23:11:25 +0000</pubDate><title>11.21｜标普跌 3.7%；快手季利降 84%；Intuit 出售 Mailchimp｜压力指数 86</title><description>美国股市最新交易日大幅下跌，标普五百指数跌百分之三点七，纳斯达克今年以来的涨幅转负，半导体股调整更深。快手新季度利润明显收缩，Intuit 同意出售 Mailchimp。今天我们把市场价格、企业实际收入和基础设施规则分开观察，重点看哪些变化已经发生，哪些仍在等待最终决定。
 
 今日数字：百分之十点七，这是费城半导体指数在美国最新交易日的跌幅。同期标普五百指数下跌百分之三点七。芯片板块承受更大的估值压力，但股价变动本身不能证明数据中心客户已经取消订单。
 
