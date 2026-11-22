@@ -14,7 +14,7 @@
 文字版主页：https://tangkk.github.io/daily_brief/</description>
     <managingEditor>dengjunqi06323011@gmail.com (龙虾日报)</managingEditor>
     <webMaster>dengjunqi06323011@gmail.com (龙虾日报)</webMaster>
-    <lastBuildDate>Sat, 21 Nov 2026 23:12:38 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 22 Nov 2026 23:11:25 +0000</lastBuildDate>
     <ttl>60</ttl>
     <itunes:type>episodic</itunes:type>
     <itunes:author>龙虾日报</itunes:author>
@@ -42,7 +42,11 @@
       <itunes:category text="Business News" />
     </itunes:category>
     <itunes:keywords>AI,人工智能,财经,早报,美股,科技新闻,投资,龙虾日报</itunes:keywords>
-    <item><pubDate>Sat, 21 Nov 2026 23:12:38 +0000</pubDate><title>周回顾 11.22｜标普周跌 8.6%；英伟达季收 1158 亿；Anthropic 发行 813 亿｜压力指数 87</title><description>美国标普五百指数一周下跌百分之八点六，纳斯达克下跌百分之十，人工智能投资相关的股权定价迅速收紧。另一面，英伟达报告一千一百五十八亿美元季度收入，Anthropic 完成八百一十三亿美元规模的公开发行，中国多家云服务商也披露了新的销售额。市场价格、供应商收入、企业融资与最终客户付费是四种不同的证据。本周要追问的是，收入和现金流能否持续覆盖设备、能源以及融资成本。
+    <item><pubDate>Sun, 22 Nov 2026 23:11:25 +0000</pubDate><title>11.23｜黎曼猜想形式证明获核验；AI 服务器报价最高上调 45%｜压力指数 86</title><description>Lean 和 Mathlib 社群核验了借助 Claude 完成的黎曼猜想形式化证明，为人工智能参与数学研究带来一个可以检查的新案例。与此同时，部分 AI 服务器交付价格据报大幅上调，联合国气候会议在核心决定上没有达成一致。今天，我们把可验证的技术进展，与尚待确认的商业成本分开看。
+
+今日数字：百分之四十五。这是金融时报报道中，部分英伟达 AI 服务器在交付前被要求提高价格的最大幅度。它不是整个服务器市场的统一涨幅；最终买方支付多少，还要看具体合同和交付结果。
+
+文字版：https://tangkk.github.io/daily_brief/2026/11/23/</description><guid isPermaLink="false">ep095-daily-2026-11-23</guid><enclosure url="https://pub-e2d65fa7f70240878f2e556592826485.r2.dev/daily/ep095-daily-2026-11-23.mp3" length="1322828" type="audio/mpeg" /><itunes:duration>00:05:31</itunes:duration><itunes:episodeType>full</itunes:episodeType><itunes:explicit>false</itunes:explicit></item><item><pubDate>Sat, 21 Nov 2026 23:12:38 +0000</pubDate><title>周回顾 11.22｜标普周跌 8.6%；英伟达季收 1158 亿；Anthropic 发行 813 亿｜压力指数 87</title><description>美国标普五百指数一周下跌百分之八点六，纳斯达克下跌百分之十，人工智能投资相关的股权定价迅速收紧。另一面，英伟达报告一千一百五十八亿美元季度收入，Anthropic 完成八百一十三亿美元规模的公开发行，中国多家云服务商也披露了新的销售额。市场价格、供应商收入、企业融资与最终客户付费是四种不同的证据。本周要追问的是，收入和现金流能否持续覆盖设备、能源以及融资成本。
 
 本周数字：百分之八点六，这是标普五百截至周五的单周跌幅，为一年半以来最深。纳斯达克同期跌百分之十。这个数字反映投资者重新要求更明确的回报，单凭股价仍无法判断企业是否取消了算力订单。
 
